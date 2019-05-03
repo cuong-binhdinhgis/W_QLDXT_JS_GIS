@@ -1,0 +1,19 @@
+extends ../layout
+block javascripts
+  script(src=m==='quyen'?"javascripts/quanlytaikhoannhomquyen/chucnang-quyen.js":"javascripts/quanlytaikhoannhomquyen/chucnang-taikhoan.js")
+block content
+  #window
+  .row
+    #listbox
+      .col-md-3
+        select#listbox0
+      .col-md-4
+        select#listbox1
+      .col-md-3#listbox2-container
+        select#listbox2
+      .col-md-2
+        .well
+          button.k-button(data-bind='events:{click:btnUpdateClick}') Cập nhật
+  ul#context-menu
+          li Chọn là chức năng chính
+          li Xem chức năng chính

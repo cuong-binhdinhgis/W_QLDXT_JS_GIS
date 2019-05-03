@@ -1,0 +1,9 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "watch": true,
+    "target": "es6",
+    "module": "amd",
+    "removeComments": true
+  }
+}

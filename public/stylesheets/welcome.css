@@ -1,0 +1,285 @@
+	/*
+Theme Name: Flusk
+Theme URI: http://themewagon.com/demo/Flusk/
+Author: ThemeWagon
+Author URI: http://themewagon.com/
+Description: Slick One page HTML 5 template powered by Bootstrap 3.
+Version: 1.14.11
+License: GNU General Public License v3
+License URI: http://www.gnu.org/licenses/gpl-3.0.txt
+Tags: blur, white, one page, parallax, responsive-layout, full-width-template
+Text Domain: flusk
+*/
+	/**
+* Table of Contents:
+*
+* 01.0 - Global
+* 02.0 - Header
+* 03.0 - Drawer with menu
+* 04.0 - Parallax styles
+* 05.0 - Recent works
+* 06.0 - Services
+* 07.0 - Blog
+* 08.0 - Testimonials
+* 09.0 - Contact
+* 10.0 - Footer
+* 11.0 - Responsive styles
+* -----------------------------------------------------------------------------
+*/
+	/* ///////////////////////////////////////////////////////////////////// 
+//  01 - Global 
+/////////////////////////////////////////////////////////////////////*/
+
+	* {
+		outline: none !important;
+		font-family: "Roboto", Helvetica, Arial, sans-serif
+	}
+
+	::selection {
+		background-color: #475B6F;
+		color: #fff;
+	}
+
+	html {
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+		-webkit-text-size-adjust: none;
+		-ms-text-size-adjust: none;
+		overflow-y: scroll;
+	}
+
+	body {
+		color: #6a6a6a;
+		background: #f1f0f0;
+	}
+
+	p {
+		margin: 0 0 20px 0;
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		margin: 0 0 15px 0;
+		color: #3A4F52;
+		font-family: 'Alegreya Sans';
+	}
+
+	.btn {
+		border-radius: 0;
+	}
+
+	.btn-o {
+		border: 1px solid #3A4F52;
+		color: #3A4F52;
+	}
+
+	.btn-o:hover {
+		background: #3A4F52;
+		color: white;
+	}
+
+	.btn.btn-o-white {
+		border: 1px solid white;
+		color: white;
+		background: transparent;
+	}
+
+	.btn.btn-o-white:hover {
+		background: white;
+		color: #6a6a6a;
+	}
+	/*////////////////////////////////////////////////////////////////////////
+//  02 - Header
+///////////////////////////////////////////////////////////////////////*/
+
+	#header {
+		position: relative;
+		padding: 0 !important;
+	}
+
+	#header.header-wrapper {
+		background: url(../images/bg-welcome.png) no-repeat center center;
+		background-size: cover;
+		display: table;
+		height: 100vh;
+		width: 100%;
+		position: relative;
+		z-index: 1;
+		overflow-x: hidden;
+	}
+
+	@media screen and (max-width: 767px) and (orientation: landscape) {
+		#header.header-wrapper {
+			height: auto;
+			min-height: 100vh;
+			padding: 0px;
+		}
+	}
+
+	#header.header-wrapper .header-wrapper-inner {
+		display: table-cell;
+		text-align: center;
+		vertical-align: middle;
+	}
+
+	#header .top {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		padding: 10px;
+		height: auto;
+		z-index: 500;
+		-o-transition: all .5s;
+		-ms-transition: all .5s;
+		-moz-transition: all .5s;
+		-webkit-transition: all .5s;
+		transition: all .5s;
+	}
+
+	#header .top.solid {
+		background: #475B6F;
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+
+	#header .top h1 {
+		margin-bottom: 0;
+	}
+
+	#header .top.solid .toggleDrawer i {
+		padding-top: 8px;
+	}
+
+	#header .logo,
+	#header .menu,
+	#header .toggleDrawer {
+		color: white;
+	}
+
+	#header .logo {
+		text-transform: uppercase;
+	}
+
+	#header .logo:hover {
+		text-decoration: unset;
+		font-weight: 700;
+		color: rgb(232, 103, 15)
+	}
+
+	#header .menu {
+		font-size: 15px;
+		margin-right: 40px;
+	}
+
+	#header .slogan {
+		font-size: 2.7em;
+		margin-bottom: 15px;
+		line-height: 1em;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: white;
+	}
+
+	#header .secondary-slogan {
+		font-size: 2.5em;
+		color: #fff;
+		line-height: 1em;
+		margin-bottom: 15px;
+	}
+
+	@media (max-width: 400px) {
+		#header .slogan {
+			font-size: 31px;
+			margin-bottom: 15px;
+			font-weight: 700;
+			text-transform: uppercase;
+			color: white;
+		}
+		#header .secondary-slogan {
+			font-size: 22px;
+			color: #fff;
+			line-height: 35px;
+			margin-bottom: 10px;
+		}
+	}
+
+	#header .bottom {
+		bottom: 25%;
+		display: block;
+		position: absolute;
+		width: 100%;
+		z-index: 3;
+	}
+
+	#header .bottom a img {
+		width: 50px;
+	}
+
+	#header .bottom a {
+		opacity: 0.7;
+	}
+
+	#header .bottom a:hover {
+		opacity: 1;
+	}
+
+	#header .btn {
+		font-weight: 700;
+		text-transform: uppercase;
+		border: none;
+		border-radius: 5px;
+		font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+		padding: 10px 25px;
+	}
+
+	#header .btn:hover {
+		background-color: rgb(232, 103, 15);
+	}
+
+	.navbar-toggle .icon-bar {
+		background-color: #fff
+	}
+
+	section.center {
+		border: rgba(255, 255, 255, 0.39) 1px solid;
+		background: rgba(0, 0, 0, 0.4);
+		border-radius: 20px;
+		padding: 28px;
+	}
+
+	.nav .open>a,
+	.nav .open>a:focus,
+	.nav .open>a:hover,
+	.nav>li>a:focus,
+	.nav>li>a:hover,
+	.nav>li>a:active {
+		text-decoration: none;
+		background-color: rgb(232, 103, 15);
+		color: #fff;
+		transition: 0.5s;
+	}
+
+	ul.nav.navbar-nav {
+		background-color: rgba(33, 150, 243, 0.76);
+		box-shadow: 0 3px 3px rgba(0, 0, 0, .1), 0 1px 2px rgba(0, 0, 0, .18);
+	}
+
+	@media (max-width: 767px) {
+		.navbar-nav .open .dropdown-menu>li>a {
+			color: #fff
+		}
+	}
+
+	@media (min-width: 768px) {
+		.navbar-nav>li>a {
+			padding: 10px 15px;
+		}
+	}

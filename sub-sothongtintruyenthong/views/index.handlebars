@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>Sở TN&amp;MT Bà Rịa - Vũng Tàu | Maps</title>
+
+    <!-- Calcite Bootstrap -->
+    <!--<link rel="stylesheet" href="/calcite-maps/dist/css/calcite-maps-bootstrap.min-v0.7.css">-->
+    <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-bootstrap.min-v0.8.css">
+
+    <!-- Calcite Maps -->
+    <!--<link rel="stylesheet" href="/calcite-maps/dist/css/calcite-maps-arcgis-4.x.min-v0.7.css">-->
+    <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-arcgis-4.x.min-v0.8.css">
+
+    <!-- <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-bootstrap.min-v0.7.css"> -->
+
+    <!-- Calcite Maps -->
+    <!-- <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-arcgis-4.x.min-v0.7.css"> -->
+
+    <!--kendo for search-->
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common-material.min.css">
+    <link rel="stylesheet" href="/stylesheets/custom-kendo.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
+
+    <!--scihub.copernicus.eu list search-->
+
+
+
+
+    <!-- ArcGIS JS 4 -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.9/esri/css/main.css">
+    <link rel="stylesheet" href="/stylesheets/map.css">
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+
+
+        #topbar {
+            background: #fff;
+            position: absolute;
+            top: 50px;
+            right: 15px;
+            padding: 10px;
+        }
+
+        .action-button {
+            font-size: 16px;
+            background-color: transparent;
+            border: 1px solid #D3D3D3;
+            color: #6e6e6e;
+            height: 32px;
+            width: 32px;
+            text-align: center;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+        }
+
+        .action-button:hover,
+        .action-button:focus {
+            background: #0079c1;
+            color: #e4e4e4;
+        }
+
+        .active {
+            background: #0079c1;
+            color: #e4e4e4;
+        }
+    </style>
+
+
+
+    <!--Search resum list-->
+    <style>
+        .list-container {
+            background-color: white;
+            width: 40%;
+            height: 100px;
+            position: fixed;
+            left: 20px;
+            min-height: 150px;
+            opacity: 0.9;
+            box-shadow: 3px 5px 19px 0 rgba(49, 50, 50, .62);
+            z-index: 98;
+        }
+
+
+
+
+
+
+        .listtitle {
+            color: #373b50;
+            font-weight: bold;
+            font-size: 14px;
+            float: left;
+            width: 220px;
+        }
+
+
+
+
+
+
+
+
+
+
+        .resize-button {
+            float: right;
+            top: 6px;
+        }
+
+        .list-top-right-container {
+            position: absolute;
+            top: 4px;
+            right: 16px;
+            width: 70px;
+            height: 20px;
+        }
+
+        .list-top-right-element {
+            float: right;
+            transform: scale(0.9);
+            margin-left: 3px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .grid-filter-modal {
+            background-color: #FAFAFA;
+            border: 1px solid black;
+            width: 250px;
+            height: 400px;
+            position: fixed;
+            z-index: 98;
+            overflow: auto;
+        }
+    </style>
+
+
+
+    <style type="text/css">
+        #dropdown-menuTools {
+            display: none;
+        }
+
+        #dropdown-nenBinhdinh {
+            display: none;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function showOrHide(zap) {
+            if (document.getElementById) {
+                var abra = document.getElementById(zap).style;
+
+                if (abra.display == "block") {
+                    abra.display = "none";
+                    document.getElementById("iconArrowtools").className = "esri-icon-right-triangle-arrow";
+                } else {
+                    abra.display = "block";
+                    document.getElementById("iconArrowtools").className = "esri-icon-down-arrow";
+                }
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function showOrHideLoaiChatThai(zap) {
+            if (document.getElementById) {
+                var abra = document.getElementById(zap).style;
+
+                if (abra.display == "block") {
+                    abra.display = "none";
+                    document.getElementById("iconArrowtoolsLCT").className = "esri-icon-right-triangle-arrow";
+                } else {
+                    abra.display = "block";
+                    document.getElementById("iconArrowtoolsLCT").className = "esri-icon-down-arrow";
+                }
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+
+
+
+    <script type="text/javascript">
+        function showOrHide_nenBinhdinh(zap) {
+
+            if (document.getElementById) {
+                var abra = document.getElementById(zap).style;
+                if (abra.display == "block") {
+                    abra.display = "none";
+                    document.getElementById("iconArrow").className = "esri-icon-right-triangle-arrow";
+                } else {
+                    abra.display = "block";
+                    document.getElementById("iconArrow").className = "esri-icon-down-arrow";
+                }
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+    </script>
+
+
+
+</head>
+
+<body class="calcite-maps calcite-nav-top" onresize="onResizeWindowSearchResumList()">
+
+    <!-- Search Resum list -->
+
+
+    <script type="text/javascript">
+
+        function searchResumListHide() {
+            document.getElementById("gridDisplay").style = "width: calc(40% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
+            document.getElementById("searchResumIcon").style = "height: 31px; margin-top: 1px;  padding: 6px; top: 64px; left: 50px; font-size: 22px; cursor: pointer; opacity: 1; display: block; background-color:#FAFAFA; position: fixed; z-index: 998;";
+
+            //document.getElementById("gridDisplay").style="width: calc(40% - 40px); left: 50px; top: 65px; height: 631px; display:none";
+        }
+
+        function searchResumListShow() {
+            document.getElementById("gridDisplay").style = "width: calc(40% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
+            document.getElementById("searchResumIcon").style = "height: 31px; margin-top: 1px;  padding: 6px; top: 64px; left: 50px; font-size: 22px; cursor: pointer; opacity: 1; display: none; background-color:#FAFAFA; position: fixed; z-index: 998;";
+            //document.getElementById("gridDisplay").style="width: calc(40% - 40px); left: 50px; top: 65px; height: 631px; display:none";
+        }
+        function searchResumListExpand() {
+            if (document.getElementById("expandSearchResum").className == "resize-button glyphicon glyphicon-resize-full") {
+                document.getElementById("gridDisplay").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
+                document.getElementById("expandSearchResum").className = "resize-button glyphicon glyphicon-resize-small";
+                document.getElementById("searchResumIcon").style = "height: 31px; margin-top: 1px;  padding: 6px; top: 64px; left: 50px; font-size: 22px; cursor: pointer; opacity: 1; display: none; background-color:#FAFAFA; position: fixed; z-index: 998;";
+            } else {
+                document.getElementById("gridDisplay").style = "width: calc(40% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
+                document.getElementById("expandSearchResum").className = "resize-button glyphicon glyphicon-resize-full";
+            }
+
+        }
+        function onResizeWindowSearchResumList() {
+            //document.getElementsByClassName("k-grid-content k-auto-scrollable")[0].style = "height: calc(80% - 40px);";
+        }
+
+
+    </script>
+
+
+    <div ng-show="visibleList" id="gridDisplay" class="list-container undrag" aria-hidden="false"
+        style="width: calc(40% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none;">
+
+
+
+        <div ng-show="productCount" class="listtitle" aria-hidden="false" style="">
+            <div> <span class="ng-binding"> Kết quả tìm kiếm</span> <br> </div>
+        </div>
+
+        <span class="list-top-right-container">
+            <span class="list-top-right-element" title="Close"> <svg ng-click="hideList()"
+                    style="width: 20px; height: 20px" role="button" tabindex="0" onclick="searchResumListHide();">
+                    <g>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                        </path>
+                    </g>
+                </svg>
+            </span>
+
+
+            <span id="expandSearchResum" class="resize-button glyphicon glyphicon-resize-full" title="Expand list"
+                role="button" tabindex="0" onclick="searchResumListExpand();" aria-hidden="false" style="">
+            </span>
+
+
+
+            <button class="esri-icon-filter" id="esri-filter" type="button" title="Filter"></button>
+
+            <div aria-label="Show or hide columns" id="esri-filter-modal" class="grid-filter-modal"
+                style="display: none">
+                <!--<div aria-label="Show or hide columns" id="esri-filter-modal"  style="background-color:#FAFAFA;border: 1px solid black; width: 200px;display: none">-->
+
+
+
+
+            </div>
+        </span>
+        <p>&nbsp;</p>
+
+
+
+    </div>
+
+
+
+
+
+
+    <div id="searchResumIcon"
+        style="height: 31px; margin-top: 1px;  padding: 6px; top: 64px; left: 50px; font-size: 22px; cursor: pointer; opacity: 1; display: none; background-color:#FAFAFA; position: fixed; z-index: 998;"
+        class="esri-icon-review" ng-click="showList()" onclick="searchResumListShow();" title="Show product list"
+        role="button" tabindex="0">
+
+    </div>
+
+
+
+
+
+
+
+    <script type="text/javascript">
+     function listCTRShow() {
+          document.getElementById("gridDisplayChatThaiRan").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
+          document.getElementById("menu-map").className="dropdown calcite-dropdown calcite-text-dark calcite-bg-light";
+          document.getElementById("menu-map-icon").className="calcite-dropdown-toggle";
+        
+          
+        }
+        function listCTRClose() {
+         
+         document.getElementById("gridDisplayChatThaiRan").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
+                
+        }
+       
+    </script>
+
+    <!--ChatThaiRan-->
+
+
+    <div ng-show="visibleList" id="gridDisplayChatThaiRan" class="list-container undrag" aria-hidden="false"
+        style="width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none">
+
+
+
+        <div ng-show="productCount" class="listtitle" aria-hidden="false" style="">
+            <div> <span class="ng-binding"> Chất thải rắn</span> <br> </div>
+        </div>
+
+
+        <span class="list-top-right-container">
+            <span class="list-top-right-element" title="Close"> <svg ng-click="hideList()"
+                    style="width: 20px; height: 20px" role="button" tabindex="0"
+                    onclick="listCTRClose();">
+                    <g>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                        </path>
+                    </g>
+                </svg>
+            </span>
+
+
+
+
+
+
+
+
+
+        </span>
+
+        <p>&nbsp;</p>
+        <div>hehheh</div>
+
+
+
+    </div>
+    <!--  -->
+
+
+
+
+    <!-- Navbar -->
+
+    <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark">
+        <!-- Menu -->
+
+        <div id="menu-map" class="dropdown calcite-dropdown calcite-text-dark calcite-bg-light" role="presentation">
+            <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+                <div id="menu-map-icon" class="calcite-dropdown-toggle">
+                    <span class="sr-only">Toggle dropdown menu</span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </a>
+            <ul class="dropdown-menu">
+
+                <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span
+                            class="esri-icon-basemap"></span><strong>
+                            Bản Đồ Nền</strong></a></li>
+                {{!-- <li><a id="menuKhukinhte" role="button" data-target="#panelZoomtoKhuKT" aria-haspopup="true"><span
+                            class="esri-icon-maps"></span><strong>
+                            Khu Kinh Tế</strong></a></li> --}}
+                <li><a id="menuKhucongnghiep" role="button" data-target="#panelZoomtoKhuCN" aria-haspopup="true"><span
+                            class="esri-icon-organization"></span><strong>
+                            Cơ Sở Kinh Doanh</strong></a></li>
+                {{!-- <li><a id="menuCumcongnghiep" role="button" data-target="#panelZoomtoCumCN" aria-haspopup="true"><span
+                            class="esri-icon-maps"></span><strong>
+                            Cụm Công Nghiệp</strong></a></li> --}}
+                <li><a id="menuDiemDautu" role="button" data-target="#panelZoomtoDiemDautu" aria-haspopup="true"><span
+                            class="esri-icon-map-pin"></span><strong>
+                            Điểm Xả Thải</strong></a></li>
+
+                <li><a role="button" aria-haspopup="true"
+                        onclick="return showOrHideLoaiChatThai('dropdown-menuToolsLCT');"><span id="iconArrowtoolsLCT"
+                            class="esri-icon-right-triangle-arrow"></span><span
+                            class="esri-icon-support"></span><strong>
+                            Loại chất thải
+                        </strong></a>
+                    <ul id="dropdown-menuToolsLCT" style="display: none">
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                                role="button" onclick="listCTRShow();" aria-haspopup="true"><span
+                                    class="esri-icon-printer"></span><strong>
+                                    Chất thải rắn</strong></a></li>
+
+                    </ul>
+                </li>
+
+
+                <li><a role="button" data-target="#panelLegend" aria-haspopup="true"><span
+                            class="esri-icon-polygon"></span><strong>
+                            Chú Thích</strong></a></li>
+                <li><a role="button" aria-haspopup="true" onclick="return showOrHide('dropdown-menuTools');"><span
+                            id="iconArrowtools" class="esri-icon-right-triangle-arrow"></span><span
+                            class="esri-icon-support"></span><strong>
+                            Công
+                            cụ
+                        </strong></a>
+                    <ul id="dropdown-menuTools">
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
+                                role="button" data-target="#panelPrinter" aria-haspopup="true"><span
+                                    class="esri-icon-printer"></span><strong>
+                                    Printer</strong></a></li>
+
+                    </ul>
+                </li>
+                <li><a role="button" data-target="#panelSettings" aria-haspopup="true"><span
+                            class="glyphicon glyphicon-cog"></span><strong>
+                            Settings</strong></a></li>
+
+                <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span
+                            class="glyphicon glyphicon-info-sign"></span><strong>
+                            Info</strong></a></li>
+                <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span
+                            class="glyphicon glyphicon-fullscreen"></span><strong>
+                            Full Map</strong></a></li>
+                <li><a role="button" href="/logout" aria-haspopup="true"><span
+                            class="esri-icon-sign-out"></span><strong>
+                            Đăng xuất</strong></a></li>
+            </ul>
+        </div>
+        <!-- Title -->
+        <div class="calcite-title calcite-overflow-hidden">
+            <span class="calcite-title-main">SỞ TÀI NGUYÊN & MÔI TRƯỜNG TỈNH BÀ RỊA - VŨNG TÀU</span>
+            <span class="calcite-title-divider hidden-xs"></span>
+            <span class="calcite-title-sub hidden-xs">Department Of Natural Resources And Environment Of
+                Baria - Vungtau Province</span>
+
+        </div>
+
+        <!-- Nav -->
+        <ul class="nav navbar-nav calcite-nav">
+
+            <li><a href="#">Xin chào <strong>{{User.DisplayName}}</strong> </a></li>
+
+            <!--
+      <li class="active"><a id="mapNav" class="hidden-xs hidden-sm" href="#mapTab" aria-controls="mapTab"
+          aria-expanded="true" role="tab" data-toggle="tab" data-tooltip="tip" title="2D View"
+          data-placement="bottom">Map</a></li>
+      <li><a id="sceneNav" class="hidden-xs hidden-sm" href="#sceneTab" aria-controls="sceneTab"
+          role="tab" data-toggle="tab" data-tooltip="tip" title="3D View" data-placement="bottom">Scene</a>
+      </li>
+-->
+            <li>
+                <div class="calcite-navbar-search calcite-search-expander">
+                    <div id="searchWidgetDiv"></div>
+                </div>
+            </li>
+
+        </ul>
+    </nav>
+    <!--/.calcite-navbar -->
+
+    <!-- Map  -->
+
+    <div class="calcite-map calcite-map-absolute">
+
+        <div id="tabContainer" class="tab-content">
+
+            <div id="mapTab" class="tab-pane fade in active" role="tabpanel">
+
+
+                <div id="mapViewDiv"></div>
+
+                <div id="pane-tools"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+            <div id="sceneTab" class="tab-pane fade" role="tabpanel">
+                <div id="sceneViewDiv"></div>
+            </div>
+        </div>
+    </div>
+    <!-- /.calcite-map -->
+
+    <!-- Panels -->
+
+    <div class="calcite-panels calcite-panels-right calcite-text-light calcite-bg-dark panel-group">
+
+        <!-- Basemaps Panel -->
+
+        <div id="panelBasemaps" class="panel collapse">
+            <div id="headingBasemaps" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps"
+                        aria-expanded="false" aria-controls="collapseBasemaps"><span class="esri-icon-basemap"
+                            aria-hidden="true"></span><span class="panel-label"> Bản Đồ Nền</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingBasemaps">
+                <div class="panel-body">
+                    <div id="basemapPanelDiv"></div>
+                    <ul class="esri-basemap-gallery__item-container" role="menu">
+
+                        <li>
+
+                        <li class="esri-basemap-gallery__item" role="menuitem" tabindex="0" title="Hình ảnh">
+                            <input type="checkbox" id="checkbox_nenBinhdinh"> &nbsp;
+
+
+                            <img id="img_nenBinhdinh" alt="" class="esri-basemap-gallery__item-thumbnail"
+                                src="/images/basemapbinhdinh.jpg">
+                            <div id="div_nenBinhdinh" class="esri-basemap-gallery__item-title">
+                                <p><br />Bản đồ nền Bình Định
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </p>
+                            </div>
+                            <a role="button" style="text-decoration:none" aria-haspopup="true"
+                                onclick="return showOrHide_nenBinhdinh('dropdown-nenBinhdinh');"><span id="iconArrow"
+                                    class="esri-icon-right-triangle-arrow"></span><strong></strong></a>
+                            &nbsp;
+                        </li>
+
+                        <ul id="dropdown-nenBinhdinh">
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+                                    id="chk_nenDaivatdactrung" disabled checked> <label id="lbl_Daivatdactrung"
+                                    role="button">Đại vật đặc trưng</label></li>
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+                                    id="chk_nenTimduong" disabled checked> <label id="lbl_Timduong" role="button">Tim
+                                    đường</label></li>
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+                                    id="chk_nenMatduongbo" disabled checked> <label id="lbl_Matduongbo"
+                                    role="button">Mặt đường bộ</label></li>
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+                                    id="chk_nenGiaothonghuyen" disabled checked> <label id="lbl_Giaothonghuyen"
+                                    role="button">Giao thông huyện</label></li>
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+                                    id="chk_nenHanhchinhxa" disabled checked> <label id="lbl_Hanhchinhxa"
+                                    role="button">Hành chính xã</label></li>
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+                                    id="chk_nenRanhgioihanhchinhhuyen" disabled checked> <label
+                                    id="lbl_Ranhgioihanhchinhhuyen" role="button">Ranh giới
+                                    hành chính huyện</label></li>
+                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
+                                    id="chk_nenHanhchinhhuyen" disabled checked> <label id="lbl_Hanhchinhhuyen"
+                                    role="button">Hành chính huyện</label></li>
+                        </ul>
+                        </li>
+                        <br />
+
+                        <legend></legend>
+
+                        <li id="basemapWorldimagery" class="esri-basemap-gallery__item" role="menuitem" tabindex="0"
+                            title="Hình ảnh">
+                            <input type="checkbox" id="chx_Worldimagery" checked> &nbsp;
+                            <img alt="" class="esri-basemap-gallery__item-thumbnail"
+                                src="https://www.arcgis.com/sharing/rest/content/items/f413abe6c66f452bae432ae215da9151/info/thumbnail/tempimagery.jpg?f=json">
+
+                            <div class="esri-basemap-gallery__item-title">Bản đồ vệ tinh</div>
+                        </li>
+                        <li id="basemapOpenStreetMap" class="esri-basemap-gallery__item" role="menuitem" tabindex="0"
+                            title="OpenStreetMap">
+                            <input type="checkbox" id="chx_OpenStreetMap"> &nbsp;
+                            <img alt="" class="esri-basemap-gallery__item-thumbnail"
+                                src="https://www.arcgis.com/sharing/rest/content/items/e911cfcd020940db9d78d6b47120b7e7/info/thumbnail/ago_downloaded.png?f=json">
+                            <div class="esri-basemap-gallery__item-title">Bản đồ đường phố</div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <!--
+<div id="panelBasemaps" class="panel collapse in" data-dojo-dataid="pid0" style="height: auto;">
+        <div id="headingBasemaps" class="panel-heading" role="tab">
+          <div class="panel-title">
+            <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false" aria-controls="collapseBasemaps" data-dojo-dataid="pid3"><span class="esri-icon-basemap" aria-hidden="true"></span><span class="panel-label"> Bản Đồ Nền</span></a>
+            <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps" data-dojo-dataid="pid2"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <div id="collapseBasemaps" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBasemaps" data-dojo-dataid="pid1" style="height: auto;">
+          <div class="panel-body">
+            <div id="basemapPanelDiv" class="esri-basemap-gallery esri-widget esri-widget--panel"><ul class="esri-basemap-gallery__item-container" role="menu"> <li class="esri-basemap-gallery__item" role="menuitem" tabindex="0" title="Hình ảnh"><img alt="" class="esri-basemap-gallery__item-thumbnail" src="https://www.arcgis.com/sharing/rest/content/items/f413abe6c66f452bae432ae215da9151/info/thumbnail/tempimagery.jpg?f=json"><div id="basemapWorldimagery" class="esri-basemap-gallery__item-title">Hình ảnh</div></li>  </ul></div>
+  
+  
+            
+          </div>
+        </div>
+      </div>
+-->
+
+        <!-- KhuKT Panel -->
+        <!--
+        <div id="panelZoomtoKhuKT" class="panel collapse">
+            <div id="headingZoomtoKhuKT" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseZoomtoKhuKT"
+                        aria-expanded="false" aria-controls="collapseZoomtoKhuKT"><span class="esri-icon-maps"
+                            aria-hidden="true"></span><span class="panel-label"> Khu Kinh Tế</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelZoomtoKhuKT"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseZoomtoKhuKT" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZoomtoKhuKT">
+                <div class="panel-body">
+
+                    <div id="divaddKhukinhte"></div>
+
+                    <div id="menuitemKhukinhte"></div>
+
+
+                </div>
+            </div>
+        </div>
+        -->
+        <!-- KhuCN Panel -->
+
+        <div id="panelZoomtoKhuCN" class="panel collapse">
+            <div id="headingZoomtoKhuCN" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseZoomtoKhuCN"
+                        aria-expanded="false" aria-controls="collapseZoomtoKhuCN"><span class="esri-icon-organization"
+                            aria-hidden="true"></span><span class="panel-label"> Cơ Sở Kinh Doanh</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelZoomtoKhuCN"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseZoomtoKhuCN" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingZoomtoKhuCN">
+                <div class="panel-body">
+
+                    <div id="divaddKhucongnghiep"></div>
+                    <div id="divaddDoanhnghiepKCNKKT"></div>
+
+                    <div id="menuitemCoSoKinhDoanh"></div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- add Khukinhte Panel -->
+
+        <script type="text/javascript">
+            function panelAddKhukinhteShow() {
+                //alert("fvnfcnggn");
+                //document.getElementById("panelZoomtoKhuKT").className = "panel collapse";
+                document.getElementById("collapseZoomtoKhuKT").className = "panel-collapse collapse";
+                //document.getElementById("topbar").style.display="block";
+                document.getElementById("panelAddKhukinhte").className = "panel collapse in";
+                document.getElementById("panelAddKhukinhte").style.height = "auto";
+                document.getElementById("collapseAddKhukinhte").className = "panel-collapse collapse in";
+
+            }
+
+        </script>
+
+        <!-- add Khucongnghiep Panel -->
+
+        <script type="text/javascript">
+            function panelAddKhucongnghiepShow() {
+                //alert("fvnfcnggn");
+                document.getElementById("panelZoomtoKhuCN").className = "panel collapse";
+                document.getElementById("collapseZoomtoKhuCN").className = "panel-collapse collapse";
+                //document.getElementById("topbar").style.display="block";
+                document.getElementById("panelAddKhucongnghiep").className = "panel collapse in";
+                document.getElementById("panelAddKhucongnghiep").style.height = "auto";
+                document.getElementById("collapseAddKhucongnghiep").className = "panel-collapse collapse in";
+
+            }
+
+        </script>
+
+        <!-- add Cumcongnghiep Panel -->
+
+        <script type="text/javascript">
+            function panelAddCumcongnghiepShow() {
+                //alert("fvnfcnggn");
+                //document.getElementById("panelZoomtoCumCN").className = "panel collapse";
+                document.getElementById("collapseZoomtoCumCN").className = "panel-collapse collapse";
+                //document.getElementById("topbar").style.display="block";
+                document.getElementById("panelAddCumcongnghiep").className = "panel collapse in";
+                document.getElementById("panelAddCumcongnghiep").style.height = "auto";
+                document.getElementById("collapseAddCumcongnghiep").className = "panel-collapse collapse in";
+
+            }
+
+        </script>
+
+
+
+        <!-- add DoanhnghiepKCNKKT Panel -->
+
+        <script type="text/javascript">
+            function panelAddDoanhnghiepKCNKKTShow() {
+                //alert("fvnfcnggn");
+                document.getElementById("panelZoomtoKhuCN").className = "panel collapse";
+                document.getElementById("collapseZoomtoKhuCN").className = "panel-collapse collapse";
+                //document.getElementById("topbar").style.display="block";
+                document.getElementById("panelAddDoanhnghiepKCNKKT").className = "panel collapse in";
+                document.getElementById("panelAddDoanhnghiepKCNKKT").style.height = "auto";
+                document.getElementById("collapseAddDoanhnghiepKCNKKT").className = "panel-collapse collapse in";
+
+            }
+
+        </script>
+
+        <!-- add DiemXaThai Panel -->
+
+        <script type="text/javascript">
+            function panelAddDiemXaThaiShow() {
+                //alert("fvnfcnggn");
+                //document.getElementById("panelZoomtoKhuCN").className = "panel collapse";
+                //document.getElementById("collapseZoomtoKhuCN").className = "panel-collapse collapse";
+                //document.getElementById("topbar").style.display="block";
+                document.getElementById("panelAddDiemXaThai").className = "panel collapse in";
+                document.getElementById("panelAddDiemXaThai").style.height = "auto";
+                document.getElementById("collapseAddDiemXaThai").className = "panel-collapse collapse in";
+
+            }
+
+        </script>
+
+        <!-- add DoanhnghiepCCN Panel -->
+
+        <script type="text/javascript">
+            function panelAddDoanhnghiepCCNShow() {
+                //alert("fvnfcnggn");
+                //document.getElementById("panelZoomtoCumCN").className = "panel collapse";
+                document.getElementById("collapseZoomtoCumCN").className = "panel-collapse collapse";
+                //document.getElementById("topbar").style.display="block";
+                document.getElementById("panelAddDoanhnghiepCCN").className = "panel collapse in";
+                document.getElementById("panelAddDoanhnghiepCCN").style.height = "auto";
+                document.getElementById("collapseAddDoanhnghiepCCN").className = "panel-collapse collapse in";
+
+            }
+
+        </script>
+
+
+
+        <!-- add DiemDautu Panel -->
+
+        <script type="text/javascript">
+            function panelAddDiemdautuShow() {
+                //alert("fvnfcnggn");
+                document.getElementById("panelZoomtoDiemDautu").className = "panel collapse";
+                document.getElementById("collapseZoomtoDiemDautu").className = "panel-collapse collapse";
+                //document.getElementById("topbar").style.display="block";
+                document.getElementById("panelAddDiemdautu").className = "panel collapse in";
+                document.getElementById("panelAddDiemdautu").style.height = "auto";
+                document.getElementById("collapseAddDiemdautu").className = "panel-collapse collapse in";
+
+            }
+
+        </script>
+
+
+        <div id="panelZoomtoDiemDautu" class="panel collapse">
+            <div id="headingZoomtoDiemDautu" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse"
+                        href="#collapseZoomtoDiemDautu" aria-expanded="false"
+                        aria-controls="collapseZoomtoDiemDautu"><span class="esri-icon-map-pin"
+                            aria-hidden="true"></span><span class="panel-label"> Điểm Xả Thải</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse"
+                        data-target="#panelZoomtoDiemDautu"><span class="esri-icon esri-icon-close"
+                            aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseZoomtoDiemDautu" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingZoomtoDiemDautu">
+                <div class="panel-body">
+
+
+                    <div id="divaddDiemdautu"></div>
+
+                    <div id="menuitemDiemdautu"></div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Layers Panel -->
+
+
+
+
+
+
+
+
+        <!-- Legend Panel -->
+
+        <div id="panelLegend" class="panel collapse">
+            <div id="headingLegend" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseLegend"
+                        aria-expanded="false" aria-controls="collapseLegend"><span class="esri-icon-polygon"
+                            aria-hidden="true"></span><span class="panel-label"> Chú Thích</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelLegend"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseLegend" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLegend">
+                <div class="panel-body">
+                    <div id="LegendPanelDiv"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools Panel -->
+        <!--Printer Panel-->
+
+        <div id="panelPrinter" class="panel collapse">
+            <div id="headingLegend" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapsePrinter"
+                        aria-expanded="false" aria-controls="collapsePrinter"><span class="esri-icon-printer"
+                            aria-hidden="true"></span><span class="panel-label"> Printer</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelPrinter"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapsePrinter" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrinter">
+                <div class="panel-body">
+                    <div id="PrinterPanelDiv"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Panel  -->
+
+        <div id="panelSettings" class="panel panel-map collapse">
+            <div id="headingSettings" class="panel-heading">
+                <div class="panel-title">
+                    <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseSettings"
+                        data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseSettings"><span
+                            class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="panel-label">
+                            Settings</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSettings"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseSettings" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingSettings">
+                <div class="panel-body">
+                    <!-- <div id="layerPanelDiv"></div> -->
+                    <span id="layerPanelDivKKT">
+                        <input type="checkbox" id="chx_Khu_KT" checked> <strong>Khu Kinh Tế</strong>
+                    </span>
+                    <br />
+                    Độ trong suốt: <select id="optKhu_KT">
+                        <option value="0.8">0.8 (mặc định)</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.5">0.5</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.7">0.7</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.9">0.9</option>
+                        <option value="1">1</option>
+
+
+                    </select>
+                    <br /><br />
+                    Hiển thị khi tỷ lệ >
+                    <select id="scaleKhu_KT">
+                        <option value="10">1:10,000 (mặc định)</option>
+                        <option value="1">1:1,000</option>
+                        <option value="2">1:2,000</option>
+                        <option value="3">1:3,000</option>
+                        <option value="4">1:4,000</option>
+                        <option value="5">1:5,000</option>
+                        <option value="6">1:6,000</option>
+                        <option value="7">1:7,000</option>
+                        <option value="8">1:8,000</option>
+                        <option value="9">1:9,000</option>
+                        <option value="10">1:10,000</option>
+                        <option value="11">1:11,000</option>
+                        <option value="12">1:12,000</option>
+                        <option value="13">1:13,000</option>
+                        <option value="14">1:14,000</option>
+                        <option value="15">1:15,000</option>
+                        <option value="16">1:16,000</option>
+                        <option value="17">1:17,000</option>
+                        <option value="18">1:18,000</option>
+                        <option value="19">1:19,000</option>
+                        <option value="20">1:20,000</option>
+                        <option value="21">1:21,000</option>
+                        <option value="22">1:22,000</option>
+                        <option value="23">1:23,000</option>
+                        <option value="24">1:24,000</option>
+                        <option value="25">1:25,000</option>
+                    </select>
+
+                    <br /><br />
+                    <legend></legend>
+                    <span id="layerPanelDiv2">
+                        <input type="checkbox" id="chx_Khu_CN" checked> <strong>Khu Công Nghiệp</strong>
+                    </span>
+                    <br />
+                    Độ trong suốt: <select id="optKhu_CN">
+                        <option value="0.4">0.4 (mặc định)</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.5">0.5</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.7">0.7</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.9">0.9</option>
+                        <option value="1">1</option>
+
+
+                    </select>
+                    <br /><br />
+                    Hiển thị khi tỷ lệ >
+                    <select id="scaleKhu_CN">
+                        <option value="10">1:10,000 (mặc định)</option>
+                        <option value="1">1:1,000</option>
+                        <option value="2">1:2,000</option>
+                        <option value="3">1:3,000</option>
+                        <option value="4">1:4,000</option>
+                        <option value="5">1:5,000</option>
+                        <option value="6">1:6,000</option>
+                        <option value="7">1:7,000</option>
+                        <option value="8">1:8,000</option>
+                        <option value="9">1:9,000</option>
+                        <option value="10">1:10,000</option>
+                        <option value="11">1:11,000</option>
+                        <option value="12">1:12,000</option>
+                        <option value="13">1:13,000</option>
+                        <option value="14">1:14,000</option>
+                        <option value="15">1:15,000</option>
+                        <option value="16">1:16,000</option>
+                        <option value="17">1:17,000</option>
+                        <option value="18">1:18,000</option>
+                        <option value="19">1:19,000</option>
+                        <option value="20">1:20,000</option>
+                        <option value="21">1:21,000</option>
+                        <option value="22">1:22,000</option>
+                        <option value="23">1:23,000</option>
+                        <option value="24">1:24,000</option>
+                        <option value="25">1:25,000</option>
+                    </select>
+
+
+
+                    <br />
+                    <p>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </p>
+                    <span id="layerPanelDiv">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chx_DN_KCNKKT" checked> <strong>Doanh
+                            Nghiệp
+                            trong KCN/KKT</strong>
+                    </span>
+                    <br />
+                    Độ trong suốt: <select id="optDN_KCNKKT">
+                        <option value="0.8">0.8 (mặc định)</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.5">0.5</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.7">0.7</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.9">0.9</option>
+                        <option value="1">1</option>
+
+
+                    </select>
+                    <br /><br />
+                    Hiển thị khi tỷ lệ >
+                    <select id="scaleDN_KCNKKT">
+                        <option value="14">1:14,000 (mặc định)</option>
+                        <option value="1">1:1,000</option>
+                        <option value="2">1:2,000</option>
+                        <option value="3">1:3,000</option>
+                        <option value="4">1:4,000</option>
+                        <option value="5">1:5,000</option>
+                        <option value="6">1:6,000</option>
+                        <option value="7">1:7,000</option>
+                        <option value="8">1:8,000</option>
+                        <option value="9">1:9,000</option>
+                        <option value="10">1:10,000</option>
+                        <option value="11">1:11,000</option>
+                        <option value="12">1:12,000</option>
+                        <option value="13">1:13,000</option>
+                        <option value="14">1:14,000</option>
+                        <option value="15">1:15,000</option>
+                        <option value="16">1:16,000</option>
+                        <option value="17">1:17,000</option>
+                        <option value="18">1:18,000</option>
+                        <option value="19">1:19,000</option>
+                        <option value="20">1:20,000</option>
+                        <option value="21">1:21,000</option>
+                        <option value="22">1:22,000</option>
+                        <option value="23">1:23,000</option>
+                        <option value="24">1:24,000</option>
+                        <option value="25">1:25,000</option>
+                    </select>
+
+
+                    <br /><br />
+                    <legend></legend>
+
+                    <span id="layerPanelDiv3">
+                        <input type="checkbox" id="chx_Cum_CN" checked> <strong>Cụm Công Nghiệp</strong>
+                    </span>
+                    <br />
+                    Độ trong suốt: <select id="optCum_CN">
+                        <option value="0.4">0.4 (mặc định)</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.5">0.5</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.7">0.7</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.9">0.9</option>
+                        <option value="1">1</option>
+
+
+                    </select>
+                    <br /><br />
+                    Hiển thị khi tỷ lệ >
+                    <select id="scaleCum_CN">
+                        <option value="10">1:10,000 (mặc định)</option>
+                        <option value="1">1:1,000</option>
+                        <option value="2">1:2,000</option>
+                        <option value="3">1:3,000</option>
+                        <option value="4">1:4,000</option>
+                        <option value="5">1:5,000</option>
+                        <option value="6">1:6,000</option>
+                        <option value="7">1:7,000</option>
+                        <option value="8">1:8,000</option>
+                        <option value="9">1:9,000</option>
+                        <option value="10">1:10,000</option>
+                        <option value="11">1:11,000</option>
+                        <option value="12">1:12,000</option>
+                        <option value="13">1:13,000</option>
+                        <option value="14">1:14,000</option>
+                        <option value="15">1:15,000</option>
+                        <option value="16">1:16,000</option>
+                        <option value="17">1:17,000</option>
+                        <option value="18">1:18,000</option>
+                        <option value="19">1:19,000</option>
+                        <option value="20">1:20,000</option>
+                        <option value="21">1:21,000</option>
+                        <option value="22">1:22,000</option>
+                        <option value="23">1:23,000</option>
+                        <option value="24">1:24,000</option>
+                        <option value="25">1:25,000</option>
+                    </select>
+                    <br />
+                    <p>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </p>
+                    <span id="layerPanelDiv4">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="chx_DN_CCN" checked> <strong>Doanh
+                            Nghiệp
+                            trong CCN</strong>
+                    </span>
+                    <br />
+
+                    Độ trong suốt: <select id="optDN_CCN">
+                        <option value="0.8">0.8 (mặc định)</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.5">0.5</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.7">0.7</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.9">0.9</option>
+                        <option value="1">1</option>
+
+
+                    </select>
+                    <br /><br />
+                    Hiển thị khi tỷ lệ >
+                    <select id="scaleDN_CCN">
+                        <option value="14">1:14,000 (mặc định)</option>
+                        <option value="1">1:1,000</option>
+                        <option value="2">1:2,000</option>
+                        <option value="3">1:3,000</option>
+                        <option value="4">1:4,000</option>
+                        <option value="5">1:5,000</option>
+                        <option value="6">1:6,000</option>
+                        <option value="7">1:7,000</option>
+                        <option value="8">1:8,000</option>
+                        <option value="9">1:9,000</option>
+                        <option value="10">1:10,000</option>
+                        <option value="11">1:11,000</option>
+                        <option value="12">1:12,000</option>
+                        <option value="13">1:13,000</option>
+                        <option value="14">1:14,000</option>
+                        <option value="15">1:15,000</option>
+                        <option value="16">1:16,000</option>
+                        <option value="17">1:17,000</option>
+                        <option value="18">1:18,000</option>
+                        <option value="19">1:19,000</option>
+                        <option value="20">1:20,000</option>
+                        <option value="21">1:21,000</option>
+                        <option value="22">1:22,000</option>
+                        <option value="23">1:23,000</option>
+                        <option value="24">1:24,000</option>
+                        <option value="25">1:25,000</option>
+                    </select>
+
+                    <br /><br />
+                    <legend></legend>
+                    <span id="layerPanelDiv5">
+                        <input type="checkbox" id="chx_Diemdautu" checked> <strong>Điểm mời gọi đầu tư</strong>
+                    </span>
+                    <br />
+                    Độ trong suốt: <select id="optDiemdautu">
+                        <option value="0.4">0.4 (mặc định)</option>
+                        <option value="0.1">0.1</option>
+                        <option value="0.2">0.2</option>
+                        <option value="0.3">0.3</option>
+                        <option value="0.4">0.4</option>
+                        <option value="0.5">0.5</option>
+                        <option value="0.6">0.6</option>
+                        <option value="0.7">0.7</option>
+                        <option value="0.8">0.8</option>
+                        <option value="0.9">0.9</option>
+                        <option value="1">1</option>
+
+
+                    </select>
+                    <br /><br />
+                    Hiển thị khi tỷ lệ >
+                    <select id="scaleDiemdautu">
+                        <option value="10">1:10,000 (mặc định)</option>
+                        <option value="1">1:1,000</option>
+                        <option value="2">1:2,000</option>
+                        <option value="3">1:3,000</option>
+                        <option value="4">1:4,000</option>
+                        <option value="5">1:5,000</option>
+                        <option value="6">1:6,000</option>
+                        <option value="7">1:7,000</option>
+                        <option value="8">1:8,000</option>
+                        <option value="9">1:9,000</option>
+                        <option value="10">1:10,000</option>
+                        <option value="11">1:11,000</option>
+                        <option value="12">1:12,000</option>
+                        <option value="13">1:13,000</option>
+                        <option value="14">1:14,000</option>
+                        <option value="15">1:15,000</option>
+                        <option value="16">1:16,000</option>
+                        <option value="17">1:17,000</option>
+                        <option value="18">1:18,000</option>
+                        <option value="19">1:19,000</option>
+                        <option value="20">1:20,000</option>
+                        <option value="21">1:21,000</option>
+                        <option value="22">1:22,000</option>
+                        <option value="23">1:23,000</option>
+                        <option value="24">1:24,000</option>
+                        <option value="25">1:25,000</option>
+                    </select>
+
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+
+        </script>
+        <!-- Info Panel -->
+
+        <div id="panelInfo" class="panel collapse">
+            <div id="headingInfo" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseInfo"
+                        aria-expanded="false" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign"
+                            aria-hidden="true"></span><span class="panel-label"> Info</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
+                <div class="panel-body">
+                    <div id="infoPanelDiv"></div>
+                    <p>Bản quyền thuộc Sở Kế hoạch Đầu tư tỉnh Bình Định </p>
+                    <p>Phát triển công nghệ: <a href="http://stttt.binhdinh.gov.vn"><strong>ICTBD</strong></a></p>
+                </div>
+            </div>
+        </div>
+
+        <!--  sum -->
+        <!--
+        <div id="panelSearchresum" class="panel panel-map collapse">
+
+            <div id="headingSearchresum" class="panel-heading">
+                <div class="panel-title">
+                    <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseSearchresum"
+                        data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseSearchresum"><span
+                            class="esri-icon-review" aria-hidden="true"></span><span class="panel-label"> Kết quả tìm
+                            kiếm</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearchresum"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseSearchresum" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSearchresum">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+
+
+
+                        <div id="report-objects"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- Add Polygon DoanhnghiepKCNKKT Panel  -->
+
+        <div id="panelAddDoanhnghiepKCNKKT" class="panel collapse">
+            <div id="headingAddDoanhnghiepKCNKKT" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse"
+                        href="#collapseAddDoanhnghiepKCNKKT" aria-expanded="false"
+                        aria-controls="collapseAddDoanhnghiepKCNKKT"><span class="esri-icon-organization"
+                            aria-hidden="true"></span><span class="panel-label">
+                            <div id="addDoanhnghiepKCNKKT"></div>
+                            Thêm mới Cơ Sở Kinh Doanh
+                        </span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse"
+                        data-target="#panelAddDoanhnghiepKCNKKT"><span class="esri-icon esri-icon-close"
+                            aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseAddDoanhnghiepKCNKKT" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingAddDoanhnghiepKCNKKT">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <p>Chấm trực tiếp trên bản đồ</p>
+
+                        <br /><br />
+                        <div id="topbar">
+
+
+                            <button class="action-button esri-icon-blank-map-pin" id="pointButtonDNKCNKKT" type="button"
+                                title="Draw point"></button>
+
+                            <!--<button class="action-button esri-icon-trash" id="resetBtn" type="button" title="Clear graphics"></button>-->
+
+                        </div>
+                        <br />
+                        <legend></legend>
+
+                        <p>Nhập từ file Excel: </p>
+                        <p id="filenameExcelDN_KCNKKT"></p>
+
+                        <input type="file" name="xlfileDN_KCNKKT" id="xlfDN_KCNKKT"
+                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+
+
+
+
+                        <div id="AddDoanhnghiepKCNKKTUpdateDiv" style="display:none">
+
+
+                            <p class="list-heading"><strong>Nhập thông tin Cơ Sở Kinh Doanh</strong></p>
+                            <legend></legend>
+
+
+                            <div id="attributeArea">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <th>Mã CSKD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaCSKD"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Mã số KD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaSoKD"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phường/Xã</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaPhuongXa"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Huyện/TP</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaHuyenTP"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mã Đường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaDuong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Người Cập Nhật</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiCapNhat"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời Gian Cập Nhật</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGCapNhat"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Người Tạo</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiTao"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời Gian Tạo</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGTao"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời gian Kinh Doanh</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGKinhDoanh"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời gian kết thúc KD</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGKetThucKinhDoanh">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tình trạng DN</th>
+                                            <td><select id="addcskdTinhTrangDN"> </select></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Tên Cơ sở KD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdTenCSKD"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loại hình DN</th>
+                                            <td><select id="addcskdLoaiHinhDN"> </select></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngành kinh tế</th>
+                                            <td><select id="addcskdNganhKinhTe"> </select></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <th>Số điện thoại</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdSoDienThoai"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa chỉ trụ sở chính</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdDiaChiTruSo"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chủ sở hửu</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdChuSoHuu"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Người đại diện</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiDaiDien"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mã số thuế</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaSoThue"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Số lần vi phạm</th>
+                                            <td><input class="inputInfo" type="number" id="addcskdSoLanViPham"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Khu vực sản xuất</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdKhuVucSanXuat"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa chỉ hoạt động</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdDiaDiemHoatDong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số lượng nhân viên</th>
+                                            <td><input class="inputInfo" type="number" id="addcskdSoLuongNhanVien"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loại hình hoạt động</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdLoaiHinhHoatDong"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Công suất thiết kế</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdCongSuatThietKe"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hóa chất sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdHoaChatSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nhiên liệu sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNhienLieuSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lượng nước sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdLuongNuocSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thủ tục môi trường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdThuTucMoiTruong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số thủ tục môi trường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdSoThuTucMoiTruong"></td>
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <th></th>
+                                            <td>.</td>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <td>
+                                                <input type="button" class="edit-button" value=" Lưu, địa điểm "
+                                                    id="polygonDoanhnghiepKCNKKTSave" style="background-color: green">
+
+                                                <input type="button" class="edit-button" value=" Hủy "
+                                                    id="polygonDoanhnghiepKCNKKTDelete"
+                                                    style="background-color: crimson">
+
+                                            </td>
+                                        </tr>
+
+
+
+
+
+                                    </tbody>
+                                </table>
+
+
+
+                                <br>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div id="report-objectsdfrgdgdrg"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Add Polygon DoanhnghiepKCNKKT Panel  -->
+
+        <div id="panelAddDiemXaThai" class="panel collapse">
+            <div id="headingAddDiemXaThai" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseAddDiemXaThai"
+                        aria-expanded="false" aria-controls="collapseAddDiemXaThai"><span class="esri-icon-organization"
+                            aria-hidden="true"></span><span class="panel-label">
+                            <div id="addDiemXaThai"></div>
+                            Thêm mới Cơ Sở Kinh Doanh
+                        </span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelAddDiemXaThai"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseAddDiemXaThai" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingAddDiemXaThai">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <p>Chấm trực tiếp trên bản đồ</p>
+
+                        <br /><br />
+                        <div id="topbar">
+
+
+                            <button class="action-button esri-icon-blank-map-pin" id="pointButtonDNKCNKKT" type="button"
+                                title="Draw point"></button>
+
+                            <!--<button class="action-button esri-icon-trash" id="resetBtn" type="button" title="Clear graphics"></button>-->
+
+                        </div>
+                        <br />
+                        <legend></legend>
+
+                        <p>Nhập từ file Excel: </p>
+                        <p id="filenameExcelDXT"></p>
+
+                        <input type="file" name="xlfileDXT" id="xlfDXT"
+                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+
+
+
+
+                        <div id="AddDiemXaThaiUpdateDiv" style="display:none">
+
+
+                            <p class="list-heading"><strong>Nhập thông tin Cơ Sở Kinh Doanh</strong></p>
+                            <legend></legend>
+
+
+                            <div id="attributeArea">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <th>Mã CSKD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaCSKD"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Mã số KD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaSoKD"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phường/Xã</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaPhuongXa"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Huyện/TP</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaHuyenTP"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mã Đường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaDuong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Người Cập Nhật</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiCapNhat"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời Gian Cập Nhật</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGCapNhat"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Người Tạo</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiTao"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời Gian Tạo</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGTao"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời gian Kinh Doanh</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGKinhDoanh"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời gian kết thúc KD</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGKetThucKinhDoanh">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tình trạng DN</th>
+                                            <td><select id="addcskdTinhTrangDN"> </select></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Tên Cơ sở KD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdTenCSKD"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loại hình DN</th>
+                                            <td><select id="addcskdLoaiHinhDN"> </select></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngành kinh tế</th>
+                                            <td><select id="addcskdNganhKinhTe"> </select></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <th>Số điện thoại</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdSoDienThoai"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa chỉ trụ sở chính</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdDiaChiTruSo"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chủ sở hửu</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdChuSoHuu"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Người đại diện</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiDaiDien"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mã số thuế</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaSoThue"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Số lần vi phạm</th>
+                                            <td><input class="inputInfo" type="number" id="addcskdSoLanViPham"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Khu vực sản xuất</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdKhuVucSanXuat"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa chỉ hoạt động</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdDiaDiemHoatDong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số lượng nhân viên</th>
+                                            <td><input class="inputInfo" type="number" id="addcskdSoLuongNhanVien"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loại hình hoạt động</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdLoaiHinhHoatDong"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Công suất thiết kế</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdCongSuatThietKe"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hóa chất sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdHoaChatSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nhiên liệu sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNhienLieuSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lượng nước sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdLuongNuocSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thủ tục môi trường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdThuTucMoiTruong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số thủ tục môi trường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdSoThuTucMoiTruong"></td>
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <th></th>
+                                            <td>.</td>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <td>
+                                                <input type="button" class="edit-button" value=" Lưu "
+                                                    id="tableDiemXaThaiSave" style="background-color: green">
+
+                                                <input type="button" class="edit-button" value=" Hủy "
+                                                    id="tableDiemXaThaiDelete" style="background-color: crimson">
+
+                                            </td>
+                                        </tr>
+
+
+
+
+
+                                    </tbody>
+                                </table>
+
+
+
+                                <br>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div id="report-objectsdfrgdgdrg"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- AddPolygonDiemdautu Panel  -->
+
+        <div id="panelAddDiemdautu" class="panel collapse">
+            <div id="headingAddDiemdautu" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseAddDiemdautu"
+                        aria-expanded="false" aria-controls="collapseAddDiemdautu"><span class="esri-icon-organization"
+                            aria-hidden="true"></span><span class="panel-label">
+                            <div id="addDiemdautu"></div>
+                            Thêm mới Điểm Xả Thải
+                        </span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelAddDiemdautu"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseAddDiemdautu" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingAddDiemdautu">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <p>Vẽ trực tiếp</p>
+
+                        <br /><br />
+
+                        <div id="topbar">
+
+                            <button class="action-button esri-icon-polygon" id="polygonButton" type="button"
+                                title="Draw polygon"></button>
+
+                            <!--<button class="action-button esri-icon-trash" id="resetBtn" type="button" title="Clear graphics"></button>-->
+
+                        </div>
+                        <br />
+                        <legend></legend>
+
+                        <p>Nhập từ file Excel: </p>
+                        <p id="filenameExcel"></p>
+
+                        <input type="file" name="xlfile" id="xlf"
+                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+
+
+
+
+                        <div id="AddDiemdautuUpdateDiv" style="display:none">
+
+                            <p class="list-heading"><strong>Nhập thông tin địa điểm mời gọi đầu tư</strong></p>
+                            <legend></legend>
+
+
+                            <div id="attributeArea">
+
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Tên điểm</th>
+                                            <td><input class="inputInfo" type="text" id="inputTenDiem"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa điểm</th>
+                                            <td><input class="inputInfo" type="text" id="inputDiaDiem"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tình trạng đầu tư</th>
+                                            <td>
+                                                <select id="inputTinhTrangDauTu">
+                                                    <option value="Đang thu hút">Đang thu hút</option>
+                                                    <option value="Đã đầu tư">Đã đầu tư</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mô tả</th>
+                                            <td><input class="inputInfo" type="text" id="inputMoTa"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tọa độ VN2000</th>
+                                            <td><input class="inputInfo" type="text" id="inputToadoVN2000"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Mục tiêu dự án</th>
+                                            <td><input class="inputInfo" type="text" id="inputMuctieuduan"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Quy mô dự án</th>
+                                            <td><input class="inputInfo" type="text" id="inputQuymoduan"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tổng mục đầu tư dự kiến</th>
+                                            <td><input class="inputInfo" type="text" id="inputTongmucdautudukien"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Quy hoạch sử dụng đất</th>
+                                            <td><input class="inputInfo" type="text" id="inputQuyhoachsudungdat"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chính sách ưu đãi</th>
+                                            <td><input class="inputInfo" type="text" id="inputChinhsachuudai"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hiệu quả đầu tư</th>
+                                            <td><input class="inputInfo" type="text" id="inputHieuquadautu"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Liên hệ</th>
+                                            <td><input class="inputInfo" type="text" id="inputLienhe"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Diện tích</th>
+                                            <td><input class="inputInfo" type="text" id="inputDientich"></td>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <td>.</td>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <td>
+                                                <input type="button" class="edit-button" value=" Lưu, địa điểm "
+                                                    id="polygonDiemdautuSave" style="background-color: green">
+
+                                                <input type="button" class="edit-button" value=" Hủy "
+                                                    id="polygonDiemdautuDelete" style="background-color: crimson">
+
+                                            </td>
+                                        </tr>
+
+
+
+
+                                    </tbody>
+                                </table>
+
+
+
+                                <br>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div id="report-objectsdfrgdgdrg"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--
+        <div id="panelSearchresum" class="panel panel-map collapse in" data-dojo-dataid="pid0" style="height: auto;">
+
+            <div id="headingSearchresum" class="panel-heading">
+                <div class="panel-title">
+                    <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseSearchresum" data-parent="#panelAccordion" aria-expanded="true"
+                        aria-controls="collapseSearchresum"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span
+                            class="panel-label"> Ket qua tim kiem</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearchresum"><span class="esri-icon esri-icon-close"
+                            aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseSearchresum" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSearchresum" data-dojo-dataid="pid1"
+                style="height: auto;">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+
+                        <p>hehehe</p>
+
+                        <div id="report-objects">
+                            <div id="table-report"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+-->
+
+
+
+        <!--kendo javascrip for search-->
+        <script src="http://kendo.cdn.telerik.com/2017.3.1026/js/jquery.min.js"></script>
+        <script src="http://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+        <!--Read excel to json -->
+        <script src="/javascripts/js-xlsx-master/jszip.js"></script>
+        <script src="/javascripts/js-xlsx-master/xlsx.js"></script>
+
+
+
+
+
+        <!-- /.calcite-panels -->
+
+        <!--<script src="/javascripts/kendo/jquery.min.js"></script>-->
+        <script src="/javascripts/config.js"></script>
+
+        <!-- ArcGIS JS 4 -->
+        <script src="https://js.arcgis.com/4.9/"></script>
+
+        <!--Map-->
+
+        <script src="./javascripts/map.js"></script>
+
+
+
+
+</body>
+
+</html>

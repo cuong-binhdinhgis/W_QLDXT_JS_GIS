@@ -1,0 +1,164 @@
+.hidden{
+    visibility: visible;
+}
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #f2f9fe;
+  background: -moz-radial-gradient(center, ellipse cover, #f2f9fe 0%, #d6f0fd 100%) /* FF3.6+ */;
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #f2f9fe), color-stop(100%, #d6f0fd)) /* Chrome,Safari4+ */;
+  background: -webkit-radial-gradient(center, ellipse cover, #f2f9fe 0%, #d6f0fd 100%) /* Chrome10+,Safari5.1+ */;
+  background: -o-radial-gradient(center, ellipse cover, #f2f9fe 0%, #d6f0fd 100%) /* Opera 12+ */;
+  background: -ms-radial-gradient(center, ellipse cover, #f2f9fe 0%, #d6f0fd 100%) /* IE10+ */;
+  background: radial-gradient(center, ellipse cover, #f2f9fe 0%, #d6f0fd 100%) /* W3C */;
+}
+h2 {
+  margin: 0 0 6px 0;
+  font-weight: bold;
+}
+h6 {
+  margin: 2px 0 20px 0;
+}
+hr {
+  margin: 14px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #fff;
+}
+ul {
+  margin: 4px 0 0 0;
+}
+label,
+h6 {
+  color: #808080;
+  font-size: 13px;
+  font-weight: normal;
+  text-shadow: -1px 1px 0 #fff;
+}
+.well {
+  background: #f1f1f1;
+  margin-bottom: 0;
+}
+
+.well .tab-title {
+  float: left;
+  margin-left: 10px;
+}
+.well .button-top-right {
+  float: right;
+  margin: 0 10px 20px 0;
+}
+.form-signup {
+  padding-top: 10px;
+}
+.title-group {
+  background: #3b5998;
+  height: 35px;
+  line-height: 35px;
+  color: white;
+}
+.title-group > div.title{
+  float: right;
+  width: 85%;
+  text-align: center;
+  padding-right: 7.5%;
+  text-transform: uppercase;
+}
+
+.title-group > i.fa.fa-home {
+  margin-left: 5%;
+  line-height: 35px;
+  font-size: x-large;
+}
+.field > label{
+  color: black;
+  margin: 7px 0 2px;
+}
+button.btn.btn-primary.button-sign-up {
+  width: 100%;
+}
+span.fa.fa-user-plus {
+  margin-right: 10px;
+}
+.navbar-btn {
+  min-width: 100px;
+  margin-right: 8px;
+}
+.navbar-btn .btn {
+  min-width: 100px;
+}
+.glyphicon {
+  margin-right: 8px;
+}
+/*
+	login window
+*/
+#login label {
+  margin-left: 2px;
+}
+#login form {
+  width: 343px;
+  padding-bottom: 0px
+}
+#login .controls {
+  margin-top: 20px;
+}
+#login .controls .button-rememember-me {
+  float: left;
+  width: 150px;
+}
+#login .controls .button-sign-in {
+  float: right;
+  width: 120px;
+}
+#login .btm-links {
+  font-size: 0.9em;
+  margin: 2px 0 0 0;
+}
+#login .btm-links #forgot-password {
+  float: left;
+  margin-left: 10px;
+}
+#login .btm-links #create-account {
+  float: right;
+  margin-right: 5px;
+}
+#account-form-container form {
+  width: 460px;
+}
+/*
+	modal windows
+*/
+.center-vertical {
+  height: 100vh;
+}
+.center-vertical form {
+  top: 50%;
+  margin: auto;
+  position: relative;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.form-horizontal .form-buttons {
+  float: right;
+}
+.form-horizontal .form-buttons .btn {
+  width: 80px;
+  margin-left: 6px;
+}
+.form-horizontal input,
+.form-horizontal select {
+  height: 30px;
+}
+div#window-report {
+  padding: 0px;
+  margin: 0px;
+  font-size: 12px;
+}
+tr.k-state-selected {
+  background-color: #93c4ef;
+}
+.alert{
+  margin-top: 10px;
+}

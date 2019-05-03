@@ -1,0 +1,45 @@
+head
+  meta(charset='utf-8')
+  meta(http-equiv='Content-Type', content='text/html; charset=utf-8')
+  meta(http-equiv='X-UA-Compatible', content='IE=edge')
+  meta(name='apple-mobile-web-app-capable', content='yes')
+  meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+  title #{title} - Hệ thống quản lý viễn thông thụ động - tỉnh Bình Định
+
+  link(rel='stylesheet', href='/stylesheets/loader.css')
+  link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+  link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css')
+  link(href='http://fonts.googleapis.com/css?family=Roboto', rel='stylesheet', type='text/css')
+  link(href='https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common-material.min.css', rel='stylesheet')
+  link(href='https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.rtl.min.css', rel='stylesheet')
+  link(href='https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.material.min.css', rel='stylesheet')
+  link(rel='stylesheet', href='/stylesheets/custom-kendo.css')
+  link(rel='stylesheet', href='/stylesheets/main.css')
+  
+  block stylesheets
+header
+  .banner
+    .header-logo
+      a(href="/so-tttt")
+        img#logo(src='/images/logo.png')
+    .title
+      .small-title Hệ thống thông tin
+      //- br
+      .big-title HẠ TẦNG VIỄN THÔNG THỤ ĐỘNG TỈNH BÌNH ĐỊNH 
+    .user-setting
+      .dropdown
+        button.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='false')
+          | #{User.DisplayName}
+          span.caret 
+        ul.dropdown-menu.dropdown-menu-right
+          li
+            a(href='javascript:void(0)',id='btn-change-pwd') Đổi mật khẩu
+          li
+            a(href='/logout') Đăng xuất
+block content
+script(src='/javascripts/lib/Loader.js')
+script(src='http://kendo.cdn.telerik.com/2017.3.1026/js/jquery.min.js')
+script(src='http://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js')
+script(src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js")
+block javascripts

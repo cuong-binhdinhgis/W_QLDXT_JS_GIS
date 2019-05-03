@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- xlsx.js (C) 2013-present  SheetJS http://sheetjs.com -->
+<!-- vim: set ts=2: -->
+<html>
+
+<head>
+
+	<title>SheetJS Live Demo</title>
+
+</head>
+
+<body>
+
+
+
+
+	<input type="file" name="xlfile" id="xlf" />
+
+	<script src="jszip.js"></script>
+	<script src="xlsx.js"></script>
+
+	<script>
+
+		var X = XLSX;
+
+		var process_wb = (function () {
+			//var OUT = document.getElementById('out');
+
+			var to_json = function to_json(workbook) {
+
+				var result = {};
+				workbook.SheetNames.forEach(function (sheetName) {
+					var roa = X.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: true });
+					console.log(roa);
+					alert("Truyvan:" + roa[0]["Trái Cây"]);
+
+					//if (roa.length) result[sheetName] = roa;
+				});
+				return JSON.stringify(result, 2, 2);
+			};
+
+			return function process_wb(wb) {
+				var output = to_json(wb);
+			};
+
+		})();
+
+		var do_file = (function () {
+		
+			var rABS = typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString;
+			return function do_file(files) {
+				var f = files[0];
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					var data = e.target.result;
+					if (!rABS) data = new Uint8Array(data);
+					else process_wb(X.read(data, { type: rABS ? 'binary' : 'array' }));
+				};
+
+				if (rABS) reader.readAsBinaryString(f);
+
+			};
+		})();
+
+		(function () {
+			var xlf = document.getElementById('xlf');
+			if (!xlf.addEventListener) return;
+			function handleFile(e) { do_file(e.target.files); }
+			xlf.addEventListener('change', handleFile, false);
+
+		})();
+
+	</script>
+
+</body>
+
+</html>

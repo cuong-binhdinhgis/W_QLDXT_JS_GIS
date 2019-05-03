@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <title>Maps</title>
+
+  <!-- Calcite Bootstrap -->
+  <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-bootstrap.min-v0.7.css">
+
+  <!-- Calcite Maps -->
+  <link rel="stylesheet" href="https://esri.github.io/calcite-maps/dist/css/calcite-maps-arcgis-4.x.min-v0.7.css">
+
+  <!-- ArcGIS JS 4 -->
+  <link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/css/main.css">
+
+ <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+  </style>
+
+
+<style type="text/css">
+#dropdown-menuTools {
+ display: none;
+}
+
+#dropdown-nenBinhdinh {
+  display: none;
+}
+</style>
+
+
+<script type="text/javascript">
+function showOrHide(zap) {
+ if (document.getElementById) {
+  var abra = document.getElementById(zap).style;
+  
+  if (abra.display == "block") {
+   abra.display = "none";
+   document.getElementById("iconArrowtools").className="esri-icon-right-triangle-arrow";
+   } else {
+   abra.display = "block";
+    document.getElementById("iconArrowtools").className="esri-icon-down-arrow";
+  } 
+  return false;
+  } else {
+  return true;
+ }
+}
+</script>
+
+<script type="text/javascript">
+function showOrHide_nenBinhdinh(zap) {
+  
+ if (document.getElementById) {
+  var abra = document.getElementById(zap).style;
+  if (abra.display == "block") {
+   abra.display = "none";
+   document.getElementById("iconArrow").className="esri-icon-right-triangle-arrow";
+   } else {
+   abra.display = "block";
+   document.getElementById("iconArrow").className="esri-icon-down-arrow";
+  } 
+  return false;
+  } else {
+  return true;
+ }
+}
+
+</script>
+
+
+
+
+</head>
+
+<body class="calcite-maps calcite-nav-top">
+
+  <!-- Navbar -->
+
+  <nav class="navbar calcite-navbar navbar-fixed-top calcite-text-light calcite-bg-dark">
+    <!-- Menu -->
+    <div class="dropdown calcite-dropdown calcite-text-dark calcite-bg-light" role="presentation">
+      <a class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <div class="calcite-dropdown-toggle">
+          <span class="sr-only">Toggle dropdown menu</span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </a>
+      <ul class="dropdown-menu">
+       
+        <li><a role="button" data-target="#panelBasemaps" aria-haspopup="true"><span class="esri-icon-basemap"></span><strong> Bản Đồ Nền</strong></a></li>        
+        <li><a role="button" data-target="#panelZoomtoKhuCN" aria-haspopup="true"><span class="esri-icon-maps"></span><strong> Khu Công Nghiệp</strong></a></li>        
+        
+        <li><a role="button" data-target="#panelLayers" aria-haspopup="true"><span class="esri-icon-layers"></span><strong> Lớp Bản Đồ</strong></a></li>
+        <li><a role="button" data-target="#panelLegend" aria-haspopup="true"><span class="esri-icon-polygon"></span><strong> Chú Thích</strong></a></li>
+        <li><a role="button"  aria-haspopup="true" onclick="return showOrHide('dropdown-menuTools');"><span id="iconArrowtools"  class="esri-icon-right-triangle-arrow"></span><span class="esri-icon-support"></span><strong> Công cụ</strong></a>
+          <ul id="dropdown-menuTools">
+            <li><a role="button" data-target="#panelPrinter" aria-haspopup="true"><span class="esri-icon-printer"></span><strong> Printer</strong></a></li>
+
+          </ul>       
+        </li>
+        <li><a role="button" data-target="#panelSettings" aria-haspopup="true"><span class="glyphicon glyphicon-cog"></span><strong> Settings</strong></a></li>
+        <li><a role="button" data-target="#panelInfo" aria-haspopup="true"><span class="glyphicon glyphicon-info-sign"></span><strong> Info</strong></a></li>        
+        <li><a role="button" id="calciteToggleNavbar" aria-haspopup="true"><span class="glyphicon glyphicon-fullscreen"></span><strong> Full Map</strong></a></li>
+        <li><a role="button" href="/users/logout" aria-haspopup="true"><span class="esri-icon-sign-out"></span><strong> Đăng xuất</strong></a></li>
+      </ul>
+    </div>
+    <!-- Title -->
+    <div class="calcite-title calcite-overflow-hidden">
+      <span class="calcite-title-main">SỞ KẾ HOẠCH ĐẦU TƯ TỈNH BÌNH ĐỊNH</span>
+      <span class="calcite-title-divider hidden-xs"></span>
+      <span class="calcite-title-sub hidden-xs">Department Of Planning And Investment Of Binhdinh Province</span>
+    </div>
+
+    <!-- Nav -->
+    <ul class="nav navbar-nav calcite-nav">
+
+<li><a  href="#">Xin chào <strong>{{user.name}}</strong> </a></li>
+
+<!--
+      <li class="active"><a id="mapNav" class="hidden-xs hidden-sm" href="#mapTab" aria-controls="mapTab"
+          aria-expanded="true" role="tab" data-toggle="tab" data-tooltip="tip" title="2D View"
+          data-placement="bottom">Map</a></li>
+      <li><a id="sceneNav" class="hidden-xs hidden-sm" href="#sceneTab" aria-controls="sceneTab"
+          role="tab" data-toggle="tab" data-tooltip="tip" title="3D View" data-placement="bottom">Scene</a>
+      </li>
+-->
+      <li>
+        <div class="calcite-navbar-search calcite-search-expander">
+          <div id="searchWidgetDiv"></div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <!--/.calcite-navbar -->
+   
+  <!-- Map  -->
+
+  <div class="calcite-map calcite-map-absolute">
+    <div id="tabContainer" class="tab-content">
+      <div id="mapTab" class="tab-pane fade in active" role="tabpanel">
+        <div id="mapViewDiv"></div>
+      </div>
+      <div id="sceneTab" class="tab-pane fade" role="tabpanel">
+        <div id="sceneViewDiv"></div>
+      </div>
+    </div>
+  </div>
+  <!-- /.calcite-map -->
+
+  <!-- Panels -->
+
+  <div class="calcite-panels calcite-panels-right calcite-text-light calcite-bg-dark panel-group">
+
+    <!-- Basemaps Panel -->
+
+    <div id="panelBasemaps" class="panel collapse">
+      <div id="headingBasemaps" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps"
+            aria-expanded="false" aria-controls="collapseBasemaps"><span class="esri-icon-basemap" aria-hidden="true"></span><span class="panel-label"> Bản Đồ Nền</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
+        <div class="panel-body">
+          <div id="basemapPanelDiv"></div>
+          <ul class="esri-basemap-gallery__item-container" role="menu"> 
+
+            <li>
+              
+              
+            
+              <li  class="esri-basemap-gallery__item" role="menuitem" tabindex="0" title="Hình ảnh">
+                 <a  role="button"  aria-haspopup="true" onclick="return showOrHide_nenBinhdinh('dropdown-nenBinhdinh');"><span id="iconArrow" class="esri-icon-right-triangle-arrow"></span><strong></strong></a>
+                &nbsp;
+                <input type="checkbox" id="checkbox_nenBinhdinh"> 
+                &nbsp;
+                <img id="img_nenBinhdinh" alt="" class="esri-basemap-gallery__item-thumbnail" src="http://vienthong.binhdinh.gov.vn/images/basemapbinhdinh.jpg">
+                <div id="div_nenBinhdinh" class="esri-basemap-gallery__item-title"> <p><br />Bản đồ nền Bình Định &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></div>
+              </li>  
+
+                <ul id="dropdown-nenBinhdinh">
+                  <li ><input type="checkbox" id="chk_nenDaivatdactrung" disabled checked> <label id="lbl_Daivatdactrung"  role="button">Đại vật đặc trưng</label></li>
+                  <li><input type="checkbox" id="chk_nenTimduong" disabled checked> <label id="lbl_Timduong"  role="button">Tim đường</label></li>
+                  <li><input type="checkbox" id="chk_nenMatduongbo" disabled checked> <label id="lbl_Matduongbo"  role="button">Mặt đường bộ</label></li>
+                  <li><input type="checkbox" id="chk_nenGiaothonghuyen" disabled checked> <label id="lbl_Giaothonghuyen"  role="button">Giao thông huyện</label></li>
+                  <li><input type="checkbox" id="chk_nenHanhchinhxa" disabled checked> <label id="lbl_Hanhchinhxa"  role="button">Hành chính xã</label></li>
+                  <li><input type="checkbox" id="chk_nenRanhgioihanhchinhhuyen" disabled checked> <label id="lbl_Ranhgioihanhchinhhuyen"  role="button">Ranh giới hành chính huyện</label></li>
+                  <li><input type="checkbox" id="chk_nenHanhchinhhuyen" disabled checked> <label id="lbl_Hanhchinhhuyen"  role="button">Hành chính huyện</label></li>
+                </ul>       
+        </li>
+
+            <li id="basemapWorldimagery" class="esri-basemap-gallery__item" role="menuitem" tabindex="0" title="Hình ảnh"><img alt="" class="esri-basemap-gallery__item-thumbnail" src="https://www.arcgis.com/sharing/rest/content/items/f413abe6c66f452bae432ae215da9151/info/thumbnail/tempimagery.jpg?f=json"><div  class="esri-basemap-gallery__item-title">Bản đồ vệ tinh</div></li>  
+            <li id="basemapOpenStreetMap" class="esri-basemap-gallery__item" role="menuitem" tabindex="0" title="OpenStreetMap"><img alt="" class="esri-basemap-gallery__item-thumbnail" src="https://www.arcgis.com/sharing/rest/content/items/e911cfcd020940db9d78d6b47120b7e7/info/thumbnail/ago_downloaded.png?f=json"><div class="esri-basemap-gallery__item-title">Bản đồ đường phố</div></li>
+          </ul>
+
+
+          
+        </div>
+      </div>
+    </div>
+    
+    <!--
+<div id="panelBasemaps" class="panel collapse in" data-dojo-dataid="pid0" style="height: auto;">
+        <div id="headingBasemaps" class="panel-heading" role="tab">
+          <div class="panel-title">
+            <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseBasemaps" aria-expanded="false" aria-controls="collapseBasemaps" data-dojo-dataid="pid3"><span class="esri-icon-basemap" aria-hidden="true"></span><span class="panel-label"> Bản Đồ Nền</span></a>
+            <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelBasemaps" data-dojo-dataid="pid2"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <div id="collapseBasemaps" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingBasemaps" data-dojo-dataid="pid1" style="height: auto;">
+          <div class="panel-body">
+            <div id="basemapPanelDiv" class="esri-basemap-gallery esri-widget esri-widget--panel"><ul class="esri-basemap-gallery__item-container" role="menu"> <li class="esri-basemap-gallery__item" role="menuitem" tabindex="0" title="Hình ảnh"><img alt="" class="esri-basemap-gallery__item-thumbnail" src="https://www.arcgis.com/sharing/rest/content/items/f413abe6c66f452bae432ae215da9151/info/thumbnail/tempimagery.jpg?f=json"><div id="basemapWorldimagery" class="esri-basemap-gallery__item-title">Hình ảnh</div></li>  </ul></div>
+  
+  
+            
+          </div>
+        </div>
+      </div>
+-->
+
+    <!-- KhuCN Panel -->
+
+    <div id="panelZoomtoKhuCN" class="panel collapse">
+      <div id="headingZoomtoKhuCN" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseZoomtoKhuCN"
+            aria-expanded="false" aria-controls="collapseZoomtoKhuCN"><span class="esri-icon-maps" aria-hidden="true"></span><span class="panel-label"> Khu Công Nghiệp</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelZoomtoKhuCN"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseZoomtoKhuCN" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingZoomtoKhuCN">
+        <div class="panel-body">
+          
+          <a role="button" id="zoomtoPhutaiKCN" aria-haspopup="true"><span class="esri-icon-navigation"></span><strong>&nbsp; KCN Phú Tài</strong></a>
+          <br />
+          <a role="button" id="zoomtoLongmyKCN" aria-haspopup="true"><span class="esri-icon-navigation"></span><strong>&nbsp; KCN Long Mỹ</strong></a>
+          <br />
+          <a role="button" id="zoomtoNhonhoaKCN" aria-haspopup="true"><span class="esri-icon-navigation"></span><strong>&nbsp; KCN Nhơn Hòa</strong></a>
+          <br />
+          <a role="button" id="zoomtoCattrinhKCN" aria-haspopup="true"><span class="esri-icon-navigation"></span><strong>&nbsp; KCN Cát Trinh</strong></a>
+          <br />
+          <a role="button" id="zoomtoHoahoiKCN" aria-haspopup="true"><span class="esri-icon-navigation"></span><strong>&nbsp; KCN Hòa Hội</strong></a>
+          <br />
+          <a role="button" id="zoomtoKKTNhonhoiAKCN" aria-haspopup="true"><span class="esri-icon-navigation"></span><strong>&nbsp; Khu kinh tế Nhơn Hội - KCN A </strong></a>
+          <br />
+          <a role="button" id="zoomtoKKTNhonhoiBKCN" aria-haspopup="true"><span class="esri-icon-navigation"></span><strong>&nbsp; Khu kinh tế Nhơn Hội - KCN B </strong></a>
+          <br />
+          <a role="button" id="zoomtoKKTNhonhoiCKCN" aria-haspopup="true"><span class="esri-icon-navigation"></span><strong>&nbsp; Khu kinh tế Nhơn Hội - KCN C </strong></a>
+        </div>
+      </div>
+    </div>
+
+   
+
+<!-- Layers Panel -->
+
+    <div id="panelLayers" class="panel collapse">
+      <div id="headingLayers" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseLayers"
+            aria-expanded="false" aria-controls="collapseLayers"><span class="esri-icon-layers" aria-hidden="true"></span><span class="panel-label"> Lớp Bản Đồ</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelLayers"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseLayers" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLayers">
+        <div class="panel-body">
+          <!-- <div id="layerPanelDiv"></div> -->
+          <span id="layerPanelDiv2">
+        <input type="checkbox" id="Khu_CN_Lyr1" checked> Khu công nghiệp
+      </span>
+      <br />
+          <span id="layerPanelDiv">
+        <input type="checkbox" id="ThuaDat_Lyr0" checked> Doanh nghiệp
+      </span>
+      
+      
+          
+        </div>
+      </div>
+    </div>
+
+ <!-- Legend Panel -->
+
+    <div id="panelLegend" class="panel collapse">
+      <div id="headingLegend" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseLegend"
+            aria-expanded="false" aria-controls="collapseLegend"><span class="esri-icon-polygon" aria-hidden="true"></span><span class="panel-label"> Chú Thích</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelLegend"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseLegend" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLegend">
+        <div class="panel-body">
+          <div id="LegendPanelDiv"></div>
+        </div>
+      </div>
+    </div>
+
+ <!-- Tools Panel -->
+    <!--Printer Panel-->
+
+    <div id="panelPrinter" class="panel collapse">
+      <div id="headingLegend" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapsePrinter"
+            aria-expanded="false" aria-controls="collapsePrinter"><span class="esri-icon-printer" aria-hidden="true"></span><span class="panel-label"> Printer</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelPrinter"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapsePrinter" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPrinter">
+        <div class="panel-body">
+          <div id="PrinterPanelDiv"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Panel  -->
+
+    <div id="panelSettings" class="panel panel-map collapse">
+      <div id="headingSettings" class="panel-heading">
+        <div class="panel-title">
+          <a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseSettings"
+            data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseSettings"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span><span class="panel-label"> Settings</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSettings"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseSettings" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSettings">
+        <div class="panel-body">
+          <div class="form-horizontal">
+
+          <p>hehehe</p>
+
+          <!-- <div id="settingsPanelDiv"></div> -->
+      
+          </div>
+        </div>
+      </div>
+    </div>
+
+ <!-- Info Panel -->
+
+    <div id="panelInfo" class="panel collapse">
+      <div id="headingInfo" class="panel-heading" role="tab">
+        <div class="panel-title">
+          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseInfo"
+            aria-expanded="false" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span><span class="panel-label"> Info</span></a>
+          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
+        <div class="panel-body">
+          <div id="infoPanelDiv"></div>
+          <p>Bản quyền thuộc Sở Kế hoạch Đầu tư tỉnh Bình Định </p>
+          <p>Phát triển công nghệ: <a href="http://stttt.binhdinh.gov.vn"><strong>ICTBD</strong></a></p>
+        </div>
+      </div>
+    </div>
+
+
+<!-- End Panels -->
+  </div>
+
+
+
+  <!-- /.calcite-panels -->
+
+  <script type="text/javascript">
+    var dojoConfig = {
+      packages: [{
+        name: "bootstrap",
+        location: "https://esri.github.io/calcite-maps/dist/vendor/dojo-bootstrap"
+      },
+      {
+        name: "calcite-maps",
+        location: "https://esri.github.io/calcite-maps/dist/js/dojo"
+      }]
+    };
+  </script>
+
+
+
+
+  <!-- ArcGIS JS 4 -->
+  <script src="https://js.arcgis.com/4.6/"></script>
+
+  <script>
+    var app;
+
+    require([    
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/widgets/Legend",
+      "esri/geometry/Point",
+      "esri/layers/FeatureLayer",
+      "esri/PopupTemplate",
+      "esri/symbols/TextSymbol",
+      "esri/widgets/Search",
+      "esri/widgets/Home",
+      "esri/widgets/Print",
+      //"esri/widgets/BasemapGallery",
+      "esri/layers/MapImageLayer",
+      "esri/layers/WebTileLayer",
+      "esri/layers/OpenStreetMapLayer",
+      "esri/core/watchUtils",
+      "dojo/query",
+      "dojo/dom",
+      "dojo/on",
+
+      // Calcite Maps
+      "calcite-maps/calcitemaps-v0.7",
+
+      // Calcite Maps ArcGIS Support
+      "calcite-maps/calcitemaps-arcgis-support-v0.7",
+
+      // Bootstrap
+      "bootstrap/Collapse",
+      "bootstrap/Dropdown",
+      "bootstrap/Tab",
+
+      
+      
+
+      "dojo/domReady!"
+    ], function(Map, MapView, Legend, Point, FeatureLayer, PopupTemplate, TextSymbol, Search, Home, Print, MapImageLayer, WebTileLayer, OpenStreetMap, watchUtils,
+      query, dom, on, CalciteMaps, CalciteMapsArcGIS) {
+
+      /******************************************************************
+       *
+       * App settings
+       *
+       ******************************************************************/
+   
+
+
+
+      app = {
+        //center: [109.172564,13.767122],
+        center: [109.183579,13.767575],
+        
+        scale: 50000,
+        //basemap: "hybrid",
+        viewPadding: {
+          top: 50,
+          bottom: 0
+        },
+       // uiComponents: ["zoom", "compass", "attribution"],
+        uiComponents: ["zoom", "attribution"],
+        mapView: null,
+  
+        containerMap: "mapViewDiv"
+
+        
+
+      };
+
+      /******************************************************************
+       *
+       * Create the map and scene view and ui components
+       *
+       ******************************************************************/
+
+      // Map
+      var map = new Map({
+        //basemap: app.basemap
+      });
+
+
+
+       let worldimagery = new WebTileLayer({
+                id: 'worldimagery',
+                urlTemplate: 'https://mt1.google.com/vt/lyrs=y&x={col}&y={row}&z={level}',
+                //title: 'Ảnh vệ tinh dfdfh',
+                visible: true
+            });
+            map.add(worldimagery);
+
+
+      var osm = new OpenStreetMap({
+                //title: 'OpenStreetMap',
+                id: "osm",
+                visible: false
+            });
+            map.add(osm);
+
+      
+
+   
+        var basemap_worldimagery = dom.byId("basemapWorldimagery");
+        on(basemap_worldimagery, "click", function() {
+          worldimagery.visible = true;
+          osm.visible=false;
+        });
+
+         var basemap_openStreetMap = dom.byId("basemapOpenStreetMap");
+        on(basemap_openStreetMap, "click", function() {
+          worldimagery.visible = false;
+          osm.visible=true;
+        });
+
+
+
+
+      // 2D view
+      app.mapView = new MapView({
+        container: app.containerMap,
+        map: map,
+        center: app.center,
+        scale: app.scale,
+        padding: app.viewPadding,
+       
+      });
+
+
+      // Set the active view to scene
+      setActiveView(app.mapView);
+
+      // Create the search widget and add it to the navbar instead of view
+      app.searchWidget = new Search({
+        view: app.activeView
+      }, "searchWidgetDiv");
+
+      CalciteMapsArcGIS.setSearchExpandEvents(app.searchWidget);
+
+      // Create basemap widget
+      /*
+      app.basemapWidget = new Basemaps({
+        view: app.activeView,
+        container: "basemapPanelDiv"
+      });
+      */
+
+
+      // Create Home widget
+      var homeBtn = new Home({
+        view:app.activeView
+      });
+      // Add the home button to the top left corner of the view
+      app.activeView.ui.add(homeBtn, "top-left");
+
+
+
+      
+      /******************************************************************
+       *
+       * Synchronize the view, search and popup
+       *
+       ******************************************************************/
+
+      // Views
+      function setActiveView(view) {
+        app.activeView = view;
+ 
+      }
+
+
+      //BaseMap nen Binh Dinh===========================================================
+       var nenBinhdinh = new MapImageLayer({
+          url: "http://117.3.71.234/arcgisadaptor/rest/services/BinhDinh/DuLieuNen/MapServer",
+          sublayers:[
+            {
+              id: 7, //Hành chính huyện              
+              visible: false
+            },
+            {
+              id: 5, //Ranh giới hành chính huyện
+              visible: false
+            },
+            {
+              id: 4, //Hành chính xã
+              visible: false
+            },
+            {
+              id: 3, //Giao thông huyện
+              visible: false
+            },
+            {
+              id: 2, //Mặt đường bộ
+              visible: false
+            },
+            {
+              id: 1, //Tim đường
+              visible: false
+            },
+            {
+              id: 0, //Đại vật đặc trưng
+              visible: false
+            }
+          ]
+        });
+        map.add(nenBinhdinh);
+
+       
+       function checkbox_nenBinhdinh_Change(){
+         var nenBinhdinh_event = dom.byId("checkbox_nenBinhdinh");
+        on(nenBinhdinh_event, "change", function() {
+         
+          //nenBinhdinh.findSublayerById(0).visible=checkbox_nenBinhdinh.checked;
+          if(dom.byId("checkbox_nenBinhdinh").checked==true){
+            if(dom.byId("chk_nenDaivatdactrung").checked==true){
+              nenBinhdinh.findSublayerById(0).visible=chk_nenDaivatdactrung.checked;
+            }
+            if(dom.byId("chk_nenTimduong").checked==true){
+              nenBinhdinh.findSublayerById(1).visible=chk_nenTimduong.checked;
+            }
+            if(dom.byId("chk_nenMatduongbo").checked==true){
+              nenBinhdinh.findSublayerById(2).visible=chk_nenMatduongbo.checked;
+            }
+            if(dom.byId("chk_nenGiaothonghuyen").checked==true){
+              nenBinhdinh.findSublayerById(3).visible=chk_nenGiaothonghuyen.checked;
+            }
+            if(dom.byId("chk_nenHanhchinhxa").checked==true){
+              nenBinhdinh.findSublayerById(4).visible=chk_nenHanhchinhxa.checked;
+            }
+            if(dom.byId("chk_nenRanhgioihanhchinhhuyen").checked==true){
+              nenBinhdinh.findSublayerById(5).visible=chk_nenRanhgioihanhchinhhuyen.checked;
+            }
+            if(dom.byId("chk_nenHanhchinhhuyen").checked==true){
+              nenBinhdinh.findSublayerById(7).visible=chk_nenHanhchinhhuyen.checked;
+            }
+
+            nenBinhdinh_Visible();
+          }else{
+            nenBinhdinh.findSublayerById(0).visible=false;
+            nenBinhdinh.findSublayerById(1).visible=false;
+            nenBinhdinh.findSublayerById(2).visible=false;
+            nenBinhdinh.findSublayerById(3).visible=false;
+            nenBinhdinh.findSublayerById(4).visible=false;
+            nenBinhdinh.findSublayerById(5).visible=false;
+            nenBinhdinh.findSublayerById(7).visible=false;
+
+            dom.byId("chk_nenDaivatdactrung").disabled=true;
+            dom.byId("chk_nenTimduong").disabled=true;
+            dom.byId("chk_nenMatduongbo").disabled=true;
+            dom.byId("chk_nenGiaothonghuyen").disabled=true;
+            dom.byId("chk_nenHanhchinhxa").disabled=true;
+            dom.byId("chk_nenRanhgioihanhchinhhuyen").disabled=true;
+            dom.byId("chk_nenHanhchinhhuyen").disabled=true;
+          }
+        });
+       }
+       checkbox_nenBinhdinh_Change();
+
+        
+
+        // conClick Hinh anh Nen Dinh Dinh
+        var nenBinhdinh_img = dom.byId("img_nenBinhdinh");
+        on(nenBinhdinh_img, "click", function() {
+         
+          //nenBinhdinh.findSublayerById(0).visible=checkbox_nenBinhdinh.checked;
+          if(dom.byId("checkbox_nenBinhdinh").checked==false){
+            if(dom.byId("chk_nenDaivatdactrung").checked==true){
+              nenBinhdinh.findSublayerById(0).visible=chk_nenDaivatdactrung.checked;
+            }
+            if(dom.byId("chk_nenTimduong").checked==true){
+              nenBinhdinh.findSublayerById(1).visible=chk_nenTimduong.checked;
+            }
+            if(dom.byId("chk_nenMatduongbo").checked==true){
+              nenBinhdinh.findSublayerById(2).visible=chk_nenMatduongbo.checked;
+            }
+            if(dom.byId("chk_nenGiaothonghuyen").checked==true){
+              nenBinhdinh.findSublayerById(3).visible=chk_nenGiaothonghuyen.checked;
+            }
+            if(dom.byId("chk_nenHanhchinhxa").checked==true){
+              nenBinhdinh.findSublayerById(4).visible=chk_nenHanhchinhxa.checked;
+            }
+            if(dom.byId("chk_nenRanhgioihanhchinhhuyen").checked==true){
+              nenBinhdinh.findSublayerById(5).visible=chk_nenRanhgioihanhchinhhuyen.checked;
+            }
+            if(dom.byId("chk_nenHanhchinhhuyen").checked==true){
+              nenBinhdinh.findSublayerById(7).visible=chk_nenHanhchinhhuyen.checked;
+            }
+
+            dom.byId("checkbox_nenBinhdinh").checked=true;
+
+            nenBinhdinh_Visible();
+          }else{
+            nenBinhdinh.findSublayerById(0).visible=false;
+            nenBinhdinh.findSublayerById(1).visible=false;
+            nenBinhdinh.findSublayerById(2).visible=false;
+            nenBinhdinh.findSublayerById(3).visible=false;
+            nenBinhdinh.findSublayerById(4).visible=false;
+            nenBinhdinh.findSublayerById(5).visible=false;
+            nenBinhdinh.findSublayerById(7).visible=false;
+
+            dom.byId("chk_nenDaivatdactrung").disabled=true;
+            dom.byId("chk_nenTimduong").disabled=true;
+            dom.byId("chk_nenMatduongbo").disabled=true;
+            dom.byId("chk_nenGiaothonghuyen").disabled=true;
+            dom.byId("chk_nenHanhchinhxa").disabled=true;
+            dom.byId("chk_nenRanhgioihanhchinhhuyen").disabled=true;
+            dom.byId("chk_nenHanhchinhhuyen").disabled=true;
+
+            dom.byId("checkbox_nenBinhdinh").checked=false;
+          }
+        });
+
+        //onClick text Nen Binh Dinh
+        var nenBinhdinh_div = dom.byId("div_nenBinhdinh");
+        on(nenBinhdinh_div, "click", function() {
+         
+          //nenBinhdinh.findSublayerById(0).visible=checkbox_nenBinhdinh.checked;
+          if(dom.byId("checkbox_nenBinhdinh").checked==false){
+            if(dom.byId("chk_nenDaivatdactrung").checked==true){
+              nenBinhdinh.findSublayerById(0).visible=chk_nenDaivatdactrung.checked;
+            }
+            if(dom.byId("chk_nenTimduong").checked==true){
+              nenBinhdinh.findSublayerById(1).visible=chk_nenTimduong.checked;
+            }
+            if(dom.byId("chk_nenMatduongbo").checked==true){
+              nenBinhdinh.findSublayerById(2).visible=chk_nenMatduongbo.checked;
+            }
+            if(dom.byId("chk_nenGiaothonghuyen").checked==true){
+              nenBinhdinh.findSublayerById(3).visible=chk_nenGiaothonghuyen.checked;
+            }
+            if(dom.byId("chk_nenHanhchinhxa").checked==true){
+              nenBinhdinh.findSublayerById(4).visible=chk_nenHanhchinhxa.checked;
+            }
+            if(dom.byId("chk_nenRanhgioihanhchinhhuyen").checked==true){
+              nenBinhdinh.findSublayerById(5).visible=chk_nenRanhgioihanhchinhhuyen.checked;
+            }
+            if(dom.byId("chk_nenHanhchinhhuyen").checked==true){
+              nenBinhdinh.findSublayerById(7).visible=chk_nenHanhchinhhuyen.checked;
+            }
+
+            dom.byId("checkbox_nenBinhdinh").checked=true;
+            
+            nenBinhdinh_Visible();
+          }else{
+            nenBinhdinh.findSublayerById(0).visible=false;
+            nenBinhdinh.findSublayerById(1).visible=false;
+            nenBinhdinh.findSublayerById(2).visible=false;
+            nenBinhdinh.findSublayerById(3).visible=false;
+            nenBinhdinh.findSublayerById(4).visible=false;
+            nenBinhdinh.findSublayerById(5).visible=false;
+            nenBinhdinh.findSublayerById(7).visible=false;
+
+            dom.byId("chk_nenDaivatdactrung").disabled=true;
+            dom.byId("chk_nenTimduong").disabled=true;
+            dom.byId("chk_nenMatduongbo").disabled=true;
+            dom.byId("chk_nenGiaothonghuyen").disabled=true;
+            dom.byId("chk_nenHanhchinhxa").disabled=true;
+            dom.byId("chk_nenRanhgioihanhchinhhuyen").disabled=true;
+            dom.byId("chk_nenHanhchinhhuyen").disabled=true;
+
+            dom.byId("checkbox_nenBinhdinh").checked=false;
+          }
+
+          
+          
+        });
+
+
+
+             var chk_nenDaivatdactrung_event = dom.byId("chk_nenDaivatdactrung");
+            on(chk_nenDaivatdactrung_event, "change", function() {
+              if(dom.byId("checkbox_nenBinhdinh").checked==true){
+                nenBinhdinh.findSublayerById(0).visible=chk_nenDaivatdactrung.checked;
+              }
+            });
+            var lbl_Daivatdactrung_event = dom.byId("lbl_Daivatdactrung");
+            on(lbl_Daivatdactrung_event, "click", function() {
+              if(dom.byId("chk_nenDaivatdactrung").disabled==false){              
+                if(dom.byId("chk_nenDaivatdactrung").checked==false){
+                  dom.byId("chk_nenDaivatdactrung").checked=true;
+                  if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(0).visible=true;}
+                }else{
+                    dom.byId("chk_nenDaivatdactrung").checked=false;
+                    if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(0).visible=false;}
+                } 
+              }
+            });
+
+             var chk_nenTimduong_event = dom.byId("chk_nenTimduong");
+            on(chk_nenTimduong_event, "change", function() {
+              if(dom.byId("checkbox_nenBinhdinh").checked==true){
+                nenBinhdinh.findSublayerById(1).visible=chk_nenTimduong.checked;
+              }
+            });
+            var lbl_Timduong_event = dom.byId("lbl_Timduong");
+            on(lbl_Timduong_event, "click", function() {
+              if(dom.byId("chk_nenTimduong").disabled==false){
+              
+                if(dom.byId("chk_nenTimduong").checked==false){
+                  dom.byId("chk_nenTimduong").checked=true;
+                  if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(1).visible=true;}
+                }else{
+                    dom.byId("chk_nenTimduong").checked=false;
+                    if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(1).visible=false;}
+                } 
+              }
+            });
+
+
+             var chk_nenMatduongbo_event = dom.byId("chk_nenMatduongbo");
+            on(chk_nenMatduongbo_event, "change", function() {
+              if(dom.byId("checkbox_nenBinhdinh").checked==true){
+                nenBinhdinh.findSublayerById(2).visible=chk_nenMatduongbo.checked;
+              }
+            });
+            var lbl_Matduongbo_event = dom.byId("lbl_Matduongbo");
+            on(lbl_Matduongbo_event, "click", function() {
+              if(dom.byId("chk_nenMatduongbo").disabled==false){
+              
+                if(dom.byId("chk_nenMatduongbo").checked==false){
+                  dom.byId("chk_nenMatduongbo").checked=true;
+                  if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(2).visible=true;}
+                }else{
+                    dom.byId("chk_nenMatduongbo").checked=false;
+                    if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(2).visible=false;}
+                } 
+              }
+            });
+
+            var chk_nenGiaothonghuyen_event = dom.byId("chk_nenGiaothonghuyen");
+            on(chk_nenGiaothonghuyen_event, "change", function() {
+              if(dom.byId("checkbox_nenBinhdinh").checked==true){
+                nenBinhdinh.findSublayerById(3).visible=chk_nenGiaothonghuyen.checked;
+              }
+            });
+             var lbl_Giaothonghuyen_event = dom.byId("lbl_Giaothonghuyen");
+            on(lbl_Giaothonghuyen_event, "click", function() {
+              if(dom.byId("chk_nenGiaothonghuyen").disabled==false){              
+                if(dom.byId("chk_nenGiaothonghuyen").checked==false){
+                  dom.byId("chk_nenGiaothonghuyen").checked=true;
+                  if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(3).visible=true;}
+                }else{
+                    dom.byId("chk_nenGiaothonghuyen").checked=false;
+                    if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(3).visible=false;}
+                } 
+              }
+            });
+            
+
+             var chk_nenHanhchinhxa_event = dom.byId("chk_nenHanhchinhxa");
+            on(chk_nenHanhchinhxa_event, "change", function() {
+              if(dom.byId("checkbox_nenBinhdinh").checked==true){
+                nenBinhdinh.findSublayerById(4).visible=chk_nenHanhchinhxa.checked;
+              }
+            });
+             var lbl_Hanhchinhxa_event = dom.byId("lbl_Hanhchinhxa");
+            on(lbl_Hanhchinhxa_event, "click", function() {
+              if(dom.byId("chk_nenHanhchinhxa").disabled==false){              
+                if(dom.byId("chk_nenHanhchinhxa").checked==false){
+                  dom.byId("chk_nenHanhchinhxa").checked=true;
+                  if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(4).visible=true;}
+                }else{
+                    dom.byId("chk_nenHanhchinhxa").checked=false;
+                    if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(4).visible=false;}
+                } 
+              }
+            });
+
+            var chk_nenRanhgioihanhchinhhuyen_event = dom.byId("chk_nenRanhgioihanhchinhhuyen");
+            on(chk_nenRanhgioihanhchinhhuyen_event, "change", function() {
+              if(dom.byId("checkbox_nenBinhdinh").checked==true){
+                nenBinhdinh.findSublayerById(5).visible=chk_nenRanhgioihanhchinhhuyen.checked;
+              }
+            });
+             var lbl_Ranhgioihanhchinhhuyen_event = dom.byId("lbl_Ranhgioihanhchinhhuyen");
+            on(lbl_Ranhgioihanhchinhhuyen_event, "click", function() {
+              if(dom.byId("chk_nenRanhgioihanhchinhhuyen").disabled==false){              
+                if(dom.byId("chk_nenRanhgioihanhchinhhuyen").checked==false){
+                  dom.byId("chk_nenRanhgioihanhchinhhuyen").checked=true;
+                  if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(5).visible=true;}
+                }else{
+                    dom.byId("chk_nenRanhgioihanhchinhhuyen").checked=false;
+                    if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(5).visible=false;}
+                } 
+              }
+            });
+
+             var chk_nenHanhchinhhuyen_event = dom.byId("chk_nenHanhchinhhuyen");
+            on(chk_nenHanhchinhhuyen_event, "change", function() {
+              if(dom.byId("checkbox_nenBinhdinh").checked==true){
+                nenBinhdinh.findSublayerById(7).visible=chk_nenHanhchinhhuyen.checked;
+              }
+            });
+             var lbl_Hanhchinhhuyen_event = dom.byId("lbl_Hanhchinhhuyen");
+            on(lbl_Hanhchinhhuyen_event, "click", function() {
+              if(dom.byId("chk_nenHanhchinhhuyen").disabled==false){              
+                if(dom.byId("chk_nenHanhchinhhuyen").checked==false){
+                  dom.byId("chk_nenHanhchinhhuyen").checked=true;
+                  if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(7).visible=true;}
+                }else{
+                    dom.byId("chk_nenHanhchinhhuyen").checked=false;
+                    if(dom.byId("checkbox_nenBinhdinh").checked==true){nenBinhdinh.findSublayerById(7).visible=false;}
+                } 
+              }
+            });
+
+// Visible nenBinhdinh theo ty le======================
+
+function nenBinhdinh_Visible(){
+  app.mapView.when(function() {
+            watchUtils.whenTrue(app.mapView, "stationary", function() {
+              //if (editExpand) {
+                if(dom.byId("checkbox_nenBinhdinh").checked==true){
+                  if (app.mapView.zoom < 15) {
+                  dom.byId("chk_nenDaivatdactrung").disabled=true;
+                }else {
+                  dom.byId("chk_nenDaivatdactrung").disabled=false;
+                  }
+                if (app.mapView.zoom < 17) {
+                  dom.byId("chk_nenTimduong").disabled=true;
+                }else {
+                  dom.byId("chk_nenTimduong").disabled=false;
+                  }
+                if (app.mapView.zoom < 16) {
+                  dom.byId("chk_nenMatduongbo").disabled=true;
+                }else {
+                  dom.byId("chk_nenMatduongbo").disabled=false;
+                  }
+                if (app.mapView.zoom < 11) {
+                  dom.byId("chk_nenGiaothonghuyen").disabled=true;
+                }else {
+                  dom.byId("chk_nenGiaothonghuyen").disabled=false;
+                  }  
+                if (app.mapView.zoom < 14) {
+                  dom.byId("chk_nenHanhchinhxa").disabled=true;
+                }else {
+                  dom.byId("chk_nenHanhchinhxa").disabled=false;
+                  }  
+                if (app.mapView.zoom < 13) {
+                  dom.byId("chk_nenRanhgioihanhchinhhuyen").disabled=true;
+                }else {
+                  dom.byId("chk_nenRanhgioihanhchinhhuyen").disabled=false;
+                  }  
+                if (app.mapView.zoom < 10 || app.mapView.zoom > 12) {  
+                  dom.byId("chk_nenHanhchinhhuyen").disabled=true;             
+                }else {
+                  dom.byId("chk_nenHanhchinhhuyen").disabled=false;
+                  } 
+                }
+                   
+              
+            });
+          });
+          
+}
+nenBinhdinh_Visible();
+
+
+
+
+  
+
+var lyr1Khu_CN = new FeatureLayer({
+      
+        url:"http://117.3.71.234/arcgisadaptor/rest/services/sokhdtbinhdinh_20181906/FeatureServer/1",
+        visible: true,
+        opacity: 0.5,
+        popupTemplate: new PopupTemplate({
+          title:"Khu Công Nghiệp",
+          content:[{
+           
+            type:"fields",
+            fieldInfos:[
+
+            {
+              fieldName:"KhuCN",
+              label:"Tên khu"
+            },
+            {
+              fieldName:"Khu",
+              label:"Khu"
+            }
+          
+          ]
+          }
+          
+          ]
+        })
+      });
+      map.add(lyr1Khu_CN);
+
+var layer0 = new FeatureLayer({
+      
+        url:"http://117.3.71.234/arcgisadaptor/rest/services/sokhdtbinhdinh_20181906/FeatureServer/0",
+        visible: true,
+        opacity: 0.6,
+        popupTemplate: new PopupTemplate({
+          title:"Vùng đất",
+          content:[{
+           
+            type:"fields",
+            fieldInfos:[
+
+            {
+              fieldName:"tenLoaiDat",
+              label:"Loại đất"
+            },
+            {
+              fieldName:"TenCSD",
+              label:"Doanh nghiệp"
+            },
+            {
+              fieldName:"NganhNghe",
+              label:"Mục đích sử dụng"
+            },           
+            {
+              fieldName:"ToadoVN2000",
+              label:"Tọa độ VN2000"
+            }
+          
+          ]
+          },
+          
+          {
+            type: "media",
+            mediaInfos: [{
+              title: "<b><a href='https://cdn.loc.gov/service/pnp/highsm/21600/21679r.jpg'>Palm tree lined street</a></b>",
+              type: "image",
+              value: {
+                sourceURL: "https://cdn.loc.gov/service/pnp/highsm/21600/21679r.jpg"
+              }
+            },{
+              title: "<a href='http://static.asiawebdirect.com/m/bangkok/portals/vietnam/homepage/quy-nhon/pagePropertiesImage/quy-nhon.jpg.jpg'><b>Pahehe ehe </a></b>",
+              type: "image",
+              value: {
+                sourceURL: "http://static.asiawebdirect.com/m/bangkok/portals/vietnam/homepage/quy-nhon/pagePropertiesImage/quy-nhon.jpg.jpg"
+              }
+            }
+            
+            ]
+          }
+          
+          ]
+        })
+      });
+      map.add(layer0);
+
+
+ var legend = new Legend({
+            view:app.activeView,
+            layerInfos: [{
+              layer: layer0,
+              title: "Chú thích loại đất:"
+            }],container:"LegendPanelDiv"
+          });
+
+
+
+
+//On/Off Layer----------------------
+        app.activeView.when(function() {
+          layer0.when(function() {
+            view.goTo(layer0.fullExtent);
+          });
+        });
+
+        var streetsLyrToggle = dom.byId("ThuaDat_Lyr0");
+
+        on(streetsLyrToggle, "change", function() {
+          layer0.visible = streetsLyrToggle.checked;
+        });
+
+
+app.activeView.when(function() {
+          lyr1Khu_CN.when(function() {
+            view.goTo(lyr1Khu_CN.fullExtent);
+          });
+        });
+
+        var Khu_CNLyrToggle = dom.byId("Khu_CN_Lyr1");
+
+        on(Khu_CNLyrToggle, "change", function() {
+          lyr1Khu_CN.visible = Khu_CNLyrToggle.checked;
+        });
+
+
+//Printer
+app.activeView.when(function() {
+          var print = new Print({
+            view: app.activeView,
+            // specify your own print service
+            printServiceUrl: "https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+            container:"PrinterPanelDiv"
+          });
+
+          // Add widget to the top right corner of the view
+          //view.ui.add(print, "top-right");
+        });
+
+
+
+
+
+
+      // Zooms to the KCN Phu Tai  location
+      function zoomtoPhutaiKCN() {
+          return app.activeView.goTo({
+            center: [109.147795,13.767921],
+            scale: 50000
+          });
+      }
+
+      on(dom.byId("zoomtoPhutaiKCN"), "click", function() {
+          zoomtoPhutaiKCN();
+      });
+
+        // Zooms to the KCN Long My  location
+      function zoomtoLongmyKCN() {
+          return app.activeView.goTo({
+            center: [109.131338,13.725532],
+            scale: 20000
+          });
+      }
+
+      on(dom.byId("zoomtoLongmyKCN"), "click", function() {
+          zoomtoLongmyKCN();
+      });
+
+      // Zooms to the KCN Nhon Hoa  location
+      function zoomtoNhonhoaKCN() {
+          return app.activeView.goTo({
+            center: [109.067897,13.838813], 
+            scale: 28000
+          });
+      }
+
+      on(dom.byId("zoomtoNhonhoaKCN"), "click", function() {
+          zoomtoNhonhoaKCN();
+      });
+
+      // Zooms to the KCN Cat Trinh  location
+      function zoomtoCattrinhKCN() {
+          return app.activeView.goTo({
+            center: [109.077255, 14.024861], 
+            scale: 30000
+          });
+      }
+
+      on(dom.byId("zoomtoCattrinhKCN"), "click", function() {
+          zoomtoCattrinhKCN();
+      });
+
+      // Zooms to the KCN Hoa hoi  location
+      function zoomtoHoahoiKCN() {
+          return app.activeView.goTo({
+            center: [109.040784, 14.043610], 
+            scale: 30000
+          });
+      }
+
+      on(dom.byId("zoomtoHoahoiKCN"), "click", function() {
+          zoomtoHoahoiKCN();
+      });
+      
+      // Zooms to the Khu kinh te Nhon Hoi - KCN A location
+      function zoomtoKKTNhonhoiAKCN() {
+          return app.activeView.goTo({
+            center: [109.270861, 13.822546], 
+            scale: 30000
+          });
+      }
+
+      on(dom.byId("zoomtoKKTNhonhoiAKCN"), "click", function() {
+          zoomtoKKTNhonhoiAKCN();
+      });
+
+      // Zooms to the Khu kinh te Nhon Hoi - KCN B location
+      function zoomtoKKTNhonhoiBKCN() {
+          return app.activeView.goTo({
+            center: [109.267465, 13.840680], 
+            scale: 30000
+          });
+      }
+
+      on(dom.byId("zoomtoKKTNhonhoiBKCN"), "click", function() {
+          zoomtoKKTNhonhoiBKCN();
+      });
+
+      // Zooms to the Khu kinh te Nhon Hoi - KCN C location
+      function zoomtoKKTNhonhoiCKCN() {
+          return app.activeView.goTo({
+            center: [109.262690, 13.858963], 
+            scale: 20000
+          });
+      }
+
+      on(dom.byId("zoomtoKKTNhonhoiCKCN"), "click", function() {
+          zoomtoKKTNhonhoiCKCN();
+      });
+
+
+
+
+
+
+          
+
+
+    });
+
+
+
+  </script>
+
+</body>
+</html>

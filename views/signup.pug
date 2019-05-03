@@ -1,0 +1,49 @@
+﻿doctype html
+html
+	head
+		title= title
+		meta(name='apple-mobile-web-app-capable', content='yes')
+		meta(name='apple-mobile-web-app-status-bar-style', content='black-translucent')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+		link(rel='stylesheet', href='stylesheets/login.css')
+		link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css')
+		script(src='https://www.google.com/recaptcha/api.js?hl=vi')
+	body
+		#login.center-vertical
+			form(id='form-signup', method='post', action="/signup")
+				.title-group
+					i.fa.fa-home
+					div.title Đăng ký người dùng
+				.form-signup.well
+					.form-group
+						.field
+							label Tên tài khoản
+							input.form-control(type='text', id='username', name='username')
+						.field
+							label Họ và tên
+							input.form-control(type='text', id='name', name='name')
+						.field
+							label Email
+							input.form-control(type='email', id='email', name='email')
+						.field
+							label Chọn đơn vị
+							select.form-control(id="donvi", name='role')
+						.field
+							label Tạo mật khẩu
+							input.form-control(type="password", name="password", id="password")
+						.field
+							label Xác nhận lại mật khẩu
+							input.form-control(type="password", name="repeat_password", id="repeat_password")
+					.g-recaptcha(data-sitekey='6LfJDUwUAAAAAHsQJJL2Hn0DEWq8nmlO7lV48dXt')
+					.controls
+						button#submit(type='button').btn.btn-primary.button-sign-up
+							span.fa.fa-user-plus
+							| Đăng ký
+					hr
+					.clearfix
+
+		script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+		script(src="javascripts/dangkytaikhoan.js")

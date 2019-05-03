@@ -1,0 +1,37 @@
+style.
+  .category-label
+  {
+    vertical-align: middle;
+    padding-right: .5em;
+  }
+  #category
+  {
+    vertical-align: middle;
+  }
+  .refreshBtnContainer {
+    display: inline-block;
+  }
+  .toolbar {
+    float: right;
+  }
+script(src="javascripts/quanlytaikhoannhomquyen/quanlytaikhoan.js")
+script#template(type='text/x-kendo-template').
+  <div class="toolbar">
+  <label class="category-label" for="category">Tìm kiếm:</label>
+  <input type="search" id="category" style="width: 150px"/>
+  </div>
+script#template_1(type='text/x-kendo-template').
+  <a class="k-button" href="javascript:void(0)" onclick="return onBackupClick()">Sao lưu</a>
+.container
+  .row
+    .col-md-12
+      #tabstrip
+        ul
+          li.k-state-active Tài khoản
+          li Sao lưu
+        div.tab-content
+          #table
+        div.tab-content
+          #table_backup
+
+

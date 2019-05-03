@@ -1,0 +1,26 @@
+extends layout
+block stylesheets
+  
+  link(rel='stylesheet', href='https://js.arcgis.com/4.5/esri/css/main.css')
+  link(rel="stylesheet", href="/stylesheets/map.css")
+  
+block content
+    #page-content
+        #vertical
+            #top-pane
+                .pane-content(style="height:inherit")
+                    #map.dtg-map
+                    #pane-tools
+            #bottom-pane
+                .pane-content
+                    #report-objects
+                    
+    
+   
+block javascripts
+    script(src='/javascripts/config.js')
+    script(src='https://js.arcgis.com/4.5/')
+    script(src='javascripts/map.js')
+    script(src="/javascripts/lib/bootstrap.min.js")
+
+     
