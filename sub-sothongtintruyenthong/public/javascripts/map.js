@@ -1278,15 +1278,15 @@ require([
                                         // }
 
 
-                                         //1. google    
-                                        
+                                        //1. google    
+
                                         let point = {
                                             type: "point", // autocasts as new Point()
                                             longitude: parseFloat(pointExcel[0]),
                                             latitude: parseFloat(pointExcel[1])
                                             //107.08461386383026, 10.367653315463448
                                         };
-                                        
+
                                         // // 1. vn2000
                                         // let point = new Point({
                                         //     longitude: parseFloat(pointExcel[0]),
@@ -1302,39 +1302,39 @@ require([
                                         // });
 
 
-/*
-
-                                        this.geometryService.project(projectParameters).then((e) => {
-                                            const geometry = e[0];
-
-                                            let polygonGraphic = new Graphic({
-                                                geometry,
-                                                symbol: fillSymbol
-                                            });
-
-                                            graphicsLayer.add(polygonGraphic);
-
-                                            polygonGraphic.attributes = {
-                                                ToBD: roa[xl]["Tên KCN/KKT"],
-                                                TenCSD: roa[xl]["Tên doanh nghiệp / Chủ sử dụng"],
-                                                mauGiayChungNhanDangKyDN: roa[xl]["GCN đăng ký doanh nghiệp"],
-                                                NganhNghe: roa[xl]["Ngành nghề"],
-                                                tenLoaiDat: roa[xl]["Loại đất"]
-
-                                            };
-
-                                            let edits = {
-
-                                                addFeatures: [polygonGraphic]
-                                            };
-
-                                            applyEdits(edits);
-
-                                        }
-
-                                        );
-
-*/
+                                        /*
+                                        
+                                                                                this.geometryService.project(projectParameters).then((e) => {
+                                                                                    const geometry = e[0];
+                                        
+                                                                                    let polygonGraphic = new Graphic({
+                                                                                        geometry,
+                                                                                        symbol: fillSymbol
+                                                                                    });
+                                        
+                                                                                    graphicsLayer.add(polygonGraphic);
+                                        
+                                                                                    polygonGraphic.attributes = {
+                                                                                        ToBD: roa[xl]["Tên KCN/KKT"],
+                                                                                        TenCSD: roa[xl]["Tên doanh nghiệp / Chủ sử dụng"],
+                                                                                        mauGiayChungNhanDangKyDN: roa[xl]["GCN đăng ký doanh nghiệp"],
+                                                                                        NganhNghe: roa[xl]["Ngành nghề"],
+                                                                                        tenLoaiDat: roa[xl]["Loại đất"]
+                                        
+                                                                                    };
+                                        
+                                                                                    let edits = {
+                                        
+                                                                                        addFeatures: [polygonGraphic]
+                                                                                    };
+                                        
+                                                                                    applyEdits(edits);
+                                        
+                                                                                }
+                                        
+                                                                                );
+                                        
+                                        */
 
 
 
@@ -2234,9 +2234,20 @@ require([
 
             // };
 
+            // dom.byId("menuKhucongnghiep").onclick = function () {
+
+            dom.byId("cmax").onclick = function () {
+                testCmax();
+            }
 
 
 
+            var MaDoiTuong="";
+            
+            function testCmax() {
+                //alert("Cmaxx");
+                
+            }
 
 
 

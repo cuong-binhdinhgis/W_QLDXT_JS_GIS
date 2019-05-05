@@ -1,7 +1,11 @@
 const config = {
-  user: 'bariavungtau',
-  password: 'Bariavungtau@123',
-  server: 'ditagis.com',
+  // user: 'bariavungtau',
+  // password: 'Bariavungtau@123',
+  // server: 'ditagis.com',
+  // database: 'BRVT_QuanLyXaThai_GIS',
+  user: 'sde',
+  password: '123456',
+  server: 'cuibap\\sql2016',
   database: 'BRVT_QuanLyXaThai_GIS',
   pool: {
     max: 15,

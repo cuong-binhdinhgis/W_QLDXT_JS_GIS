@@ -16,6 +16,7 @@ define(["require", "exports"], function (require, exports) {
         LOAICHATTHAI_CTK:'CTK',
         CHATTHAILONG_Cmax:'CmaxCTL',
         CHATTHAIKHI_Cmax:'CmaxCTK',
+        
         //TramBTS: 'TramBTS',
         //DIEMDICHVU: "DiemDichVu",
         //TUYENCAPNGAM: 'TuyenCapNgam',

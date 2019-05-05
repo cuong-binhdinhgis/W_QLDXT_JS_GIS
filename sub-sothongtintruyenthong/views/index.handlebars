@@ -320,19 +320,40 @@
 
 
     <script type="text/javascript">
-     function listCTRShow() {
-          document.getElementById("gridDisplayChatThaiRan").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
-          document.getElementById("menu-map").className="dropdown calcite-dropdown calcite-text-dark calcite-bg-light";
-          document.getElementById("menu-map-icon").className="calcite-dropdown-toggle";
-        
-          
+        //CTR
+        function listCTRShow() {
+            listCTLClose();
+            listCTKClose();
+            document.getElementById("gridDisplayChatThaiRan").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
+            document.getElementById("menu-map").className = "dropdown calcite-dropdown calcite-text-dark calcite-bg-light";
+            document.getElementById("menu-map-icon").className = "calcite-dropdown-toggle";
         }
         function listCTRClose() {
-         
-         document.getElementById("gridDisplayChatThaiRan").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
-                
+            document.getElementById("gridDisplayChatThaiRan").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
         }
-       
+        //CTL
+         function listCTLShow() {
+            listCTRClose();
+            listCTKClose();
+            document.getElementById("gridDisplayChatThaiLong").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
+            document.getElementById("menu-map").className = "dropdown calcite-dropdown calcite-text-dark calcite-bg-light";
+            document.getElementById("menu-map-icon").className = "calcite-dropdown-toggle";
+        }
+        function listCTLClose() {
+            document.getElementById("gridDisplayChatThaiLong").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
+        }
+        //CTK
+         function listCTKShow() {
+            listCTRClose();
+            listCTLClose();
+            document.getElementById("gridDisplayChatThaiKhi").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
+            document.getElementById("menu-map").className = "dropdown calcite-dropdown calcite-text-dark calcite-bg-light";
+            document.getElementById("menu-map-icon").className = "calcite-dropdown-toggle";
+        }
+        function listCTKClose() {
+            document.getElementById("gridDisplayChatThaiKhi").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
+        }
+
     </script>
 
     <!--ChatThaiRan-->
@@ -350,8 +371,7 @@
 
         <span class="list-top-right-container">
             <span class="list-top-right-element" title="Close"> <svg ng-click="hideList()"
-                    style="width: 20px; height: 20px" role="button" tabindex="0"
-                    onclick="listCTRClose();">
+                    style="width: 20px; height: 20px" role="button" tabindex="0" onclick="listCTRClose();">
                     <g>
                         <path
                             d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
@@ -371,12 +391,353 @@
         </span>
 
         <p>&nbsp;</p>
-        <div>hehheh</div>
+        <div>hehheh
+            <a id="cmax" role="button">
+                Tcggfhfg</a>
+        </div>
 
 
 
     </div>
     <!--  -->
+
+
+
+
+      <!-- add ChatThaiLong Panel -->
+
+        <script type="text/javascript">
+            function panelAddChatThaiLongShow() {
+                listCTLClose();
+                ///document.getElementById("panelZoomtoKhuCN").className = "panel collapse";
+                ///document.getElementById("collapseZoomtoKhuCN").className = "panel-collapse collapse";
+                //document.getElementById("topbar").style.display="block";
+                document.getElementById("panelAddChatThaiLong").className = "panel collapse in";
+                document.getElementById("panelAddChatThaiLong").style.height = "auto";
+                document.getElementById("collapseAddChatThaiLong").className = "panel-collapse collapse in";
+
+            }
+
+        </script>
+
+    <!--ChatThaiLong-->
+
+
+    <div ng-show="visibleList" id="gridDisplayChatThaiLong" class="list-container undrag" aria-hidden="false"
+        style="width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none">
+
+
+
+        <div ng-show="productCount" class="listtitle" aria-hidden="false" style="">
+            <div> <span class="ng-binding"> Chất thải lỏng </span> <br> </div>
+        </div>
+
+
+        <span class="list-top-right-container">
+            <span class="list-top-right-element" title="Close"> <svg ng-click="hideList()"
+                    style="width: 20px; height: 20px" role="button" tabindex="0" onclick="listCTLClose();">
+                    <g>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                        </path>
+                    </g>
+                </svg>
+            </span>
+
+
+
+
+
+
+
+
+
+        </span>
+
+        <p>&nbsp;</p>
+        <div><a role="button" aria-haspopup="true" onclick="panelAddChatThaiLongShow();">Thêm mới chất thải lỏng</a></div>
+        <div>Danh sách chất thải lỏng ở đây...
+           
+        </div>
+
+
+
+    </div>
+    <!--  -->
+
+     <!--ChatThaiKhi-->
+
+
+    <div ng-show="visibleList" id="gridDisplayChatThaiKhi" class="list-container undrag" aria-hidden="false"
+        style="width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none">
+
+
+
+        <div ng-show="productCount" class="listtitle" aria-hidden="false" style="">
+            <div> <span class="ng-binding"> Chất thải lỏng</span> <br> </div>
+        </div>
+
+
+        <span class="list-top-right-container">
+            <span class="list-top-right-element" title="Close"> <svg ng-click="hideList()"
+                    style="width: 20px; height: 20px" role="button" tabindex="0" onclick="listCTKClose();">
+                    <g>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                        </path>
+                    </g>
+                </svg>
+            </span>
+
+
+
+
+
+
+
+
+
+        </span>
+
+        <p>&nbsp;</p>
+        <div>Danh sách chất thải khí ở đây...
+           
+        </div>
+
+
+
+    </div>
+    <!--  -->
+
+
+<!--Them moi CTL-->
+
+{{!-- 
+        <div id="panelAddChatThaiLong" class="panel collapse">
+            <div id="headingAddChatThaiLong" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse"
+                        href="#collapseAddChatThaiLong" aria-expanded="false"
+                        aria-controls="collapseAddChatThaiLong"><span class="esri-icon-organization"
+                            aria-hidden="true"></span><span class="panel-label">
+                            <div id="addChatThaiLong"></div>
+                            Thêm mới chất thải lỏng
+                        </span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse"
+                        data-target="#panelAddChatThaiLong"><span class="esri-icon esri-icon-close"
+                            aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseAddChatThaiLong" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingAddChatThaiLong">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                       
+                        <legend></legend>
+
+                        <p>Nhập từ file Excel: </p>
+                        <p id="filenameExcelDN_KCNKKT"></p>
+
+                        <input type="file" name="xlfileDN_KCNKKT" id="xlfDN_KCNKKT"
+                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+
+
+
+
+                        <div id="AddDoanhnghiepKCNKKTUpdateDiv" style="display:none">
+
+
+                            <p class="list-heading"><strong>Nhập thông tin Cơ Sở Kinh Doanh</strong></p>
+                            <legend></legend>
+
+
+                            <div id="attributeArea">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <th>Mã CSKD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaCSKD"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Mã số KD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaSoKD"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Phường/Xã</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaPhuongXa"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Huyện/TP</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaHuyenTP"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mã Đường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaDuong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Người Cập Nhật</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiCapNhat"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời Gian Cập Nhật</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGCapNhat"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Người Tạo</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiTao"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời Gian Tạo</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGTao"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời gian Kinh Doanh</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGKinhDoanh"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thời gian kết thúc KD</th>
+                                            <td><input class="inputInfo" type="date" id="addcskdTGKetThucKinhDoanh">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Tình trạng DN</th>
+                                            <td><select id="addcskdTinhTrangDN"> </select></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Tên Cơ sở KD</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdTenCSKD"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loại hình DN</th>
+                                            <td><select id="addcskdLoaiHinhDN"> </select></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ngành kinh tế</th>
+                                            <td><select id="addcskdNganhKinhTe"> </select></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <th>Số điện thoại</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdSoDienThoai"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa chỉ trụ sở chính</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdDiaChiTruSo"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Chủ sở hửu</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdChuSoHuu"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Người đại diện</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNguoiDaiDien"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mã số thuế</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdMaSoThue"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Số lần vi phạm</th>
+                                            <td><input class="inputInfo" type="number" id="addcskdSoLanViPham"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Khu vực sản xuất</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdKhuVucSanXuat"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Địa chỉ hoạt động</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdDiaDiemHoatDong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số lượng nhân viên</th>
+                                            <td><input class="inputInfo" type="number" id="addcskdSoLuongNhanVien"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Loại hình hoạt động</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdLoaiHinhHoatDong"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <th>Công suất thiết kế</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdCongSuatThietKe"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Hóa chất sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdHoaChatSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nhiên liệu sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdNhienLieuSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lượng nước sử dụng</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdLuongNuocSuDung"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Thủ tục môi trường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdThuTucMoiTruong"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Số thủ tục môi trường</th>
+                                            <td><input class="inputInfo" type="text" id="addcskdSoThuTucMoiTruong"></td>
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <th></th>
+                                            <td>.</td>
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <td>
+                                                <input type="button" class="edit-button" value=" Lưu, địa điểm "
+                                                    id="polygonDoanhnghiepKCNKKTSave" style="background-color: green">
+
+                                                <input type="button" class="edit-button" value=" Hủy "
+                                                    id="polygonDoanhnghiepKCNKKTDelete"
+                                                    style="background-color: crimson">
+
+                                            </td>
+                                        </tr>
+
+
+
+
+
+                                    </tbody>
+                                </table>
+
+
+
+                                <br>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                        <div id="report-objectsdfrgdgdrg"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+        <!-- -->
+
+
+
+
 
 
 
@@ -421,10 +782,20 @@
                             Loại chất thải
                         </strong></a>
                     <ul id="dropdown-menuToolsLCT" style="display: none">
-                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                                role="button" onclick="listCTRShow();" aria-haspopup="true"><span
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a role="button"
+                                onclick="listCTRShow();" aria-haspopup="true"><span
                                     class="esri-icon-printer"></span><strong>
                                     Chất thải rắn</strong></a></li>
+                        <br>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a role="button"
+                                onclick="listCTLShow();" aria-haspopup="true"><span
+                                    class="esri-icon-printer"></span><strong>
+                                    Chất thải lỏng</strong></a></li>
+                        <br>
+                        <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a role="button"
+                                onclick="listCTKShow();" aria-haspopup="true"><span
+                                    class="esri-icon-printer"></span><strong>
+                                    Chất thải khí</strong></a></li>
 
                     </ul>
                 </li>
@@ -755,21 +1126,7 @@
 
         </script>
 
-        <!-- add DiemXaThai Panel -->
-
-        <script type="text/javascript">
-            function panelAddDiemXaThaiShow() {
-                //alert("fvnfcnggn");
-                //document.getElementById("panelZoomtoKhuCN").className = "panel collapse";
-                //document.getElementById("collapseZoomtoKhuCN").className = "panel-collapse collapse";
-                //document.getElementById("topbar").style.display="block";
-                document.getElementById("panelAddDiemXaThai").className = "panel collapse in";
-                document.getElementById("panelAddDiemXaThai").style.height = "auto";
-                document.getElementById("collapseAddDiemXaThai").className = "panel-collapse collapse in";
-
-            }
-
-        </script>
+      
 
         <!-- add DoanhnghiepCCN Panel -->
 
@@ -1226,6 +1583,7 @@
 
 
         </script>
+
         <!-- Info Panel -->
 
         <div id="panelInfo" class="panel collapse">
@@ -1525,53 +1883,43 @@
 
 
 
-        <!-- Add Polygon DoanhnghiepKCNKKT Panel  -->
+<!--Them moi CTL-->
 
-        <div id="panelAddDiemXaThai" class="panel collapse">
-            <div id="headingAddDiemXaThai" class="panel-heading" role="tab">
+        <div id="panelAddChatThaiLong" class="panel collapse">
+            <div id="headingAddChatThaiLong" class="panel-heading" role="tab">
                 <div class="panel-title">
-                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseAddDiemXaThai"
-                        aria-expanded="false" aria-controls="collapseAddDiemXaThai"><span class="esri-icon-organization"
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse"
+                        href="#collapseAddChatThaiLong" aria-expanded="false"
+                        aria-controls="collapseAddChatThaiLong"><span class="esri-icon-organization"
                             aria-hidden="true"></span><span class="panel-label">
-                            <div id="addDiemXaThai"></div>
-                            Thêm mới Cơ Sở Kinh Doanh
+                            <div id="addChatThaiLong"></div>
+                            Thêm mới chất thải lỏng
                         </span></a>
-                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelAddDiemXaThai"><span
-                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse"
+                        data-target="#panelAddChatThaiLong"><span class="esri-icon esri-icon-close"
+                            aria-hidden="true"></span></a>
                 </div>
             </div>
-            <div id="collapseAddDiemXaThai" class="panel-collapse collapse" role="tabpanel"
-                aria-labelledby="headingAddDiemXaThai">
+            <div id="collapseAddChatThaiLong" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingAddChatThaiLong">
                 <div class="panel-body">
                     <div class="form-horizontal">
-                        <p>Chấm trực tiếp trên bản đồ</p>
-
-                        <br /><br />
-                        <div id="topbar">
-
-
-                            <button class="action-button esri-icon-blank-map-pin" id="pointButtonDNKCNKKT" type="button"
-                                title="Draw point"></button>
-
-                            <!--<button class="action-button esri-icon-trash" id="resetBtn" type="button" title="Clear graphics"></button>-->
-
-                        </div>
-                        <br />
+                       <!--
                         <legend></legend>
 
                         <p>Nhập từ file Excel: </p>
-                        <p id="filenameExcelDXT"></p>
+                        <p id="filenameExcelDN_KCNKKT"></p>
 
-                        <input type="file" name="xlfileDXT" id="xlfDXT"
+                        <input type="file" name="xlfileDN_KCNKKT" id="xlfDN_KCNKKT"
                             accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                       -->
 
 
 
+                        <div id="AddDoanhnghiepKCNKKTUpdateDiv" style="display:block">
 
-                        <div id="AddDiemXaThaiUpdateDiv" style="display:none">
 
-
-                            <p class="list-heading"><strong>Nhập thông tin Cơ Sở Kinh Doanh</strong></p>
+                            <p class="list-heading"><strong>Nhập thông tin Chất Thải Lỏng</strong></p>
                             <legend></legend>
 
 
@@ -1581,137 +1929,103 @@
                                     <tbody>
 
                                         <tr>
-                                            <th>Mã CSKD</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdMaCSKD"></td>
+                                            <th>Mã đối tượng</th>
+                                            <td><input class="inputInfo" type="text" id="CTLMaDoiTuong"></td>
                                         </tr>
 
                                         <tr>
-                                            <th>Mã số KD</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdMaSoKD"></td>
+                                            <th>Mã điểm xả thải</th>
+                                            <td><input class="inputInfo" type="text" id="CTLMaDXT"></td>
                                         </tr>
                                         <tr>
-                                            <th>Phường/Xã</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdMaPhuongXa"></td>
+                                            <th>Lưu lượng</th>
+                                            <td><input class="inputInfo" type="text" id="CTLLuuLuong"></td>
                                         </tr>
                                         <tr>
-                                            <th>Huyện/TP</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdMaHuyenTP"></td>
+                                            <th>Thời gian lấy mẫu</th>
+                                            <td><input class="inputInfo" type="date" id="CTLTGLayMau"></td>
                                         </tr>
                                         <tr>
-                                            <th>Mã Đường</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdMaDuong"></td>
+                                            <th>Thời gian ký kết quả</th>
+                                            <td><input class="inputInfo" type="date" id="CTLTGKyKetQua"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Loại điểm xả thải</th>
+                                            <td><input class="inputInfo" type="text" id="CTLLoaiDXT" value="CTL"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>SO2</th>
+                                            <td><input class="inputInfo" type="text" id="CTLSO2"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>NOx</th>
+                                            <td><input class="inputInfo" type="text" id="CTLNOx"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>CO</th>
+                                            <td><input class="inputInfo" type="text" id="CTLCO"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>NH3</th>
+                                            <td><input class="inputInfo" type="text" id="CTLNH3"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>H2S</th>
+                                            <td><input class="inputInfo" type="text" id="CTLH2S"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>HCI</th>
+                                            <td><input class="inputInfo" type="text" id="CTLHCI"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Pb</th>
+                                            <td><input class="inputInfo" type="text" id="CTLPb"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Cd</th>
+                                            <td><input class="inputInfo" type="text" id="CTLCd"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Hg</th>
+                                            <td><input class="inputInfo" type="text" id="CTLHg"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>BOD5</th>
+                                            <td><input class="inputInfo" type="text" id="CTLBOD5"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>COD</th>
+                                            <td><input class="inputInfo" type="text" id="CTLCOD"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>TSS</th>
+                                            <td><input class="inputInfo" type="text" id="CTLTSS"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>NH4</th>
+                                            <td><input class="inputInfo" type="text" id="CTLNH4"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>Coliform</th>
+                                            <td><input class="inputInfo" type="text" id="CTLColiform"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>As</th>
+                                            <td><input class="inputInfo" type="text" id="CTLAs_"></td>
+                                        </tr>
+                                         <tr>
+                                            <th>CrIII</th>
+                                            <td><input class="inputInfo" type="text" id="CTLCrIII"></td>
                                         </tr>
                                         <tr>
-                                            <th>Người Cập Nhật</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdNguoiCapNhat"></td>
+                                            <th>CrVI</th>
+                                            <td><input class="inputInfo" type="text" id="CTLCrVI"></td>
                                         </tr>
                                         <tr>
-                                            <th>Thời Gian Cập Nhật</th>
-                                            <td><input class="inputInfo" type="date" id="addcskdTGCapNhat"></td>
+                                            <th>Zn</th>
+                                            <td><input class="inputInfo" type="text" id="CTLZn"></td>
                                         </tr>
-
-                                        <tr>
-                                            <th>Người Tạo</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdNguoiTao"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Thời Gian Tạo</th>
-                                            <td><input class="inputInfo" type="date" id="addcskdTGTao"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Thời gian Kinh Doanh</th>
-                                            <td><input class="inputInfo" type="date" id="addcskdTGKinhDoanh"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Thời gian kết thúc KD</th>
-                                            <td><input class="inputInfo" type="date" id="addcskdTGKetThucKinhDoanh">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tình trạng DN</th>
-                                            <td><select id="addcskdTinhTrangDN"> </select></td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Tên Cơ sở KD</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdTenCSKD"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Loại hình DN</th>
-                                            <td><select id="addcskdLoaiHinhDN"> </select></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Ngành kinh tế</th>
-                                            <td><select id="addcskdNganhKinhTe"> </select></td>
-                                        </tr>
-
-
-                                        <tr>
-                                            <th>Số điện thoại</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdSoDienThoai"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Địa chỉ trụ sở chính</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdDiaChiTruSo"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Chủ sở hửu</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdChuSoHuu"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Người đại diện</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdNguoiDaiDien"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Mã số thuế</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdMaSoThue"></td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Số lần vi phạm</th>
-                                            <td><input class="inputInfo" type="number" id="addcskdSoLanViPham"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Khu vực sản xuất</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdKhuVucSanXuat"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Địa chỉ hoạt động</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdDiaDiemHoatDong"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Số lượng nhân viên</th>
-                                            <td><input class="inputInfo" type="number" id="addcskdSoLuongNhanVien"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Loại hình hoạt động</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdLoaiHinhHoatDong"></td>
-                                        </tr>
-
-                                        <tr>
-                                            <th>Công suất thiết kế</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdCongSuatThietKe"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Hóa chất sử dụng</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdHoaChatSuDung"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Nhiên liệu sử dụng</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdNhienLieuSuDung"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Lượng nước sử dụng</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdLuongNuocSuDung"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Thủ tục môi trường</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdThuTucMoiTruong"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Số thủ tục môi trường</th>
-                                            <td><input class="inputInfo" type="text" id="addcskdSoThuTucMoiTruong"></td>
-                                        </tr>
+                                        
 
 
 
@@ -1722,11 +2036,12 @@
                                         <tr>
                                             <th></th>
                                             <td>
-                                                <input type="button" class="edit-button" value=" Lưu "
-                                                    id="tableDiemXaThaiSave" style="background-color: green">
+                                                <input type="button" class="edit-button" value=" Lưu, chất thải lỏng "
+                                                    id="tableCTLSave" style="background-color: green">
 
                                                 <input type="button" class="edit-button" value=" Hủy "
-                                                    id="tableDiemXaThaiDelete" style="background-color: crimson">
+                                                    id="tableCTLDelete"
+                                                    style="background-color: crimson">
 
                                             </td>
                                         </tr>
@@ -1754,10 +2069,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
 
-
-
+        <!-- -->
 
 
 
