@@ -10,17 +10,25 @@ define(["require", "exports"], function (require, exports) {
         CUM_CONGNGHIEP:'Cum_CN',
         DOANHNGHIEP_KCNKKT:'DN_KCNKKT',
         DOANHNGHIEP_CCN:'DN_CCN',
-        DIEMDAUTU:'Diem_DauTu',
+        DIEMXATHAI:'Diem_XaThai',
         LOAICHATTHAI_CTR:'CTR',
         LOAICHATTHAI_CTL:'CTL',
         LOAICHATTHAI_CTK:'CTK',
         CHATTHAILONG_Cmax:'CmaxCTL',
         CHATTHAIKHI_Cmax:'CmaxCTK',
+        PHAN_VUNG:'PhanVung',
+        GIATRI_C:'GiaTriC',
+        HESO_Kf:'HeSoKf',
+        HESO_Kq:'HeSoKp',
+        THONGTIN_MAU:'ThongTinMau',
+     
+
         
         //TramBTS: 'TramBTS',
         //DIEMDICHVU: "DiemDichVu",
         //TUYENCAPNGAM: 'TuyenCapNgam',
         CHUYEN_DE_HT: 'chuyendehientrang',
+        CHUYEN_DE_DT: 'chuyendedata',
         OSM: "osm"
     };
     return constName;

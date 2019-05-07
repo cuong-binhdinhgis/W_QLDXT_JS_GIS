@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="/stylesheets/custom-kendo.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
 
+ 
+
     <!--scihub.copernicus.eu list search-->
 
 
@@ -407,6 +409,8 @@
       <!-- add ChatThaiLong Panel -->
 
         <script type="text/javascript">
+        //viet lại bên map
+        /*
             function panelAddChatThaiLongShow() {
                 listCTLClose();
                 ///document.getElementById("panelZoomtoKhuCN").className = "panel collapse";
@@ -417,6 +421,7 @@
                 document.getElementById("collapseAddChatThaiLong").className = "panel-collapse collapse in";
 
             }
+            */
 
         </script>
 
@@ -455,7 +460,7 @@
         </span>
 
         <p>&nbsp;</p>
-        <div><a role="button" aria-haspopup="true" onclick="panelAddChatThaiLongShow();">Thêm mới chất thải lỏng</a></div>
+        <div><a id="linkFormChatThaiLong" role="button" aria-haspopup="true" >Thêm mới chất thải lỏng</a></div>
         <div>Danh sách chất thải lỏng ở đây...
            
         </div>
@@ -1916,7 +1921,7 @@
 
 
 
-                        <div id="AddDoanhnghiepKCNKKTUpdateDiv" style="display:block">
+                        <div id="AddChatThaiLongDiv" style="display:block">
 
 
                             <p class="list-heading"><strong>Nhập thông tin Chất Thải Lỏng</strong></p>
