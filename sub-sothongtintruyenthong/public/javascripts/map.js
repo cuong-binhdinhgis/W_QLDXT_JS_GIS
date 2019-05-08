@@ -765,42 +765,81 @@ require([
 
 
                 //tinh cmax===============================
-         
-              
-                
+
+
+
+
+
+
+
 
                 if (layerCfg.groupLayer === constName.CHUYEN_DE_DT && layerCfg.permission.view && layerCfg.id == constName.THONGTIN_MAU) {
 
                     //console.log(layerCfg.url);
-                
-                    
+
+
                     if (layerCfg.permission.create) {
 
                         dom.byId("linkFormChatThaiLong").onclick = function () {
                             //Ẩn bảng dữ liệu Chất Thỉa Lỏng
                             document.getElementById("gridDisplayChatThaiLong").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
                             //Hiện Form nhập Chất Thải Lỏng
-                            document.getElementById("panelAddChatThaiLong").className = "panel collapse in";
-                            document.getElementById("panelAddChatThaiLong").style.height = "auto";
-                            document.getElementById("collapseAddChatThaiLong").className = "panel-collapse collapse in";
+                            document.getElementById("panelAddThongTinMau").className = "panel collapse in";
+                            document.getElementById("panelAddThongTinMau").style.height = "auto";
+                            document.getElementById("collapseAddThongTinMau").className = "panel-collapse collapse in";
 
 
-                            //MaDXT
+                            //Lấy  MaDXT đổ vào combobox 
+                            for (let layerCfg of app.activeView.systemVariable.user.Layers) {
+                                if (layerCfg.id == constName.DIEMXATHAI) {
+                                    //lay các domain đo vao combobox
+                                    /*
+                                    $.ajax({
+                                        url: layerCfg.url + '?f=pjson',
+                                        type: 'get',
+                                        dataType: 'json',
+                                        success: function (result) {
+                                            console.log(result);
+                                            alert("so1");
+                                          
+                                        }
+                                    });
+                                    */
+                                    //Lấy  MaDXT đổ vào combobox
+                                    $.ajax({
+                                        url: layerCfg.url + '/query?where=1%3D1&outFields=MaDXT%2C+MaCSKD&returnGeometry=false&f=pjson',
+                                        type: 'get',
+                                        dataType: 'json',
+                                        success: function (result) {
+                                            var optionMaDXT = "";
+                                            for (let i = 0; i < result.features.length; i++) {
+                                                optionMaDXT += '<option value="' + result.features[i].attributes.MaDXT + '">' + result.features[i].attributes.MaDXT + '</option>';
+                                            }
+                                            dom.byId("TTMMaDXT").innerHTML = optionMaDXT;
+                                        }
+
+                                    });
+
+                                }
+                            }
+
+
+                            //var hehe;
+                            /*
                             $.ajax({
+
                                 url: layerCfg.url + '/query?where=1%3D1&outFields=MaDXT%2C++MaCSKD&f=pjson',
                                 //url : layerCfg.url+'/?f=pjson',
                                 type: 'get',
                                 dataType: 'json',
                                 success: function (result) {
-
+                                    //hehe=result;
                                     console.log(result);
-
-
-
-
+                                    alert("so2");
 
                                 }
                             });
+                            */
 
 
 
@@ -811,38 +850,106 @@ require([
 
 
 
-                        dom.byId("tableCTLSave").onclick = function () {
-                            AddChatThaiLong();
-                        };
 
-                        function AddChatThaiLong() {
+                        dom.byId("tableTTMSave").onclick = function () {
+                            AddThongTinMau();
+
+                            // var Abuoc1 = 0;
+                            // var Abuoc2 = 0;
+                            // var Abuoc3 = 0;
+
+                            // function buoc1() {
+                            //     Abuoc1 = 1+1;
+                            // }
+                            // function buoc2() {
+                            //     Abuoc2 = Abuoc1+5;
+                            // }
+
+                            // function buoc3() {
+                            //     Abuoc3 = Abuoc2+3;
+                            // }
+
+                            // buoc1();
+                            // buoc2();
+                            // buoc3();
+                            // console.log("buoc1:" + Abuoc1 + "buoc2:" + Abuoc2 + "buoc3:" + Abuoc3);
+
+
+
+
+
+
+
+
+
+
+
+                        };
+                        //123
+                        function AddThongTinMau() {
+
+                            // var dateTTMTGLayMau='null';
+                            // if(dom.byId("TTMTGLayMau").value.trim()!=""){
+                            //     dateTTMTGLayMau=dom.byId("TTMTGLayMau").value.trim();
+                            // }else{
+                            //    // dateTTMTGLayMau=null;
+                            // }
+                            if (dom.byId("TTMMaDoiTuong").value.trim() != "") {
+                                var dtMaDoiTuong = dom.byId("TTMMaDoiTuong").value.trim();
+                            } else {
+                                alert("Nhập Mã Đối Tượng!")
+                                return false;
+                            }
+                            var dtLuuLuong = dom.byId("TTMLuuLuong").value.trim() != "" ? dom.byId("TTMLuuLuong").value.trim() : null;
+                            var dtLTGLayMau = dom.byId("TTMTGLayMau").value.trim() != "" ? dom.byId("TTMTGLayMau").value.trim() : null;
+                            var dtTGKyKetQua = dom.byId("TTMTGKyKetQua").value.trim() != "" ? dom.byId("TTMTGKyKetQua").value.trim() : null;
+                            var dtLoaiDXT = dom.byId("TTMLoaiDXT").value.trim() != "" ? dom.byId("TTMLoaiDXT").value.trim() : null;
+                            var dtSO2 = dom.byId("TTMSO2").value.trim() != "" ? dom.byId("TTMSO2").value.trim() : null;
+                            var dtNOx = dom.byId("TTMNOx").value.trim() != "" ? dom.byId("TTMNOx").value.trim() : null;
+                            var dtCO = dom.byId("TTMCO").value.trim() != "" ? dom.byId("TTMCO").value.trim() : null;
+                            var dtNH3 = dom.byId("TTMNH3").value.trim() != "" ? dom.byId("TTMNH3").value.trim() : null;
+                            var dtH2S = dom.byId("TTMH2S").value.trim() != "" ? dom.byId("TTMH2S").value.trim() : null;
+                            var dtHCI = dom.byId("TTMHCI").value.trim() != "" ? dom.byId("TTMHCI").value.trim() : null;
+                            var dtPb = dom.byId("TTMPb").value.trim() != "" ? dom.byId("TTMPb").value.trim() : null;
+                            var dtCd = dom.byId("TTMCd").value.trim() != "" ? dom.byId("TTMCd").value.trim() : null;
+                            var dtHg = dom.byId("TTMHg").value.trim() != "" ? dom.byId("TTMHg").value.trim() : null;
+                            var dtBOD5 = dom.byId("TTMBOD5").value.trim() != "" ? dom.byId("TTMBOD5").value.trim() : null;
+                            var dtCOD = dom.byId("TTMCOD").value.trim() != "" ? dom.byId("TTMCOD").value.trim() : null;
+                            var dtTSS = dom.byId("TTMTSS").value.trim() != "" ? dom.byId("TTMTSS").value.trim() : null;
+                            var dtNH4 = dom.byId("TTMNH4").value.trim() != "" ? dom.byId("TTMNH4").value.trim() : null;
+                            var dtColiform = dom.byId("TTMColiform").value.trim() != "" ? dom.byId("TTMColiform").value.trim() : null;
+                            var dtAs_ = dom.byId("TTMAs_").value.trim() != "" ? dom.byId("TTMAs_").value.trim() : null;
+                            var dtCrIII = dom.byId("TTMCrIII").value.trim() != "" ? dom.byId("TTMCrIII").value.trim() : null;
+                            var dtCrVI = dom.byId("TTMCrVI").value.trim() != "" ? dom.byId("TTMCrVI").value.trim() : null;
+                            var dtZn = dom.byId("TTMZn").value.trim() != "" ? dom.byId("TTMZn").value.trim() : null;
+
                             var form = new FormData();
                             form.append('f', 'json');
                             form.append('features', '[{"attributes":{'
-                                + '"MaDoiTuong":"hee",'
-                                + '"MaDXT":"dsd",'
-                                + '"LuuLuong":null,'
-                                + '"TGLayMau":null,'
-                                + '"TGKyKetQua":null,'
-                                + '"LoaiDXT":null,'
-                                + '"SO2":null,'
-                                + '"NOx":null,'
-                                + '"CO":null,'
-                                + '"NH3":null,'
-                                + '"H2S":null,'
-                                + '"HCI":null,'
-                                + '"Pb":null,'
-                                + '"Cd":null,'
-                                + '"Hg":null,'
-                                + '"BOD5":null,'
-                                + '"COD":null,'
-                                + '"TSS":null,'
-                                + '"NH4":null,'
-                                + '"Coliform":null,'
-                                + '"As_":null,'
-                                + '"CrIII":null,'
-                                + '"CrVI":null,'
-                                + '"Zn":null'
+                                + '"MaDoiTuong":' + dtMaDoiTuong + ','
+                                + '"MaDXT":' + dom.byId("TTMMaDXT").value.trim() + ','
+                                + '"LuuLuong":' + dtLuuLuong + ','
+                                + '"TGLayMau":' + dtLTGLayMau + ','
+                                + '"TGKyKetQua":' + dtTGKyKetQua + ','
+                                + '"LoaiDXT":' + dtLoaiDXT + ','
+                                + '"SO2":' + dtSO2 + ','
+                                + '"NOx":' + dtNOx + ','
+                                + '"CO":' + dtCO + ','
+                                + '"NH3":' + dtNH3 + ','
+                                + '"H2S":' + dtH2S + ','
+                                + '"HCI":' + dtHCI + ','
+                                + '"Pb":' + dtPb + ','
+                                + '"Cd":' + dtCd + ','
+                                + '"Hg":' + dtHg + ','
+                                + '"BOD5":' + dtBOD5 + ','
+                                + '"COD":' + dtCOD + ','
+                                + '"TSS":' + dtTSS + ','
+                                + '"NH4":' + dtNH4 + ','
+                                + '"Coliform":' + dtColiform + ','
+                                + '"As_":' + dtAs_ + ','
+                                + '"CrIII":' + dtCrIII + ','
+                                + '"CrVI":' + dtCrVI + ','
+                                + '"Zn":' + dtZn + ','
                                 + '}}]');
 
                             fetch(layerCfg.url + '/addFeatures?f=json', {
@@ -850,7 +957,8 @@ require([
                                 body: form
                             })
                                 .then(r => r.json())
-                                .then(r => console.log(r));
+                                .then(r => alert("Đã thêm mới OBJECTID: " + r.addResults[0].objectId));
+                            //.then(r => console.log(r))
                         };
                     }
 
@@ -1608,301 +1716,252 @@ require([
 
 
 
-               //Điểm đầu tư Layer===============================
+                //Điểm đầu tư Layer===============================
 
-               if (layerCfg.groupLayer === constName.CHUYEN_DE_HT && layerCfg.permission.view && layerCfg.id == constName.DIEMXATHAI) {
-                let DIEMXATHAILayer = new FeatureLayer(layerCfg);
-                DIEMXATHAI_LYR=layerCfg.url;
-                
-                gr.add(DIEMXATHAILayer);
-alert("sdvsdsd");
-                //opacity
-                // DIEMDAUTULayer.opacity = 0.4;
-                dom.byId("optDiemdautu").onchange = function () {
-                    DIEMXATHAILayer.opacity = dom.byId("optDiemdautu").value;
-                };
+                if (layerCfg.groupLayer === constName.CHUYEN_DE_HT && layerCfg.permission.view && layerCfg.id == constName.DIEMXATHAI) {
+                    let DIEMXATHAILayer = new FeatureLayer(layerCfg);
+                    DIEMXATHAI_LYR = layerCfg.url;
 
-                /*
-                //scale when zoom========================
-                //var minDiemdautu=12;
-                var maxDiemdautu = 10;
-                dom.byId("scaleDiemdautu").onchange = function () {
-                    maxDiemdautu = dom.byId("scaleDiemdautu").value;
-                };
-                watchUtils.whenTrue(app.mapView, "stationary", function () {
-                    //if (editExpand) {
-                    if (app.mapView.zoom < maxDiemdautu) {
-                        DIEMDAUTULayer.visible = false;
-                        //alert("fgfg");
-                    } else {
-                        DIEMDAUTULayer.visible = true;
-                    }
-                    // if (app.mapView.zoom < 10 || app.mapView.zoom > 12) {
-                    //     dom.byId("chk_nenHanhchinhhuyen").disabled = true;
-                    // } else {
-                    //     dom.byId("chk_nenHanhchinhhuyen").disabled = false;
-                    // }
-                });
-                */
+                    gr.add(DIEMXATHAILayer);
 
+                    //opacity
+                    // DIEMDAUTULayer.opacity = 0.4;
+                    dom.byId("optDiemdautu").onchange = function () {
+                        DIEMXATHAILayer.opacity = dom.byId("optDiemdautu").value;
+                    };
 
-
-
-
-
-
-                //MenuGoto==================================================
-                dom.byId("menuDiemDautu").onclick = function () {
-                  
-                    let queryItems = DIEMXATHAILayer.createQuery();
-                    queryItems.where = '';// + iditem;
-                    queryItems.orderByFields = 'OBJECTID ASC';
-                    queryItems.outSpatialReference = app.activeView.spatialReference;
-                    queryItems.returnGeometry = true;
-                    
-                    DIEMXATHAILayer.queryFeatures(queryItems).then(results => {
-                  
-
-                        var itemDiemxathai = "";
-
-                        for (var i = 0; i < results.features.length; i++) {
-                            itemDiemxathai += "<tr id='" + results.features[i].attributes.OBJECTID + "' role='button'><td><span class='esri-icon-map-pin'></span>&nbsp;&nbsp;" + results.features[i].attributes.MaDXT + "</td></tr>";
+                    /*
+                    //scale when zoom========================
+                    //var minDiemdautu=12;
+                    var maxDiemdautu = 10;
+                    dom.byId("scaleDiemdautu").onchange = function () {
+                        maxDiemdautu = dom.byId("scaleDiemdautu").value;
+                    };
+                    watchUtils.whenTrue(app.mapView, "stationary", function () {
+                        //if (editExpand) {
+                        if (app.mapView.zoom < maxDiemdautu) {
+                            DIEMDAUTULayer.visible = false;
+                            //alert("fgfg");
+                        } else {
+                            DIEMDAUTULayer.visible = true;
                         }
-                        dom.byId("menuitemDiemdautu").innerHTML = '<table id="tableitemDiemdautu"><tbody>' + itemDiemxathai + '</tbody></table>';
+                        // if (app.mapView.zoom < 10 || app.mapView.zoom > 12) {
+                        //     dom.byId("chk_nenHanhchinhhuyen").disabled = true;
+                        // } else {
+                        //     dom.byId("chk_nenHanhchinhhuyen").disabled = false;
+                        // }
+                    });
+                    */
 
-                        dom.byId("tableitemDiemdautu").onclick = function (e) {
-                            let id = e.path[1].id;
-                            let query = DIEMXATHAILayer.createQuery();
-                            query.where = 'OBJECTID = ' + id;
-                            query.outSpatialReference = app.activeView.spatialReference;
-                            query.returnGeometry = true;
-                            DIEMXATHAILayer.queryFeatures(query).then(results => {
-                                app.activeView.popup.open({
-                                    features: results.features,
-                                    updateLocationEnabled: true
+
+
+
+
+
+
+                    //MenuGoto==================================================
+                    dom.byId("menuDiemDautu").onclick = function () {
+
+                        let queryItems = DIEMXATHAILayer.createQuery();
+                        queryItems.where = '';// + iditem;
+                        queryItems.orderByFields = 'OBJECTID ASC';
+                        queryItems.outSpatialReference = app.activeView.spatialReference;
+                        queryItems.returnGeometry = true;
+
+                        DIEMXATHAILayer.queryFeatures(queryItems).then(results => {
+
+
+                            var itemDiemxathai = "";
+
+                            for (var i = 0; i < results.features.length; i++) {
+                                itemDiemxathai += "<tr id='" + results.features[i].attributes.OBJECTID + "' role='button'><td><span class='esri-icon-map-pin'></span>&nbsp;&nbsp;" + results.features[i].attributes.MaDXT + "</td></tr>";
+                            }
+                            dom.byId("menuitemDiemdautu").innerHTML = '<table id="tableitemDiemdautu"><tbody>' + itemDiemxathai + '</tbody></table>';
+
+                            dom.byId("tableitemDiemdautu").onclick = function (e) {
+                                let id = e.path[1].id;
+                                let query = DIEMXATHAILayer.createQuery();
+                                query.where = 'OBJECTID = ' + id;
+                                query.outSpatialReference = app.activeView.spatialReference;
+                                query.returnGeometry = true;
+                                DIEMXATHAILayer.queryFeatures(query).then(results => {
+                                    app.activeView.popup.open({
+                                        features: results.features,
+                                        updateLocationEnabled: true
+                                    });
+
                                 });
 
-                            });
+                            };
 
-                        };
-
-                    });
-                };
-                //================================
-
-
-
-                // on/off layer=================
-                /*
-                var DIEMDAUTUToggle = dom.byId("chx_Diemdautu");
-                on(DIEMDAUTUToggle, "change", function () {
-                    DIEMDAUTULayer.visible = DIEMDAUTUToggle.checked;
-                });
-                */
-
-
-
-
-
-                //Create===========================
-                if (layerCfg.permission.create) {
-
-                    dom.byId("divaddDiemdautu").innerHTML = '<a role="button" data-target="#panelAddDiemdautu" aria-haspopup="true" onclick="return panelAddDiemdautuShow();"><span class="esri-icon-plus-circled"></span><strong> Thêm mới Điểm Xả Thải</strong></a><br /><br /><legend></legend>';
-
-                    const graphicsLayer = new GraphicsLayer({
-                        id: "tempGraphics"
-                    });
-
-                    const polygonSymbol = {
-                        type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                        color: "rgba(138,43,226, 0.8)",
-                        style: "solid",
-                        outline: {
-                            color: "white",
-                            width: 1
-                        }
+                        });
                     };
-                    const sketchViewModel = new SketchViewModel({
-                        view: app.activeView,
-                        layer: graphicsLayer,
+                    //================================
 
-                        polygonSymbol
+
+
+                    // on/off layer=================
+                    /*
+                    var DIEMDAUTUToggle = dom.byId("chx_Diemdautu");
+                    on(DIEMDAUTUToggle, "change", function () {
+                        DIEMDAUTULayer.visible = DIEMDAUTUToggle.checked;
                     });
-
-
-                    sketchViewModel.on("create-complete", addGraphic);
-
-
-                    function applyEdits(params) {
-                        //alert("add vao diem dau tu");
-                        //unselectFeature();
-                        var promise = DIEMXATHAILayer.applyEdits(params);
-
-
-                        //Tra form lại null
-                        dom.byId("inputTenDiem").value = "";
-                        dom.byId("inputDiaDiem").value = "";
-                        dom.byId("inputTinhTrangDauTu").value = "Đang thu hút";
-                        dom.byId("inputMoTa").value = "";
-                        dom.byId("inputToadoVN2000").value = "";
-                        dom.byId("inputMuctieuduan").value = "";
-                        dom.byId("inputQuymoduan").value = "";
-                        dom.byId("inputTongmucdautudukien").value = "";
-                        dom.byId("inputQuyhoachsudungdat").value = "";
-                        dom.byId("inputChinhsachuudai").value = "";
-                        dom.byId("inputHieuquadautu").value = "";
-                        dom.byId("inputLienhe").value = "";
-                        dom.byId("inputDientich").value = "";
+                    */
 
 
 
-                        editResultsHandler(promise);
-
-                    }
-
-                    function editResultsHandler(promise) {
-                        promise
-                            .then(function (editsResult) {
-                                var extractObjectId = function (result) {
-                                    return result.objectId;
-                                };
-
-                                // get the objectId of the newly added feature
-                                if (editsResult.addFeatureResults.length > 0) {
-                                    var adds = editsResult.addFeatureResults.map(extractObjectId);
-                                    newIncidentId = adds[0];
-
-                                    selectFeature(newIncidentId);
-                                }
-
-                            })
-                            .catch(function (error) {
-                                console.log("===============================================");
-                                console.error("[ applyEdits ] FAILURE: ", error.code, error.name, error.message);
-                                console.log("error = ", error);
-                                alert("Có lỗi xảy ra! :(")
-                            });
-                    }
 
 
-                    function selectFeature(objectId) {
+                    //Create===========================
+                    if (layerCfg.permission.create) {
 
-                        graphicsLayer.removeAll();
+                        dom.byId("divaddDiemdautu").innerHTML = '<a role="button" data-target="#panelAddDiemdautu" aria-haspopup="true" onclick="return panelAddDiemdautuShow();"><span class="esri-icon-plus-circled"></span><strong> Thêm mới Điểm Xả Thải</strong></a><br /><br /><legend></legend>';
 
-                        // symbol for the selected feature on the view
-                        /*
-                        var selectionSymbol = {
-                          type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
-                          color: [0, 0, 0, 0],
-                          style: "square",
-                          size: "40px",
-                          outline: {
-                            color: [0, 255, 255, 1],
-                            width: "3px"
-                          }
-                        };
-                        */
+                        const graphicsLayer = new GraphicsLayer({
+                            id: "tempGraphics"
+                        });
 
-                        var query = DIEMXATHAILayer.createQuery();
-
-                        query.where = DIEMXATHAILayer.objectIdField + " = " + objectId;
-
-                        DIEMXATHAILayer.queryFeatures(query).then(function (results) {
-
-
-
-                            if (results.features.length > 0) {
-
-                                editFeature = results.features[0];
-
-
-                                editFeature.symbol = selectionSymbol;
-
-                                view.graphics.add(editFeature);
-
-                                //hehehe
-
+                        const polygonSymbol = {
+                            type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                            color: "rgba(138,43,226, 0.8)",
+                            style: "solid",
+                            outline: {
+                                color: "white",
+                                width: 1
                             }
-                        });
-
-
-
-                    }
-
-
-
-                    let graphic;
-                    function addGraphic(event) {
-                        // Create a new graphic and set its geometry to
-                        // `create-complete` event geometry.
-                        graphic = new Graphic({
-                            geometry: event.geometry,
-                            symbol: sketchViewModel.graphic.symbol
-                        });
-
-                        graphicsLayer.add(graphic);
-
-                        map.add(graphicsLayer);
-
-                        //luu tamj
-                        var edits = {
-
-                            addFeatures: [graphic]
                         };
+                        const sketchViewModel = new SketchViewModel({
+                            view: app.activeView,
+                            layer: graphicsLayer,
 
-                        applyEdits(edits);
-
-
-                        dom.byId("AddDiemdautuUpdateDiv").style.display = "block";
-                    }
-
-
+                            polygonSymbol
+                        });
 
 
+                        sketchViewModel.on("create-complete", addGraphic);
 
 
+                        function applyEdits(params) {
+                            //alert("add vao diem dau tu");
+                            //unselectFeature();
+                            var promise = DIEMXATHAILayer.applyEdits(params);
 
 
-
-
-
-
-
-                    var drawPolygonButton = document.getElementById("polygonButton");
-                    drawPolygonButton.onclick = function () {
-                        // set the sketch to create a polygon geometry
-                        sketchViewModel.create("polygon");
-                        map.add(graphicsLayer);
-                        //setActiveButton(this);
-                    };
-
-
-                    var savePolygonButton = document.getElementById("polygonDiemdautuSave");
-                    savePolygonButton.onclick = function () {
-                        if (editFeature) {
-                            editFeature.attributes["TenDiem"] = dom.byId("inputTenDiem").value;
-                            editFeature.attributes["DiaDiem"] = dom.byId("inputDiaDiem").value;
-                            editFeature.attributes["TinhTrangDauTu"] = dom.byId("inputTinhTrangDauTu").value;
-                            editFeature.attributes["MoTa"] = dom.byId("inputMoTa").value;
-                            editFeature.attributes["ToadoVN2000"] = dom.byId("inputToadoVN2000").value;
-                            editFeature.attributes["MucTieuDuAn"] = dom.byId("inputMuctieuduan").value;
-                            editFeature.attributes["QuyMoDuAn"] = dom.byId("inputQuymoduan").value;
-                            editFeature.attributes["TongMucDauTuDuKien"] = dom.byId("inputTongmucdautudukien").value;
-                            editFeature.attributes["QuyHoachSuDungDat"] = dom.byId("inputQuyhoachsudungdat").value;
-                            editFeature.attributes["ChinhSachUuDai"] = dom.byId("inputChinhsachuudai").value;
-                            editFeature.attributes["HieuQuaDauTu"] = dom.byId("inputHieuquadautu").value;
-                            editFeature.attributes["LienHe"] = dom.byId("inputLienhe").value;
-                            editFeature.attributes["DienTich"] = dom.byId("inputDientich").value;
+                            //Tra form lại null
+                            dom.byId("inputTenDiem").value = "";
+                            dom.byId("inputDiaDiem").value = "";
+                            dom.byId("inputTinhTrangDauTu").value = "Đang thu hút";
+                            dom.byId("inputMoTa").value = "";
+                            dom.byId("inputToadoVN2000").value = "";
+                            dom.byId("inputMuctieuduan").value = "";
+                            dom.byId("inputQuymoduan").value = "";
+                            dom.byId("inputTongmucdautudukien").value = "";
+                            dom.byId("inputQuyhoachsudungdat").value = "";
+                            dom.byId("inputChinhsachuudai").value = "";
+                            dom.byId("inputHieuquadautu").value = "";
+                            dom.byId("inputLienhe").value = "";
+                            dom.byId("inputDientich").value = "";
 
 
 
+                            editResultsHandler(promise);
+
+                        }
+
+                        function editResultsHandler(promise) {
+                            promise
+                                .then(function (editsResult) {
+                                    var extractObjectId = function (result) {
+                                        return result.objectId;
+                                    };
+
+                                    // get the objectId of the newly added feature
+                                    if (editsResult.addFeatureResults.length > 0) {
+                                        var adds = editsResult.addFeatureResults.map(extractObjectId);
+                                        newIncidentId = adds[0];
+
+                                        selectFeature(newIncidentId);
+                                    }
+
+                                })
+                                .catch(function (error) {
+                                    console.log("===============================================");
+                                    console.error("[ applyEdits ] FAILURE: ", error.code, error.name, error.message);
+                                    console.log("error = ", error);
+                                    alert("Có lỗi xảy ra! :(")
+                                });
+                        }
 
 
+                        function selectFeature(objectId) {
+
+                            graphicsLayer.removeAll();
+
+                            // symbol for the selected feature on the view
+                            /*
+                            var selectionSymbol = {
+                              type: "simple-marker", // autocasts as new SimpleMarkerSymbol()
+                              color: [0, 0, 0, 0],
+                              style: "square",
+                              size: "40px",
+                              outline: {
+                                color: [0, 255, 255, 1],
+                                width: "3px"
+                              }
+                            };
+                            */
+
+                            var query = DIEMXATHAILayer.createQuery();
+
+                            query.where = DIEMXATHAILayer.objectIdField + " = " + objectId;
+
+                            DIEMXATHAILayer.queryFeatures(query).then(function (results) {
+
+
+
+                                if (results.features.length > 0) {
+
+                                    editFeature = results.features[0];
+
+
+                                    editFeature.symbol = selectionSymbol;
+
+                                    view.graphics.add(editFeature);
+
+                                    //hehehe
+
+                                }
+                            });
+
+
+
+                        }
+
+
+
+                        let graphic;
+                        function addGraphic(event) {
+                            // Create a new graphic and set its geometry to
+                            // `create-complete` event geometry.
+                            graphic = new Graphic({
+                                geometry: event.geometry,
+                                symbol: sketchViewModel.graphic.symbol
+                            });
+
+                            graphicsLayer.add(graphic);
+
+                            map.add(graphicsLayer);
+
+                            //luu tamj
                             var edits = {
-                                updateFeatures: [editFeature]
+
+                                addFeatures: [graphic]
                             };
 
                             applyEdits(edits);
+
+
+                            dom.byId("AddDiemdautuUpdateDiv").style.display = "block";
                         }
 
 
@@ -1910,189 +1969,238 @@ alert("sdvsdsd");
 
 
 
-                        graphicsLayer.removeAll();
-                        //setActiveButton(this);
-
-                        dom.byId("AddDiemdautuUpdateDiv").style.display = "none";
 
 
-                    };
 
 
-                    on(dom.byId("polygonDiemdautuDelete"), "click", function () {
-                        var edits = {
-                            deleteFeatures: [editFeature]
+
+
+
+                        var drawPolygonButton = document.getElementById("polygonButton");
+                        drawPolygonButton.onclick = function () {
+                            // set the sketch to create a polygon geometry
+                            sketchViewModel.create("polygon");
+                            map.add(graphicsLayer);
+                            //setActiveButton(this);
                         };
-                        applyEdits(edits);
-                        graphicsLayer.removeAll();
-                    });
-
-                    //**************
-                    // reset button
-                    //**************
-                    /*
-                    document.getElementById("resetBtn").onclick = function () {
-                        sketchViewModel.reset();
-                        tempGraphicsLayer.removeAll();
-                        //setActiveButton();
-                    };
-*/
-                    //-------------------------------------------------------------------------
-
-                    let X = XLSX;
-                    let process_wb = (function () {
-                        //var OUT = document.getElementById('out');
-
-                        let to_json = function to_json(workbook) {
-
-                            let result = {};
-                            workbook.SheetNames.forEach(function (sheetName) {
-                                let roa = X.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: true });
 
 
-                                // Create a symbol for rendering the graphic
-                                let fillSymbol = {
-                                    type: "simple-fill", // autocasts as new SimpleFillSymbol()
-                                    color: [227, 139, 79, 0.8],
-                                    outline: { // autocasts as new SimpleLineSymbol()
-                                        color: [255, 255, 255],
-                                        width: 1
-                                    }
+                        var savePolygonButton = document.getElementById("polygonDiemdautuSave");
+                        savePolygonButton.onclick = function () {
+                            if (editFeature) {
+                                editFeature.attributes["TenDiem"] = dom.byId("inputTenDiem").value;
+                                editFeature.attributes["DiaDiem"] = dom.byId("inputDiaDiem").value;
+                                editFeature.attributes["TinhTrangDauTu"] = dom.byId("inputTinhTrangDauTu").value;
+                                editFeature.attributes["MoTa"] = dom.byId("inputMoTa").value;
+                                editFeature.attributes["ToadoVN2000"] = dom.byId("inputToadoVN2000").value;
+                                editFeature.attributes["MucTieuDuAn"] = dom.byId("inputMuctieuduan").value;
+                                editFeature.attributes["QuyMoDuAn"] = dom.byId("inputQuymoduan").value;
+                                editFeature.attributes["TongMucDauTuDuKien"] = dom.byId("inputTongmucdautudukien").value;
+                                editFeature.attributes["QuyHoachSuDungDat"] = dom.byId("inputQuyhoachsudungdat").value;
+                                editFeature.attributes["ChinhSachUuDai"] = dom.byId("inputChinhsachuudai").value;
+                                editFeature.attributes["HieuQuaDauTu"] = dom.byId("inputHieuquadautu").value;
+                                editFeature.attributes["LienHe"] = dom.byId("inputLienhe").value;
+                                editFeature.attributes["DienTich"] = dom.byId("inputDientich").value;
+
+
+
+
+
+                                var edits = {
+                                    updateFeatures: [editFeature]
                                 };
 
-                                for (let xl = 0; xl < roa.length; xl++) {
-
-                                    let ringsExcel = (roa[xl]["Tọa độ VN2000"]).split(", ");//[roa[0]["Tọa độ VN2000"]];
-                                    let ringsPolygon = [];
-                                    for (let x = 0; x < ringsExcel.length; x++) {
-
-                                        ringsPolygon[x] = [ringsExcel[x].split(" ")[0], ringsExcel[x].split(" ")[1]];
-                                    }
+                                applyEdits(edits);
+                            }
 
 
 
-                                    let polygon = new Polygon({
-                                        rings: [ringsPolygon],
-                                        spatialReference: {
-                                            wkt: 'PROJCS["VN_2000_KT108-15_3deg",GEOGCS["GCS_VN_2000",DATUM["D_Vietnam_2000",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["False_Easting",500000.0],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",108.25],PARAMETER["Scale_Factor",0.9999],PARAMETER["Latitude_Of_Origin",0.0],UNIT["Meter",1.0]]',
+
+
+
+                            graphicsLayer.removeAll();
+                            //setActiveButton(this);
+
+                            dom.byId("AddDiemdautuUpdateDiv").style.display = "none";
+
+
+                        };
+
+
+                        on(dom.byId("polygonDiemdautuDelete"), "click", function () {
+                            var edits = {
+                                deleteFeatures: [editFeature]
+                            };
+                            applyEdits(edits);
+                            graphicsLayer.removeAll();
+                        });
+
+                        //**************
+                        // reset button
+                        //**************
+                        /*
+                        document.getElementById("resetBtn").onclick = function () {
+                            sketchViewModel.reset();
+                            tempGraphicsLayer.removeAll();
+                            //setActiveButton();
+                        };
+    */
+                        //-------------------------------------------------------------------------
+
+                        let X = XLSX;
+                        let process_wb = (function () {
+                            //var OUT = document.getElementById('out');
+
+                            let to_json = function to_json(workbook) {
+
+                                let result = {};
+                                workbook.SheetNames.forEach(function (sheetName) {
+                                    let roa = X.utils.sheet_to_json(workbook.Sheets[sheetName], { raw: true });
+
+
+                                    // Create a symbol for rendering the graphic
+                                    let fillSymbol = {
+                                        type: "simple-fill", // autocasts as new SimpleFillSymbol()
+                                        color: [227, 139, 79, 0.8],
+                                        outline: { // autocasts as new SimpleLineSymbol()
+                                            color: [255, 255, 255],
+                                            width: 1
                                         }
-                                    });
+                                    };
+
+                                    for (let xl = 0; xl < roa.length; xl++) {
+
+                                        let ringsExcel = (roa[xl]["Tọa độ VN2000"]).split(", ");//[roa[0]["Tọa độ VN2000"]];
+                                        let ringsPolygon = [];
+                                        for (let x = 0; x < ringsExcel.length; x++) {
+
+                                            ringsPolygon[x] = [ringsExcel[x].split(" ")[0], ringsExcel[x].split(" ")[1]];
+                                        }
 
 
-                                    let projectParameters = new ProjectParameters({
-                                        geometries: [polygon], outSpatialReference: app.activeView.spatialReference
-                                    });
 
-                                    this.geometryService.project(projectParameters).then((e) => {
-                                        const geometry = e[0];
-
-                                        let polygonGraphic = new Graphic({
-                                            geometry,
-                                            symbol: fillSymbol
+                                        let polygon = new Polygon({
+                                            rings: [ringsPolygon],
+                                            spatialReference: {
+                                                wkt: 'PROJCS["VN_2000_KT108-15_3deg",GEOGCS["GCS_VN_2000",DATUM["D_Vietnam_2000",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]],PROJECTION["Transverse_Mercator"],PARAMETER["False_Easting",500000.0],PARAMETER["False_Northing",0.0],PARAMETER["Central_Meridian",108.25],PARAMETER["Scale_Factor",0.9999],PARAMETER["Latitude_Of_Origin",0.0],UNIT["Meter",1.0]]',
+                                            }
                                         });
 
-                                        graphicsLayer.add(polygonGraphic);
 
-                                        polygonGraphic.attributes = {
-                                            TenDiem: roa[xl]["Tên điểm"],
-                                            DiaDiem: roa[xl]["Địa điểm"],
-                                            TinhTrangDauTu: roa[xl]["Tình trạng đầu tư"],
-                                            TongMucDauTuDuKien: roa[xl]["Tổng mức đầu tư dự kiến"]
-                                        };
+                                        let projectParameters = new ProjectParameters({
+                                            geometries: [polygon], outSpatialReference: app.activeView.spatialReference
+                                        });
 
-                                        let edits = {
+                                        this.geometryService.project(projectParameters).then((e) => {
+                                            const geometry = e[0];
 
-                                            addFeatures: [polygonGraphic]
-                                        };
+                                            let polygonGraphic = new Graphic({
+                                                geometry,
+                                                symbol: fillSymbol
+                                            });
+
+                                            graphicsLayer.add(polygonGraphic);
+
+                                            polygonGraphic.attributes = {
+                                                TenDiem: roa[xl]["Tên điểm"],
+                                                DiaDiem: roa[xl]["Địa điểm"],
+                                                TinhTrangDauTu: roa[xl]["Tình trạng đầu tư"],
+                                                TongMucDauTuDuKien: roa[xl]["Tổng mức đầu tư dự kiến"]
+                                            };
+
+                                            let edits = {
+
+                                                addFeatures: [polygonGraphic]
+                                            };
 
 
-                                        applyEdits(edits);
+                                            applyEdits(edits);
 
-                                        //map.add(graphicsLayer);
+                                            //map.add(graphicsLayer);
+
+                                        }
+
+                                        );
+
+
+                                        document.getElementById('filenameExcel').innerHTML = document.getElementById('xlf').value.replace(/^.*[\\\/]/, '');
 
                                     }
-
-                                    );
-
-
-                                    document.getElementById('filenameExcel').innerHTML = document.getElementById('xlf').value.replace(/^.*[\\\/]/, '');
-
-                                }
-                                //document.getElementById('filenameExcel').innerHTML=": "+document.getElementById('xlf').value;
-                                document.getElementById('xlf').value = "";
-                                //console.log("Truyvan:" + roa[0]["Tọa độ VN2000"]);
-                                //polygon vn2000---
+                                    //document.getElementById('filenameExcel').innerHTML=": "+document.getElementById('xlf').value;
+                                    document.getElementById('xlf').value = "";
+                                    //console.log("Truyvan:" + roa[0]["Tọa độ VN2000"]);
+                                    //polygon vn2000---
 
 
 
 
 
-                                //--------
+                                    //--------
 
-                                //if (roa.length) result[sheetName] = roa;
-                            });
-                            return JSON.stringify(result, 2, 2);
-                        };
-
-                        return function process_wb(wb) {
-                            let output = to_json(wb);
-
-                        };
-
-                    })();
-
-
-
-                    let do_file = (function () {
-
-                        let rABS = typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString;
-                        return function do_file(files) {
-                            let f = files[0];
-                            let reader = new FileReader();
-                            reader.onload = function (e) {
-                                let data = e.target.result;
-                                if (!rABS) data = new Uint8Array(data);
-                                else process_wb(X.read(data, { type: rABS ? 'binary' : 'array' }));
+                                    //if (roa.length) result[sheetName] = roa;
+                                });
+                                return JSON.stringify(result, 2, 2);
                             };
 
-                            if (dom.byId('xlf').value != "") {
-                                reader.readAsBinaryString(f);
-                            }
-                            //if (rABS) reader.readAsBinaryString(f);
+                            return function process_wb(wb) {
+                                let output = to_json(wb);
 
-                        };
-                    })();
+                            };
 
-
-                    (function () {
-                        let xlf = document.getElementById('xlf');
-                        //if (!xlf.addEventListener) return;
-                        function handleFile(e) { do_file(e.target.files); }
-                        xlf.addEventListener('change', handleFile, false);
-
-
-                    })();
+                        })();
 
 
 
+                        let do_file = (function () {
+
+                            let rABS = typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString;
+                            return function do_file(files) {
+                                let f = files[0];
+                                let reader = new FileReader();
+                                reader.onload = function (e) {
+                                    let data = e.target.result;
+                                    if (!rABS) data = new Uint8Array(data);
+                                    else process_wb(X.read(data, { type: rABS ? 'binary' : 'array' }));
+                                };
+
+                                if (dom.byId('xlf').value != "") {
+                                    reader.readAsBinaryString(f);
+                                }
+                                //if (rABS) reader.readAsBinaryString(f);
+
+                            };
+                        })();
+
+
+                        (function () {
+                            let xlf = document.getElementById('xlf');
+                            //if (!xlf.addEventListener) return;
+                            function handleFile(e) { do_file(e.target.files); }
+                            xlf.addEventListener('change', handleFile, false);
+
+
+                        })();
 
 
 
 
 
+
+
+
+
+
+
+                    }
 
 
 
                 }
 
 
-
             }
 
-
-        }
-
-        //end show layer===================
+            //end show layer===================
 
 
 

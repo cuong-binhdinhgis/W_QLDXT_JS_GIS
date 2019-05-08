@@ -322,6 +322,9 @@
 
 
     <script type="text/javascript">
+
+
+
         //CTR
         function listCTRShow() {
             listCTLClose();
@@ -1887,26 +1890,25 @@
 
 
 
+<!--Them moi ThongTinMau-->
 
-<!--Them moi CTL-->
-
-        <div id="panelAddChatThaiLong" class="panel collapse">
-            <div id="headingAddChatThaiLong" class="panel-heading" role="tab">
+        <div id="panelAddThongTinMau" class="panel collapse">
+            <div id="headingAddThongTinMau" class="panel-heading" role="tab">
                 <div class="panel-title">
                     <a class="panel-toggle collapsed" role="button" data-toggle="collapse"
-                        href="#collapseAddChatThaiLong" aria-expanded="false"
-                        aria-controls="collapseAddChatThaiLong"><span class="esri-icon-organization"
+                        href="#collapseAddThongTinMau" aria-expanded="false"
+                        aria-controls="collapseAddThongTinMau"><span class="esri-icon-organization"
                             aria-hidden="true"></span><span class="panel-label">
-                            <div id="addChatThaiLong"></div>
-                            Thêm mới chất thải lỏng
+                            <div id="addThongTinMau"></div>
+                            Thêm mới quan trắc chất thải
                         </span></a>
                     <a class="panel-close" role="button" data-toggle="collapse"
-                        data-target="#panelAddChatThaiLong"><span class="esri-icon esri-icon-close"
+                        data-target="#panelAddThongTinMau"><span class="esri-icon esri-icon-close"
                             aria-hidden="true"></span></a>
                 </div>
             </div>
-            <div id="collapseAddChatThaiLong" class="panel-collapse collapse" role="tabpanel"
-                aria-labelledby="headingAddChatThaiLong">
+            <div id="collapseAddThongTinMau" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingAddThongTinMau">
                 <div class="panel-body">
                     <div class="form-horizontal">
                        <!--
@@ -1921,10 +1923,10 @@
 
 
 
-                        <div id="AddChatThaiLongDiv" style="display:block">
+                        <div id="AddThongTinMauDiv" style="display:block">
 
 
-                            <p class="list-heading"><strong>Nhập thông tin Chất Thải Lỏng</strong></p>
+                            <p class="list-heading"><strong>Nhập thông số quan trắc chất thải</strong></p>
                             <legend></legend>
 
 
@@ -1935,100 +1937,103 @@
 
                                         <tr>
                                             <th>Mã đối tượng</th>
-                                            <td><input class="inputInfo" type="text" id="CTLMaDoiTuong"></td>
+                                            <td><input class="inputInfo" type="text" id="TTMMaDoiTuong"></td>
                                         </tr>
 
-                                        <tr>
+
+                                          <tr>
                                             <th>Mã điểm xả thải</th>
-                                            <td><input class="inputInfo" type="text" id="CTLMaDXT"></td>
+                                            <td><select id="TTMMaDXT"> </select></td>
                                         </tr>
+
+
                                         <tr>
                                             <th>Lưu lượng</th>
-                                            <td><input class="inputInfo" type="text" id="CTLLuuLuong"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMLuuLuong"></td>
                                         </tr>
                                         <tr>
                                             <th>Thời gian lấy mẫu</th>
-                                            <td><input class="inputInfo" type="date" id="CTLTGLayMau"></td>
+                                            <td><input class="inputInfo" type="date" id="TTMTGLayMau"></td>
                                         </tr>
                                         <tr>
                                             <th>Thời gian ký kết quả</th>
-                                            <td><input class="inputInfo" type="date" id="CTLTGKyKetQua"></td>
+                                            <td><input class="inputInfo" type="date" id="TTMTGKyKetQua"></td>
                                         </tr>
                                          <tr>
                                             <th>Loại điểm xả thải</th>
-                                            <td><input class="inputInfo" type="text" id="CTLLoaiDXT" value="CTL"></td>
+                                            <td><input class="inputInfo" type="text" id="TTMLoaiDXT" value="CTL"></td>
                                         </tr>
                                          <tr>
                                             <th>SO2</th>
-                                            <td><input class="inputInfo" type="text" id="CTLSO2"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMSO2"></td>
                                         </tr>
                                          <tr>
                                             <th>NOx</th>
-                                            <td><input class="inputInfo" type="text" id="CTLNOx"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMNOx"></td>
                                         </tr>
                                          <tr>
                                             <th>CO</th>
-                                            <td><input class="inputInfo" type="text" id="CTLCO"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMCO"></td>
                                         </tr>
                                          <tr>
                                             <th>NH3</th>
-                                            <td><input class="inputInfo" type="text" id="CTLNH3"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMNH3"></td>
                                         </tr>
                                          <tr>
                                             <th>H2S</th>
-                                            <td><input class="inputInfo" type="text" id="CTLH2S"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMH2S"></td>
                                         </tr>
                                          <tr>
                                             <th>HCI</th>
-                                            <td><input class="inputInfo" type="text" id="CTLHCI"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMHCI"></td>
                                         </tr>
                                          <tr>
                                             <th>Pb</th>
-                                            <td><input class="inputInfo" type="text" id="CTLPb"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMPb"></td>
                                         </tr>
                                          <tr>
                                             <th>Cd</th>
-                                            <td><input class="inputInfo" type="text" id="CTLCd"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMCd"></td>
                                         </tr>
                                          <tr>
                                             <th>Hg</th>
-                                            <td><input class="inputInfo" type="text" id="CTLHg"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMHg"></td>
                                         </tr>
                                          <tr>
                                             <th>BOD5</th>
-                                            <td><input class="inputInfo" type="text" id="CTLBOD5"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMBOD5"></td>
                                         </tr>
                                          <tr>
                                             <th>COD</th>
-                                            <td><input class="inputInfo" type="text" id="CTLCOD"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMCOD"></td>
                                         </tr>
                                          <tr>
                                             <th>TSS</th>
-                                            <td><input class="inputInfo" type="text" id="CTLTSS"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMTSS"></td>
                                         </tr>
                                          <tr>
                                             <th>NH4</th>
-                                            <td><input class="inputInfo" type="text" id="CTLNH4"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMNH4"></td>
                                         </tr>
                                          <tr>
                                             <th>Coliform</th>
-                                            <td><input class="inputInfo" type="text" id="CTLColiform"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMColiform"></td>
                                         </tr>
                                          <tr>
                                             <th>As</th>
-                                            <td><input class="inputInfo" type="text" id="CTLAs_"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMAs_"></td>
                                         </tr>
                                          <tr>
                                             <th>CrIII</th>
-                                            <td><input class="inputInfo" type="text" id="CTLCrIII"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMCrIII"></td>
                                         </tr>
                                         <tr>
                                             <th>CrVI</th>
-                                            <td><input class="inputInfo" type="text" id="CTLCrVI"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMCrVI"></td>
                                         </tr>
                                         <tr>
                                             <th>Zn</th>
-                                            <td><input class="inputInfo" type="text" id="CTLZn"></td>
+                                            <td><input class="inputInfo" type="number" id="TTMZn"></td>
                                         </tr>
                                         
 
@@ -2041,11 +2046,11 @@
                                         <tr>
                                             <th></th>
                                             <td>
-                                                <input type="button" class="edit-button" value=" Lưu, chất thải lỏng "
-                                                    id="tableCTLSave" style="background-color: green">
+                                                <input type="button" class="edit-button" value=" Lưu, mẫu quan trắc "
+                                                    id="tableTTMSave" style="background-color: green">
 
                                                 <input type="button" class="edit-button" value=" Hủy "
-                                                    id="tableCTLDelete"
+                                                    id="tableTTMDelete"
                                                     style="background-color: crimson">
 
                                             </td>
@@ -2077,6 +2082,8 @@
         </div> 
 
         <!-- -->
+
+
 
 
 
