@@ -758,7 +758,6 @@ require([
 
 
 
-
             //show layer
 
             for (let layerCfg of app.activeView.systemVariable.user.Layers) {
@@ -780,13 +779,21 @@ require([
 
                     if (layerCfg.permission.create) {
 
-                        dom.byId("linkFormChatThaiLong").onclick = function () {
-                            //Ẩn bảng dữ liệu Chất Thỉa Lỏng
-                            document.getElementById("gridDisplayChatThaiLong").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
-                            //Hiện Form nhập Chất Thải Lỏng
-                            document.getElementById("panelAddThongTinMau").className = "panel collapse in";
-                            document.getElementById("panelAddThongTinMau").style.height = "auto";
-                            document.getElementById("collapseAddThongTinMau").className = "panel-collapse collapse in";
+                        dom.byId("linkQuanTracChatThai").onclick = function () {
+
+                            // //Ẩn bảng dữ liệu Chất Thỉa Lỏng
+                            // document.getElementById("gridDisplayChatThaiLong").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
+                            // //Hiện Form nhập Chất Thải Lỏng
+                            // document.getElementById("panelAddThongTinMau").className = "panel collapse in";
+                            // document.getElementById("panelAddThongTinMau").style.height = "auto";
+                            // document.getElementById("collapseAddThongTinMau").className = "panel-collapse collapse in";
+
+
+
+                        }
+
+
+                        dom.byId("TTMLoaiDXT").onchange = function () {
 
 
                             //Lấy  MaDXT đổ vào combobox 
@@ -799,53 +806,40 @@ require([
                                         type: 'get',
                                         dataType: 'json',
                                         success: function (result) {
-                                            console.log(result);
-                                            alert("so1");
-                                          
+                                            var optionLoaiDXT="";
+                                            for(let i=0;i<result.fields[2].domain.codedValues.length;i++)
+                                            {
+                                                optionLoaiDXT += '<option value="' + result.fields[2].domain.codedValues[i].code + '">' + result.fields[2].domain.codedValues[i].name+ '</option>';
+                                            }
+                                            dom.byId("TTMLoaiDXT").innerHTML='<option value="">Chọn Loại điểm xả thải</option>'+optionLoaiDXT;
                                         }
                                     });
                                     */
                                     //Lấy  MaDXT đổ vào combobox
-                                    $.ajax({
-                                        url: layerCfg.url + '/query?where=1%3D1&outFields=MaDXT%2C+MaCSKD&returnGeometry=false&f=pjson',
-                                        type: 'get',
-                                        dataType: 'json',
-                                        success: function (result) {
-                                            var optionMaDXT = "";
-                                            for (let i = 0; i < result.features.length; i++) {
-                                                optionMaDXT += '<option value="' + result.features[i].attributes.MaDXT + '">' + result.features[i].attributes.MaDXT + '</option>';
+                                    if (dom.byId("TTMLoaiDXT").value != "") {
+                                        $.ajax({
+                                            url: layerCfg.url + '/query?where=LoaiDXT%3D%27' + dom.byId("TTMLoaiDXT").value + '%27&outFields=MaDXT%2C+LoaiDXT%2C+MaCSKD&returnGeometry=false&f=pjson',
+                                            type: 'get',
+                                            dataType: 'json',
+                                            success: function (result) {
+                                                var optionMaDXT = "";
+                                                for (let i = 0; i < result.features.length; i++) {
+                                                    optionMaDXT += '<option value="' + result.features[i].attributes.MaDXT + '">' + result.features[i].attributes.MaDXT + '</option>';
+                                                }
+                                                dom.byId("TTMMaDXT").innerHTML = '<option value="">-- Lựa chọn --</option>' + optionMaDXT;
+
                                             }
-                                            dom.byId("TTMMaDXT").innerHTML = optionMaDXT;
-                                        }
 
-                                    });
-
+                                        });
+                                    }
+                                    if (dom.byId("TTMLoaiDXT").value == "CTL") {
+                                        dom.byId("TTMLuuLuong").placeholder = "nước m3/ngày";
+                                    }
+                                    if (dom.byId("TTMLoaiDXT").value == "CTK") {
+                                        dom.byId("TTMLuuLuong").placeholder = "khí thải Nm3/h";
+                                    }
                                 }
                             }
-
-
-                            //var hehe;
-                            /*
-                            $.ajax({
-
-                                url: layerCfg.url + '/query?where=1%3D1&outFields=MaDXT%2C++MaCSKD&f=pjson',
-                                //url : layerCfg.url+'/?f=pjson',
-                                type: 'get',
-                                dataType: 'json',
-                                success: function (result) {
-                                    //hehe=result;
-                                    console.log(result);
-                                    alert("so2");
-
-                                }
-                            });
-                            */
-
-
-
-
-
-
                         }
 
 
@@ -853,57 +847,38 @@ require([
 
                         dom.byId("tableTTMSave").onclick = function () {
                             AddThongTinMau();
-
-                            // var Abuoc1 = 0;
-                            // var Abuoc2 = 0;
-                            // var Abuoc3 = 0;
-
-                            // function buoc1() {
-                            //     Abuoc1 = 1+1;
-                            // }
-                            // function buoc2() {
-                            //     Abuoc2 = Abuoc1+5;
-                            // }
-
-                            // function buoc3() {
-                            //     Abuoc3 = Abuoc2+3;
-                            // }
-
-                            // buoc1();
-                            // buoc2();
-                            // buoc3();
-                            // console.log("buoc1:" + Abuoc1 + "buoc2:" + Abuoc2 + "buoc3:" + Abuoc3);
-
-
-
-
-
-
-
-
-
-
-
                         };
-                        //123
+
                         function AddThongTinMau() {
 
-                            // var dateTTMTGLayMau='null';
-                            // if(dom.byId("TTMTGLayMau").value.trim()!=""){
-                            //     dateTTMTGLayMau=dom.byId("TTMTGLayMau").value.trim();
-                            // }else{
-                            //    // dateTTMTGLayMau=null;
-                            // }
                             if (dom.byId("TTMMaDoiTuong").value.trim() != "") {
                                 var dtMaDoiTuong = dom.byId("TTMMaDoiTuong").value.trim();
                             } else {
                                 alert("Nhập Mã Đối Tượng!")
                                 return false;
                             }
+                            if (dom.byId("TTMMaDXT").value.trim() != "") {
+                                var dtMaDXT = dom.byId("TTMMaDXT").value.trim();
+                            } else {
+                                alert("Chọn Điểm xả thải!")
+                                return false;
+                            }
+                            if (dom.byId("TTMLuuLuong").value.trim() != "") {
+                                var dtLuuLuong = dom.byId("TTMLuuLuong").value.trim();
+                            } else {
+                                alert("Nhập lưu lượng!")
+                                return false;
+                            }
+
                             var dtLuuLuong = dom.byId("TTMLuuLuong").value.trim() != "" ? dom.byId("TTMLuuLuong").value.trim() : null;
                             var dtLTGLayMau = dom.byId("TTMTGLayMau").value.trim() != "" ? dom.byId("TTMTGLayMau").value.trim() : null;
                             var dtTGKyKetQua = dom.byId("TTMTGKyKetQua").value.trim() != "" ? dom.byId("TTMTGKyKetQua").value.trim() : null;
-                            var dtLoaiDXT = dom.byId("TTMLoaiDXT").value.trim() != "" ? dom.byId("TTMLoaiDXT").value.trim() : null;
+                            if (dom.byId("TTMLoaiDXT").value.trim() != "") {
+                                var dtLoaiDXT = dom.byId("TTMLoaiDXT").value.trim();
+                            } else {
+                                alert("Chọn Loại điểm xả thải!")
+                                return false;
+                            }
                             var dtSO2 = dom.byId("TTMSO2").value.trim() != "" ? dom.byId("TTMSO2").value.trim() : null;
                             var dtNOx = dom.byId("TTMNOx").value.trim() != "" ? dom.byId("TTMNOx").value.trim() : null;
                             var dtCO = dom.byId("TTMCO").value.trim() != "" ? dom.byId("TTMCO").value.trim() : null;
@@ -927,7 +902,7 @@ require([
                             form.append('f', 'json');
                             form.append('features', '[{"attributes":{'
                                 + '"MaDoiTuong":' + dtMaDoiTuong + ','
-                                + '"MaDXT":' + dom.byId("TTMMaDXT").value.trim() + ','
+                                + '"MaDXT":' + dtMaDXT + ','
                                 + '"LuuLuong":' + dtLuuLuong + ','
                                 + '"TGLayMau":' + dtLTGLayMau + ','
                                 + '"TGKyKetQua":' + dtTGKyKetQua + ','
@@ -957,7 +932,89 @@ require([
                                 body: form
                             })
                                 .then(r => r.json())
-                                .then(r => alert("Đã thêm mới OBJECTID: " + r.addResults[0].objectId));
+                                .then(r => {
+                                    //Tinh Cmax==================
+
+
+
+                                    var getMaDXT = dom.byId("TTMMaDXT").value;
+                                    var getMaNguonTiepNhan = "";
+                                    var getMaQuyChuan = "";
+                                    var getThongSo = [
+                                        "SO2",
+                                        "NOx",
+                                        "CO"
+                                    ];
+
+                                    var getCot = "";
+                                    var getKq = "";
+
+                                    var getGiaTriC = "";
+                                    var hetKf = "";
+
+                                    //DIEMXATHAI:MaDXT------------------
+                                    for (let layerCfg of app.activeView.systemVariable.user.Layers) {
+                                        if (layerCfg.id == constName.DIEMXATHAI) {
+                                            $.ajax({
+                                                url: layerCfg.url + '/query?where=MaDXT%3D%27' + getMaDXT + '%27&outFields=*&returnGeometry=true&f=pjson',
+                                                type: 'get',
+                                                dataType: 'json',
+                                                success: function (result) {
+                                                    getMaNguonTiepNhan = result.features[0].attributes.MaNguonTiepNhap;
+                                                    getMaQuyChuan = result.features[0].attributes.MaQuyChuan;
+                                                    console.log(getMaQuyChuan);
+
+                                                    //console.log(getMaNguonTiepNhan);
+                                                    //NGUONTIEP_NHAN----------------
+                                                    for (let layerCfg of app.activeView.systemVariable.user.Layers) {
+                                                        if (layerCfg.id == constName.NGUONTIEP_NHAN) {
+                                                            $.ajax({
+                                                                url: layerCfg.url + '/query?where=MaNguonTiepNhan%3D%27' + getMaNguonTiepNhan + '%27&outFields=*&f=pjson',
+                                                                type: 'get',
+                                                                dataType: 'json',
+                                                                success: function (result) {
+                                                                    getCot = result.features[0].attributes.Cot;
+                                                                    getKq = result.features[0].attributes.Kq;
+
+                                                                    //GIATRI_C SUA LAIIIIIIIIIIIIIIIIIIIIIIIII for getThongSo.....
+                                                                    for (let layerCfg of app.activeView.systemVariable.user.Layers) {
+                                                                        if (layerCfg.id == constName.NGUONTIEP_NHAN) {
+                                                                            $.ajax({
+                                                                                url: layerCfg.url + '/query?where=MaNguonTiepNhan%3D%27' + getMaNguonTiepNhan + '%27&outFields=*&f=pjson',
+                                                                                type: 'get',
+                                                                                dataType: 'json',
+                                                                                success: function (result) {
+                                                                                    // getCot = result.features[0].attributes.Cot;
+                                                                                    // getKq = result.features[0].attributes.Kq;
+
+                                                                                    console.log(getThongSo);
+
+
+                                                                                    //console.log("Cot:"+getCot+"Kq:"+getKq);
+
+
+
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    }
+
+                                                                }
+                                                            });
+                                                        }
+                                                    }
+
+
+                                                }
+                                            });
+                                        }
+                                    }
+
+
+
+                                    alert("Đã thêm mới OBJECTID: " + r.addResults[0].objectId);
+                                });
+
                             //.then(r => console.log(r))
                         };
                     }
@@ -1716,7 +1773,7 @@ require([
 
 
 
-                //Điểm đầu tư Layer===============================
+                //DIEMXATHAI Layer===============================
 
                 if (layerCfg.groupLayer === constName.CHUYEN_DE_HT && layerCfg.permission.view && layerCfg.id == constName.DIEMXATHAI) {
                     let DIEMXATHAILayer = new FeatureLayer(layerCfg);
@@ -2408,6 +2465,9 @@ require([
 
 
 
+
+
+            //const u = new User({ username: 'pikalong' })
 
 
 

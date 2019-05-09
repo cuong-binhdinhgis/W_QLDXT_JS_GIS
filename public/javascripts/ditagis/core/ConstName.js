@@ -21,6 +21,7 @@ define(["require", "exports"], function (require, exports) {
         HESO_Kf:'HeSoKf',
         HESO_Kq:'HeSoKp',
         THONGTIN_MAU:'ThongTinMau',
+        NGUONTIEP_NHAN:'Nguon_TiepNhan',
      
 
         

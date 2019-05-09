@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/stylesheets/custom-kendo.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
 
- 
+
 
     <!--scihub.copernicus.eu list search-->
 
@@ -337,7 +337,7 @@
             document.getElementById("gridDisplayChatThaiRan").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
         }
         //CTL
-         function listCTLShow() {
+        function listCTLShow() {
             listCTRClose();
             listCTKClose();
             document.getElementById("gridDisplayChatThaiLong").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
@@ -348,7 +348,7 @@
             document.getElementById("gridDisplayChatThaiLong").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:none";
         }
         //CTK
-         function listCTKShow() {
+        function listCTKShow() {
             listCTRClose();
             listCTLClose();
             document.getElementById("gridDisplayChatThaiKhi").style = "width: calc(96% - 40px); left: 50px; top: 65px; height: calc(80% - 40px); display:block";
@@ -409,9 +409,9 @@
 
 
 
-      <!-- add ChatThaiLong Panel -->
+    <!-- add ChatThaiLong Panel -->
 
-        <script type="text/javascript">
+    <script type="text/javascript">
         //viet lại bên map
         /*
             function panelAddChatThaiLongShow() {
@@ -426,7 +426,7 @@
             }
             */
 
-        </script>
+    </script>
 
     <!--ChatThaiLong-->
 
@@ -463,9 +463,9 @@
         </span>
 
         <p>&nbsp;</p>
-        <div><a id="linkFormChatThaiLong" role="button" aria-haspopup="true" >Thêm mới chất thải lỏng</a></div>
+        <div><a id="linkFormChatThaiLongheheh" role="button" aria-haspopup="true">Thêm mới chất thải lỏng</a></div>
         <div>Danh sách chất thải lỏng ở đây...
-           
+
         </div>
 
 
@@ -473,7 +473,7 @@
     </div>
     <!--  -->
 
-     <!--ChatThaiKhi-->
+    <!--ChatThaiKhi-->
 
 
     <div ng-show="visibleList" id="gridDisplayChatThaiKhi" class="list-container undrag" aria-hidden="false"
@@ -509,7 +509,7 @@
 
         <p>&nbsp;</p>
         <div>Danh sách chất thải khí ở đây...
-           
+
         </div>
 
 
@@ -518,9 +518,9 @@
     <!--  -->
 
 
-<!--Them moi CTL-->
+    <!--Them moi CTL-->
 
-{{!-- 
+    {{!-- 
         <div id="panelAddChatThaiLong" class="panel collapse">
             <div id="headingAddChatThaiLong" class="panel-heading" role="tab">
                 <div class="panel-title">
@@ -741,7 +741,7 @@
             </div>
         </div> --}}
 
-        <!-- -->
+    <!-- -->
 
 
 
@@ -782,6 +782,9 @@
                 <li><a id="menuDiemDautu" role="button" data-target="#panelZoomtoDiemDautu" aria-haspopup="true"><span
                             class="esri-icon-map-pin"></span><strong>
                             Điểm Xả Thải</strong></a></li>
+                <li><a id="linkQuanTracChatThai" role="button" data-target="#panelQuanTracChatThai"
+                        aria-haspopup="true"><span class="esri-icon-experimental"></span><strong>
+                            Quan Trắc Điểm Xả Thải</strong></a></li>
 
                 <li><a role="button" aria-haspopup="true"
                         onclick="return showOrHideLoaiChatThai('dropdown-menuToolsLCT');"><span id="iconArrowtoolsLCT"
@@ -1134,7 +1137,7 @@
 
         </script>
 
-      
+
 
         <!-- add DoanhnghiepCCN Panel -->
 
@@ -1199,11 +1202,191 @@
             </div>
         </div>
 
-        <!-- Layers Panel -->
+        <!--  -->
 
 
 
 
+        <!-- QuanTracChatThai -->
+
+        <div id="panelQuanTracChatThai" class="panel collapse">
+            <div id="headingQuanTracChatThai" class="panel-heading" role="tab">
+                <div class="panel-title">
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse"
+                        href="#collapseQuanTracChatThai" aria-expanded="false"
+                        aria-controls="collapseQuanTracChatThai"><span class="esri-icon-experimental"
+                            aria-hidden="true"></span><span class="panel-label"> Kết quả quan trắc điểm xả
+                            thải</span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse"
+                        data-target="#panelQuanTracChatThai"><span class="esri-icon esri-icon-close"
+                            aria-hidden="true"></span></a>
+                </div>
+            </div>
+            <div id="collapseQuanTracChatThai" class="panel-collapse collapse" role="tabpanel"
+                aria-labelledby="headingQuanTracChatThai">
+                <div class="panel-body">
+                    <!-- <div id="QuanTracChatThaiPanelDiv"></div> -->
+
+                    <div id="AddThongTinMauDiv" style="display:block">
+
+
+                        <p class="list-heading"><strong>Nhập kết quả quan trắc để tính Cmax</strong></p>
+                        <legend></legend>
+
+
+                        <div id="attributeArea">
+
+                            <table>
+                                <tbody>
+
+                                    <tr>
+                                        <th>Mã đối tượng</th>
+                                        <td><input class="inputInfo" type="text" id="TTMMaDoiTuong" placeholder="phân vùng"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Loại điểm xả thải</th>
+                                        <td><select id="TTMLoaiDXT">
+                                                <option value="">-- Lựa chọn --</option>
+                                                <option value="CTL">Chất thải lỏng</option>
+                                                <option value="CTK">Chất thải khí</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Mã điểm xả thải</th>
+                                        <td><select id="TTMMaDXT"> </select></td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <th>Lưu lượng</th>
+                                        <td><input class="inputInfo" type="number" id="TTMLuuLuong" ></td>
+                                    </tr>
+                                    
+
+
+                                    <tr>
+                                        <th>SO2</th>
+                                        <td><input class="inputInfo" type="number" id="TTMSO2"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>NOx</th>
+                                        <td><input class="inputInfo" type="number" id="TTMNOx"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CO</th>
+                                        <td><input class="inputInfo" type="number" id="TTMCO"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>NH3</th>
+                                        <td><input class="inputInfo" type="number" id="TTMNH3"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>H2S</th>
+                                        <td><input class="inputInfo" type="number" id="TTMH2S"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>HCI</th>
+                                        <td><input class="inputInfo" type="number" id="TTMHCI"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Pb</th>
+                                        <td><input class="inputInfo" type="number" id="TTMPb"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Cd</th>
+                                        <td><input class="inputInfo" type="number" id="TTMCd"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Hg</th>
+                                        <td><input class="inputInfo" type="number" id="TTMHg"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>BOD5</th>
+                                        <td><input class="inputInfo" type="number" id="TTMBOD5"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>COD</th>
+                                        <td><input class="inputInfo" type="number" id="TTMCOD"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>TSS</th>
+                                        <td><input class="inputInfo" type="number" id="TTMTSS"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>NH4</th>
+                                        <td><input class="inputInfo" type="number" id="TTMNH4"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Coliform</th>
+                                        <td><input class="inputInfo" type="number" id="TTMColiform"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>As</th>
+                                        <td><input class="inputInfo" type="number" id="TTMAs_"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CrIII</th>
+                                        <td><input class="inputInfo" type="number" id="TTMCrIII"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CrVI</th>
+                                        <td><input class="inputInfo" type="number" id="TTMCrVI"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Zn</th>
+                                        <td><input class="inputInfo" type="number" id="TTMZn"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Thời gian lấy mẫu</th>
+                                        <td><input class="inputInfo" type="date" id="TTMTGLayMau"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Thời gian ký kết quả</th>
+                                        <td><input class="inputInfo" type="date" id="TTMTGKyKetQua"></td>
+                                    </tr>
+
+
+
+
+                                    <tr>
+                                        <th></th>
+                                        <td>.</td>
+                                    </tr>
+                                    <tr>
+                                        <th></th>
+                                        <td>
+                                            <input type="button" class="edit-button" value=" Lưu, mẫu quan trắc "
+                                                id="tableTTMSave" style="background-color: green">
+
+                                            <input type="button" class="edit-button" value=" Hủy " id="tableTTMDelete"
+                                                style="background-color: crimson">
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                                </tbody>
+                            </table>
+
+
+
+                            <br>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
 
 
 
@@ -1890,7 +2073,7 @@
 
 
 
-<!--Them moi ThongTinMau-->
+        <!--Them moi ThongTinMau-->
 
         <div id="panelAddThongTinMau" class="panel collapse">
             <div id="headingAddThongTinMau" class="panel-heading" role="tab">
@@ -1902,16 +2085,15 @@
                             <div id="addThongTinMau"></div>
                             Thêm mới quan trắc chất thải
                         </span></a>
-                    <a class="panel-close" role="button" data-toggle="collapse"
-                        data-target="#panelAddThongTinMau"><span class="esri-icon esri-icon-close"
-                            aria-hidden="true"></span></a>
+                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelAddThongTinMau"><span
+                            class="esri-icon esri-icon-close" aria-hidden="true"></span></a>
                 </div>
             </div>
             <div id="collapseAddThongTinMau" class="panel-collapse collapse" role="tabpanel"
                 aria-labelledby="headingAddThongTinMau">
                 <div class="panel-body">
                     <div class="form-horizontal">
-                       <!--
+                        <!--
                         <legend></legend>
 
                         <p>Nhập từ file Excel: </p>
@@ -1923,7 +2105,7 @@
 
 
 
-                        <div id="AddThongTinMauDiv" style="display:block">
+                        {{!-- <div id="AddThongTinMauDiv" style="display:block">
 
 
                             <p class="list-heading"><strong>Nhập thông số quan trắc chất thải</strong></p>
@@ -2071,7 +2253,7 @@
 
 
 
-                        </div>
+                        </div> --}}
 
 
                         <div id="report-objectsdfrgdgdrg"></div>
@@ -2079,7 +2261,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
 
         <!-- -->
 
