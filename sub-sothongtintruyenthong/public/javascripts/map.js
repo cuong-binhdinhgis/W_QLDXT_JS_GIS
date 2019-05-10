@@ -832,12 +832,12 @@ require([
 
                                         });
                                     }
-                                    if (dom.byId("TTMLoaiDXT").value == "CTL") {
-                                        dom.byId("TTMLuuLuong").placeholder = "nước m3/ngày";
-                                    }
-                                    if (dom.byId("TTMLoaiDXT").value == "CTK") {
-                                        dom.byId("TTMLuuLuong").placeholder = "khí thải Nm3/h";
-                                    }
+                                    // if (dom.byId("TTMLoaiDXT").value == "CTL") {
+                                    //     dom.byId("TTMLuuLuong").placeholder = "nước thải m3/ngày";
+                                    // }
+                                    // if (dom.byId("TTMLoaiDXT").value == "CTK") {
+                                    //     dom.byId("TTMLuuLuong").placeholder = "khí thải Nm3/h";
+                                    // }
                                 }
                             }
                         }
@@ -851,6 +851,14 @@ require([
 
                         function AddThongTinMau() {
 
+                            if(dom.byId("TTMLoaiDXT").value=="CTK"){
+                                alert("Hiện tại chức năng tính Cmax Chất thải khí chưa hoàn thành, vui lòng trở lại sau!")
+                            }
+
+
+
+
+
                             if (dom.byId("TTMMaDoiTuong").value.trim() != "") {
                                 var dtMaDoiTuong = dom.byId("TTMMaDoiTuong").value.trim();
                             } else {
@@ -863,14 +871,58 @@ require([
                                 alert("Chọn Điểm xả thải!")
                                 return false;
                             }
-                            if (dom.byId("TTMLuuLuong").value.trim() != "") {
-                                var dtLuuLuong = dom.byId("TTMLuuLuong").value.trim();
-                            } else {
-                                alert("Nhập lưu lượng!")
+                            // if (dom.byId("TTMLuuLuong").value.trim() != "" && dom.byId("TTMLuuLuong").value.trim() > 0) {
+                            //     var dtLuuLuong = dom.byId("TTMLuuLuong").value.trim();
+                            // } else {
+                            //     alert("Nhập lưu lượng!")
+                            //     return false;
+                            // }
+
+                            var getTSo = {
+                                SO2: dom.byId("TTMSO2").value,
+                                NOx: dom.byId("TTMNOx").value,
+                                CO: dom.byId("TTMCO").value,
+                                NH3: dom.byId("TTMNH3").value,
+                                H2S: dom.byId("TTMH2S").value,
+                                HCI: dom.byId("TTMHCI").value,
+                                Pb: dom.byId("TTMPb").value,
+                                Cd: dom.byId("TTMCd").value,
+                                Hg: dom.byId("TTMHg").value,
+                                BOD5: dom.byId("TTMBOD5").value,
+                                COD: dom.byId("TTMCOD").value,
+                                TSS: dom.byId("TTMTSS").value,
+                                NH4: dom.byId("TTMNH4").value,
+                                Coliform: dom.byId("TTMColiform").value,
+                                As_: dom.byId("TTMAs_").value,
+                                CrIII: dom.byId("TTMCrIII").value,
+                                CrVI: dom.byId("TTMCrVI").value,
+                                Zn: dom.byId("TTMZn").value
+                            };
+
+                            if ((getTSo.SO2 == "" || getTSo.SO2 <= 0)
+                                && (getTSo.NOx == "" || getTSo.NOx <= 0)
+                                && (getTSo.CO == "" || getTSo.CO <= 0)
+                                && (getTSo.NH3 == "" || getTSo.NH3 <= 0)
+                                && (getTSo.H2S == "" || getTSo.H2S <= 0)
+                                && (getTSo.HCI == "" || getTSo.HCI <= 0)
+                                && (getTSo.Pb == "" || getTSo.Pb <= 0)
+                                && (getTSo.Cd == "" || getTSo.Cd <= 0)
+                                && (getTSo.Hg == "" || getTSo.Hg <= 0)
+                                && (getTSo.BOD5 == "" || getTSo.BOD5 <= 0)
+                                && (getTSo.COD == "" || getTSo.COD <= 0)
+                                && (getTSo.TSS == "" || getTSo.TSS <= 0)
+                                && (getTSo.NH4 == "" || getTSo.NH4 <= 0)
+                                && (getTSo.Coliform == "" || getTSo.Coliform <= 0)
+                                && (getTSo.As_ == "" || getTSo.As_ <= 0)
+                                && (getTSo.CrIII == "" || getTSo.CrIII <= 0)
+                                && (getTSo.CrVI == "" || getTSo.CrVI <= 0)
+                                && (getTSo.Zn == "" || getTSo.Zn <= 0)) {
+
+                                alert("Nhập ít nhất 1 thông số quan trắc có giá trị > 0");
                                 return false;
                             }
 
-                            var dtLuuLuong = dom.byId("TTMLuuLuong").value.trim() != "" ? dom.byId("TTMLuuLuong").value.trim() : null;
+                            //var dtLuuLuong = dom.byId("TTMLuuLuong").value.trim() != "" ? dom.byId("TTMLuuLuong").value.trim() : null;
                             var dtLTGLayMau = dom.byId("TTMTGLayMau").value.trim() != "" ? dom.byId("TTMTGLayMau").value.trim() : null;
                             var dtTGKyKetQua = dom.byId("TTMTGKyKetQua").value.trim() != "" ? dom.byId("TTMTGKyKetQua").value.trim() : null;
                             if (dom.byId("TTMLoaiDXT").value.trim() != "") {
@@ -903,7 +955,7 @@ require([
                             form.append('features', '[{"attributes":{'
                                 + '"MaDoiTuong":' + dtMaDoiTuong + ','
                                 + '"MaDXT":' + dtMaDXT + ','
-                                + '"LuuLuong":' + dtLuuLuong + ','
+                                //+ '"LuuLuong":' + dtLuuLuong + ','
                                 + '"TGLayMau":' + dtLTGLayMau + ','
                                 + '"TGKyKetQua":' + dtTGKyKetQua + ','
                                 + '"LoaiDXT":' + dtLoaiDXT + ','
@@ -938,19 +990,21 @@ require([
 
 
                                     var getMaDXT = dom.byId("TTMMaDXT").value;
+
+                                    var getTinhTrangDN = "";
                                     var getMaNguonTiepNhan = "";
                                     var getMaQuyChuan = "";
-                                    var getThongSo = [
-                                        "SO2",
-                                        "NOx",
-                                        "CO"
-                                    ];
+                                    var getLuuLuongChatThai = "";
+
+
 
                                     var getCot = "";
                                     var getKq = "";
 
                                     var getGiaTriC = "";
-                                    var hetKf = "";
+                                    var getKf = "";
+
+                                    var CMAX_CTL="";
 
                                     //DIEMXATHAI:MaDXT------------------
                                     for (let layerCfg of app.activeView.systemVariable.user.Layers) {
@@ -961,8 +1015,57 @@ require([
                                                 dataType: 'json',
                                                 success: function (result) {
                                                     getMaNguonTiepNhan = result.features[0].attributes.MaNguonTiepNhap;
-                                                    getMaQuyChuan = result.features[0].attributes.MaQuyChuan;
-                                                    console.log(getMaQuyChuan);
+                                                    console.log("Mã nguồn tiếp nhận:" + getMaNguonTiepNhan);
+                                                    //Nếu có 2 Mã quy chuẩn thì cắt lấy mã đầu tiên 2540 --> 25
+                                                    getMaQuyChuan = result.features[0].attributes.MaQuyChuan.substring(0, 2).trim();
+                                                    console.log("Mã Quy Chuẩn: " + getMaQuyChuan);
+
+                                                    if (dom.byId("TTMLoaiDXT").value == "CTL") {
+                                                        if (getMaNguonTiepNhan == "") {
+                                                            alert("[Lỗi] Không xác định được: Nguồn tiếp nhận :(");
+                                                            return false;
+                                                        }
+                                                        if (getMaQuyChuan == "") {
+                                                            alert("[Lỗi] Không xác định được: Mã quy chuẩn :(");
+                                                            return false;
+                                                        }
+                                                    }
+
+
+
+
+                                                    if (dom.byId("TTMLoaiDXT").value == "CTL") {
+                                                        getLuuLuongChatThai = result.features[0].attributes.LuuLuongNuocThai;
+
+                                                    } else {
+                                                        getLuuLuongChatThai = result.features[0].attributes.LuuLuongKhiThai;
+
+                                                    }
+                                                    //kiem tra chắc chắn có chưa?
+                                                    if (getLuuLuongChatThai == "") {
+                                                        alert("[Lỗi] Không xác định được: Lưu lượng chất thải :(");
+                                                        return false;
+                                                    }
+                                                    console.log("Lưu lượng:" + getLuuLuongChatThai);
+
+                                                    //DoanhNghiep------Tnh trang: DHD hay XP
+                                                    for (let layerCfg of app.activeView.systemVariable.user.Layers) {
+                                                        if (layerCfg.id == constName.DOANHNGHIEP_KCNKKT) {
+                                                            $.ajax({
+                                                                url: layerCfg.url + '/query?where=MaCSKD%3D%27' + result.features[0].attributes.MaCSKD.trim() + '%27&outFields=*&returnGeometry=true&f=pjson',
+                                                                type: 'get',
+                                                                dataType: 'json',
+                                                                success: function (result) {
+                                                                    getTinhTrangDN = result.features[0].attributes.TinhTrangDN;
+
+                                                                    console.log("TinhTrangDN:" + result.features[0].attributes.TinhTrangDN);
+                                                                }
+                                                            });
+
+
+                                                        }
+                                                    }
+
 
                                                     //console.log(getMaNguonTiepNhan);
                                                     //NGUONTIEP_NHAN----------------
@@ -973,29 +1076,203 @@ require([
                                                                 type: 'get',
                                                                 dataType: 'json',
                                                                 success: function (result) {
+                                                                    console.log(result);
                                                                     getCot = result.features[0].attributes.Cot;
+                                                                    if(getCot==""){
+                                                                        alert("[Lỗi] Không xác định được: Cột :(");
+                                                                        return false;
+                                                                    }
+
+                                                                    console.log("COT:" + getCot);
                                                                     getKq = result.features[0].attributes.Kq;
+                                                                    console.log("Kq:" + getKq);
 
-                                                                    //GIATRI_C SUA LAIIIIIIIIIIIIIIIIIIIIIIIII for getThongSo.....
+                                                                    //GIATRI_C ---------------------
                                                                     for (let layerCfg of app.activeView.systemVariable.user.Layers) {
-                                                                        if (layerCfg.id == constName.NGUONTIEP_NHAN) {
-                                                                            $.ajax({
-                                                                                url: layerCfg.url + '/query?where=MaNguonTiepNhan%3D%27' + getMaNguonTiepNhan + '%27&outFields=*&f=pjson',
-                                                                                type: 'get',
-                                                                                dataType: 'json',
-                                                                                success: function (result) {
-                                                                                    // getCot = result.features[0].attributes.Cot;
-                                                                                    // getKq = result.features[0].attributes.Kq;
-
-                                                                                    console.log(getThongSo);
+                                                                        if (layerCfg.id == constName.GIATRI_C) {
+                                                                            //console.log(layerCfg.url)
 
 
-                                                                                    //console.log("Cot:"+getCot+"Kq:"+getKq);
 
 
+
+
+
+                                                                            //Lất được giá trị C thông qua [Mã quy chuẩn], [Cột (ajax)]
+                                                                            for (let xThongSo in getTSo) {
+                                                                                //Chỉ lấy Thông số quan trắc hợp lệ (ko bằng rỗng và lớn hơn 0)
+                                                                                if (getTSo[xThongSo] != null && getTSo[xThongSo] > 0) {
+                                                                                    console.log("Thông số quan trắc:" + xThongSo);
+                                                                                    $.ajax({
+                                                                                        url: layerCfg.url + '/query?where=MaQuyChuan%3D%27' + getMaQuyChuan + '%27+and+ThongSo%3D%27' + xThongSo + '%27&outFields=*&f=pjson',
+                                                                                        type: 'get',
+                                                                                        dataType: 'json',
+                                                                                        success: function (result) {
+
+
+
+                                                                                            // //Nếu có hơn 1 giá trị C, và có Diều kiện phụ (XP, DHD)
+                                                                                            for (let i = 0; i < result.features.length;) {
+                                                                                                if (result.features[i].attributes.DieuKienPhu == getCot) {
+                                                                                                    if (getCot == "CA") { getGiaTriC = result.features[i].attributes.CA; }
+                                                                                                    if (getCot == "CB1") { getGiaTriC = result.features[i].attributes.CB1; }
+                                                                                                    if (getCot == "CB2") { getGiaTriC = result.features[i].attributes.CB2; }
+                                                                                                    if (getCot == "CB3") { getGiaTriC = result.features[i].attributes.CB3; }
+                                                                                                    i = result.features.length
+                                                                                                } else {
+                                                                                                    i++;
+                                                                                                }
+                                                                                                if (getGiaTriC == "") {
+                                                                                                    if (getCot == "CA") { getGiaTriC = result.features[0].attributes.CA; }
+                                                                                                    if (getCot == "CB1") { getGiaTriC = result.features[0].attributes.CB1; }
+                                                                                                    if (getCot == "CB2") { getGiaTriC = result.features[0].attributes.CB2; }
+                                                                                                    if (getCot == "CB3") { getGiaTriC = result.features[0].attributes.CB3; }
+                                                                                                }
+
+                                                                                            }
+                                                                                            console.log("Giá trị C:"+getGiaTriC);
+                                                                                            if(getGiaTriC==""){
+                                                                                                alert("[Lỗi] Không xác định được: Giá trị C :(");
+                                                                                                return false;
+                                                                                            }
+                                                                                            // if (result.features.length > 1) {
+                                                                                            //     //Thì lấy theo Tình Trạng DN (XP, DHD)
+                                                                                            //     console.log(result);
+                                                                                            //     $.ajax({
+                                                                                            //         url: layerCfg.url + '/query?where=MaQuyChuan%3D%27'+getMaQuyChuan+'%27+and+ThongSo%3D%27'+xThongSo+'%27+and+DieuKienPhu%3D%27'+getTinhTrangDN+'%27&outFields='+getCot+'&f=pjson',
+                                                                                            //         type: 'get',
+                                                                                            //         dataType: 'json',
+                                                                                            //         success: function (result) {
+                                                                                            //             //console.log("Giá trị: "+result.features[0].attributes.CA);
+                                                                                            //             console.log(result);
+
+                                                                                            //          }
+                                                                                            //     });
+
+
+                                                                                            // }
+
+
+
+
+                                                                                            // for (let i = 0; i < result.fields.length; i++) {
+
+                                                                                            // }
+
+                                                                                            //Xác định cột------ danglam...........
+
+
+
+                                                                                            //getGiaTriC=getTSo[xThongSo];
+                                                                                            // console.log("GiaTriC:" + getGiaTriC);
+
+                                                                                            // console.log(getMaQuyChuan);
+                                                                                            // console.log(xThongSo);
+                                                                                            // console.log(getTSo[xThongSo]);
+                                                                                            // console.log(result);
+                                                                                            // console.log(result.fields);
+                                                                                            // console.log("-----------------");
+                                                                                            // console.log("Tìm Kf...................")
+                                                                                            //50 < F <= 500
+                                                                                            //var F = xThongSo;
+                                                                                            //Lấy Kq--------------
+                                                                                            for (let layerCfg of app.activeView.systemVariable.user.Layers) {
+                                                                                                if (layerCfg.id == constName.HESO_Kf) {
+                                                                                                    $.ajax({
+                                                                                                        url: layerCfg.url + '/query?where=MaQuyChuan%3D%27' + getMaQuyChuan + '%27&outFields=*&orderByFields=OBJECTID&f=pjson',
+                                                                                                        type: 'get',
+                                                                                                        dataType: 'json',
+                                                                                                        success: function (result) {
+                                                                                                            //Liệt kê "Điều kiện" tính để tìm Kf
+                                                                                                            //console.log(result);
+                                                                                                            for (let i = 0; i < result.features.length;) {
+                                                                                                                //Đưa các "Điều kiện" 50 < F ≤ 500 vào để tìm ra Kf
+                                                                                                                var F = getLuuLuongChatThai;
+
+                                                                                                                if (eval(result.features[i].attributes.DieuKien)) {
+                                                                                                                    // console.log(F);
+                                                                                                                    getKf=result.features[i].attributes.Kf;
+                                                                                                                    if(getKf==""){
+                                                                                                                        alert("[Lỗi] Không xác định được: Kf :(");
+                                                                                                                    }
+                                                                                                                    console.log("Thông số Kf:"+result.features[i].attributes.Kf);
+                                                                                                                    i = result.features.length;
+
+                                                                                                                    //Tính Cmax CTL================
+                                                                                                                    CMAX_CTL=getGiaTriC*getKf*getKq;
+                                                                                                                    console.log("==================================");
+                                                                                                                    console.log("Cmax CTL: "+CMAX_CTL);
+                                                                                                                    console.log("Thông số quan trắc "+xThongSo+": "+getTSo[xThongSo]);
+                                                                                                                    console.log("-------------------------");
+                                                                                                                    
+                                                                                                                    console.log("Lấy Cmax - Thông số quan trắc= "+(CMAX_CTL-getTSo[xThongSo]));
+                                                                                                                    console.log("Nếu Dương là không vượt, Âm là vượt");
+                                                                                                                    console.log("Chỉ cần có 1 thông số quan trắc vượt Cmax, thì update trạng trái Điểm Xả Thải đó thành Nguy Hiểm");
+
+                                                                                                                    
+                                                                                                                     
+                                                                                                                }
+                                                                                                                else {
+                                                                                                                    if (i < result.features.length) {
+                                                                                                                    
+                                                                                                                        //console.log("Điều kiện so sánh ko trùng:" + result.features[i].attributes.DieuKien);
+                                                                                                                        i++;
+                                                                                                                    } else {
+                                                                                                                        alert("Lỗi: Không tìm ra tham số Kf")
+                                                                                                                    }
+
+                                                                                                                }
+
+                                                                                                            }
+                                                                                                        }
+
+                                                                                                    });
+                                                                                                }
+                                                                                            }
+
+
+
+
+                                                                                            // var DieuKien = "(50<F)&&(F<=500)";
+                                                                                            // if (DieuKien) {
+                                                                                            //     alert("1.1");
+                                                                                            // } else {
+                                                                                            //     alert("khac");
+                                                                                            // }
+
+                                                                                        }
+
+                                                                                    });
 
                                                                                 }
-                                                                            });
+
+                                                                                ///query?where=MaQuyChuan%3D%2719%27+and+ThongSo%3D%27SO2%27&outFields=*&f=pjson
+
+                                                                            }
+
+                                                                            // console.log(getTSo);
+                                                                            // console.log(getTSo[1]);//
+
+                                                                            //for(let i=0;i<)
+
+
+                                                                            // $.ajax({
+                                                                            //     url: layerCfg.url + '/query?where=MaNguonTiepNhan%3D%27' + getMaNguonTiepNhan + '%27&outFields=*&f=pjson',
+                                                                            //     type: 'get',
+                                                                            //     dataType: 'json',
+                                                                            //     success: function (result) {
+                                                                            //         // getCot = result.features[0].attributes.Cot;
+                                                                            //         // getKq = result.features[0].attributes.Kq;
+
+                                                                            //         console.log(getTSo);
+
+
+                                                                            //         //console.log("Cot:"+getCot+"Kq:"+getKq);
+
+
+
+                                                                            //     }
+                                                                            // });
                                                                         }
                                                                     }
 
@@ -1012,7 +1289,7 @@ require([
 
 
 
-                                    alert("Đã thêm mới OBJECTID: " + r.addResults[0].objectId);
+                                    alert("Đã thêm mới OBJECTID: " + r.addResults[0].objectId+" Bấm F12 vào Console xem kết quả Cmax");
                                 });
 
                             //.then(r => console.log(r))
@@ -2468,6 +2745,8 @@ require([
 
 
             //const u = new User({ username: 'pikalong' })
+
+
 
 
 
